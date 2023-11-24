@@ -24,9 +24,9 @@ public class witcher extends character {
 
         switch (chooseWeapon) {
             case 1:
-                return new magic_wand();
+                return new magicWand();
             case 2:
-                return new big_magic_wand();
+                return new bigMagicWand();
             default:
                 System.out.println("Choix invalide.");
                 System.exit(0);

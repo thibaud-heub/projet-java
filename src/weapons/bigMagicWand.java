@@ -1,11 +1,11 @@
 package weapons;
 
-public class big_magic_wand extends weapon {
+public class bigMagicWand extends weapon {
 
-    public big_magic_wand() {
+    public bigMagicWand() {
         this.name = "Grand bâton magique";
         this.damage = 15;
-        this.mana_used = 5;
+        this.manaUsed = 5;
         this.durability = 100;
     }
 }

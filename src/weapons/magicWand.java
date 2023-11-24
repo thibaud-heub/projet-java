@@ -1,11 +1,11 @@
 package weapons;
 
-public class magic_wand extends weapon {
+public class magicWand extends weapon {
 
-    public magic_wand() {
+    public magicWand() {
         this.name = "Baton magique";
         this.damage = 15;
-        this.mana_used = 5;
+        this.manaUsed = 5;
         this.durability = 100;
     }
 }

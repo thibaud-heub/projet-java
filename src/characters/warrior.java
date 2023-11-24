@@ -26,7 +26,7 @@ public class warrior extends character {
             case 1:
                 return new sword();
             case 2:
-                return new war_axe();
+                return new warAxe();
             default:
                 System.out.println("Choix invalide.");
                 System.exit(0);

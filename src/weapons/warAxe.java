@@ -1,11 +1,11 @@
 package weapons;
 
-public class war_axe extends weapon {
+public class warAxe extends weapon {
 
-    public war_axe() {
+    public warAxe() {
         this.name = "Hache de guerre";
         this.damage = 50;
-        this.mana_used = 20;
+        this.manaUsed = 20;
         this.durability = 100;
     }
 }
