@@ -48,25 +48,25 @@ public class ManageMonster {
         if (nbRandom <= (sumProb += Game.probDarkWizard)) 
         {
             // pour chaque génération de mpnstre, il y'a une probabilité que cle monstre généré soit élite
-            if (Game.probElite <= eliteRandom)return elite.createDarkWizard();
+            if (eliteRandom <= Game.probElite)return elite.createDarkWizard();
             else return common.createDarkWizard();
         }
         else if (nbRandom <= (sumProb += Game.probGobelin))
         {
-            if (Game.probElite <= eliteRandom) return elite.createGobelin();
+            if (eliteRandom <= Game.probElite) return elite.createGobelin();
             else return common.createGobelin();
         }
 
         else if (nbRandom <= (sumProb += Game.probOrc))
         {
-            if (Game.probElite <= eliteRandom) return elite.createOrc();
+            if (eliteRandom <= Game.probElite) return elite.createOrc();
             else return common.createOrc();
         }
         else 
 
         //sinon retourner un squellette
         {
-            if (Game.probElite <= eliteRandom) return elite.createSkeleton();
+            if (eliteRandom <= Game.probElite) return elite.createSkeleton();
             else return common.createSkeleton();
         }
 }
