@@ -6,6 +6,5 @@ public class Main {
 
         manager.generateMonster(10);
         manager.printMonsters();
-        
      }
 }

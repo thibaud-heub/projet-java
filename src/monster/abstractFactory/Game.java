@@ -6,8 +6,8 @@ public class Game {
     private int nbMonsterTurn = 10; //nombre de monstre pour chaque tour
     private int turn = 1; //indique le tour en cours
 
-    ManageMonster manager = new ManageMonster();
 
+    
     //probabilité dapparation des monstres
     public static double probGobelin = 0.3;
     public static double probDarkWizard = 0.2;
@@ -16,7 +16,7 @@ public class Game {
     public static double probMudPile = 0;
     
     //probabilité d'un monstre elite
-    public static double probElite = 0.05;
+    public static double probElite = 0.3;
 
     public void level ()
     {
@@ -25,7 +25,7 @@ public class Game {
 
         for (int i = 1; i<=nbLevel; i++)
         {
-            manager.generateMonster(nbMonsterLevel);
+            //manager.generateMonster(nbMonsterLevel);
             while (!levelEnd())
             {
 

@@ -11,7 +11,12 @@ public class ManageMonster {
     public static Monster monsters[];
 
 
-//génére un tableau de monstre aléatoire, de taille nbMonster
+
+/**
+    * génére un tableau de monstre aléatoire, de taille nbMonster
+    * @param nbMonster, nombre de monstre souhaité
+    * @return actualise le tableau de monstre, parametre static de la classe
+*/
     public void generateMonster(int nbMonster) 
     {
         monsters = new Monster[nbMonster];
@@ -22,7 +27,12 @@ public class ManageMonster {
         }
     }
 
-    //tire un monstre au hasard avec différentes chances d'apparition des monstres (la somme des proba doit être egal à 1)
+
+/**
+ * tire un monstre au hasard avec différentes chances d'apparition des monstres (la somme des proba doit être egal à 1)
+    * @return un monstre tiré au sort, avec une probabilité qu'il soit élite
+*/
+
     public Monster sortMonster() 
     {   
 
@@ -34,7 +44,6 @@ public class ManageMonster {
         double nbRandom = random.nextDouble();
         //tirage de la probabilité d'un monstre élite
         double eliteRandom = random.nextDouble();
-        System.out.println(eliteRandom);
 
         double sumProb = Game.probDarkWizard + Game.probGobelin + Game.probMudPile + Game.probOrc + Game.probSkeleton;
         
