@@ -1,6 +1,6 @@
 package monster.abstractFactory.monsterType;
 
-public class MudPile extends MonsterShare{
+public class MudPile extends Monster{
     public MudPile () 
     {
        super(5, 0, 0 , 0, DamageType.NOTHING, monsterType.COMMON);

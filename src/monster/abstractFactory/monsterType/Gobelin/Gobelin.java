@@ -1,8 +1,8 @@
 package monster.abstractFactory.monsterType.Gobelin;
-import monster.abstractFactory.monsterType.MonsterShare;;
+import monster.abstractFactory.monsterType.Monster;;
 
 //implementation de la classe gobelin, fille de la classe monstre
-public class Gobelin extends MonsterShare{
+public class Gobelin extends Monster{
 
 //surchage du constructeur avec les stats du gobelin
     public Gobelin () 
@@ -11,7 +11,7 @@ public class Gobelin extends MonsterShare{
     }
 
 //rédifinition de la méthode attaque en réutilisant la méthode de la class parente
-    public void attack (MonsterShare other_monster) 
+    public void attack (Monster other_monster) 
     {
         System.out.println("Gobelin attack");
         super.attack(other_monster);

@@ -1,6 +1,6 @@
 package monster.abstractFactory;
 
-import monster.abstractFactory.monsterType.*;
+import monster.abstractFactory.monsterType.Monster;
 import monster.abstractFactory.monsterType.DarkWizard.EliteDarkWizard;
 import monster.abstractFactory.monsterType.Gobelin.EliteGobelin;
 import monster.abstractFactory.monsterType.Orc.EliteOrc;

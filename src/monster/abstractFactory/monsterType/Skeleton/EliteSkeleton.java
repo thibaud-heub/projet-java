@@ -1,14 +1,14 @@
 package monster.abstractFactory.monsterType.Skeleton;
-import monster.abstractFactory.monsterType.MonsterShare;
+import monster.abstractFactory.monsterType.Monster;
 
-public class EliteSkeleton extends MonsterShare {
+public class EliteSkeleton extends Monster {
     
     public EliteSkeleton () 
     {
        super(10, 1, 1.2 , 0, DamageType.FIRE, monsterType.ELITE);
     };
 
-    public void attack (MonsterShare other_monster) 
+    public void attack (Monster other_monster) 
     {
         System.out.println("Skeleton elite attack");
         this.attack(other_monster);
