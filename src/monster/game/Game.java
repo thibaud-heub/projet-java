@@ -1,20 +1,10 @@
-package monster.abstractFactory;
-
-
+package monster.game;
 
 public class Game {
-    private int nbMonsterTurn = 10; //nombre de monstre pour chaque tour
+    static int nbMonsterTurn = 10; //nombre de monstre pour chaque tour
     private int turn = 1; //indique le tour en cours
 
 
-    
-    //probabilité dapparation des monstres
-    public static double probGobelin = 0.3;
-    public static double probDarkWizard = 0.2;
-    public static double probOrc =0.1;
-    public static double probSkeleton =0.4;
-    public static double probMudPile = 0;
-    
     //probabilité d'un monstre elite
     public static double probElite = 0.3;
 

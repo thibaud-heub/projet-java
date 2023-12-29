@@ -8,7 +8,9 @@ import monster.abstractFactory.monsterType.Skeleton.Skeleton;
 import monster.abstractFactory.monsterType.MudPile;
 
 
-//implémente une factory de monstre commun, chaque fonction retourner le type de monstre souhaite
+/** 
+ * implémente une factory de monstre commun, chaque méthode retourne le type de monstre souhaité
+ */
 public class commonFactory implements AbstractFactory {
     public Monster createDarkWizard() 
     {

@@ -6,7 +6,9 @@ import monster.abstractFactory.monsterType.Gobelin.EliteGobelin;
 import monster.abstractFactory.monsterType.Orc.EliteOrc;
 import monster.abstractFactory.monsterType.Skeleton.EliteSkeleton;
 
-//implémente la fabrique de monstre d'élites
+/**
+ * implémente la fabrique de monstre d'élites
+ */
 public class eliteFactory implements AbstractFactory{
     public Monster createDarkWizard()
     {
