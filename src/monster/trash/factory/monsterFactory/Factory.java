@@ -1,8 +1,9 @@
-package monster.factory.monsterFactory;
+package monster.trash.factory.monsterFactory;
 
 import java.util.Random;
-import monster.factory.Game;
-import monster.factory.monsterType.*;
+
+import monster.trash.factory.Game;
+import monster.trash.factory.monsterType.*;
 
 public class Factory {
     //tableau contenant les monstres du tour, généré par generateMonster

@@ -1,10 +1,14 @@
 package monster.abstractFactory.monsterType.Orc;
 import monster.abstractFactory.monsterType.Monster;
+import monster.game.monsterStats;
 
+/**
+ *implémentation de la classe Orc, extension de la classe Monster
+ */
 public class Orc extends Monster {
     public Orc () 
     {
-       super(10, 1, 1.2 , 0, DamageType.FIRE, monsterType.COMMON);
+       super(monsterType.COMMON, monsterStats.getStats("Orc"));
     };
 
     public void attack (Monster other_monster) 

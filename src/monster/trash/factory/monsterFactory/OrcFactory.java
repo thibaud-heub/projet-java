@@ -1,5 +1,5 @@
-package monster.factory.monsterFactory;
-import monster.factory.monsterType.*;
+package monster.trash.factory.monsterFactory;
+import monster.trash.factory.monsterType.*;
 
 public class OrcFactory extends MonsterFactory{
     public MonsterShare createMonster()

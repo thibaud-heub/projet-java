@@ -1,9 +1,10 @@
 package monster.abstractFactory.monsterType;
+import monster.game.monsterStats;
 
 public class MudPile extends Monster{
     public MudPile () 
     {
-       super(5, 0, 0 , 0, DamageType.NOTHING, monsterType.COMMON);
+       super(monsterType.COMMON, monsterStats.getStats("MudPile"));
     };
 
     @Override

@@ -1,57 +1,83 @@
 package monster.abstractFactory.monsterType;
 
 import monster.entity;
+import java.util.Map;
 
 public abstract class Monster extends entity {
 
-    public enum DamageType {NOTHING, FIRE, MAGIC, PHYSIC}
     public enum monsterType {COMMON, ELITE}
     
-    private double mAttackSpeed;
-    private int mArmor;
-    private DamageType mResistance; //le monstre peut être résistant à un élèment
-    private monsterType mMonsterType; //indique si le monstre est common ou elite
+    private int id = -1;
+    private double X;
+    private double Y;
+    private monsterType monsterType; //indique si le monstre est common ou elite
 
 /**
  * constructeur de la classe monstre, permet de créer un monstre en définissant tous ses paremètres
- * @param PV le nombre de point de vie du monstre
- * @param damage dégats du monstre
- * @param attack_speed : vitesse d'attaque
- * @param armor : armor du monstre
- * @param resistance : résistance a un type de dégat
+ * @param monsterStats ; les stats du monstre que l'ont souhaite créer, issu de la classe monsterStats
  * @param Type : type du monstre : commun ou elite
  */
-    public Monster (int PV, int damage, double attack_speed, int armor, DamageType resistance, monsterType Type)
+    public Monster (monsterType Type, Map<String, Integer> monsterStats)
     {
-        super(PV, damage, true);
-        this.mArmor = armor;
-        this.mAttackSpeed = attack_speed;
-        this.mResistance = resistance;
-        this.mMonsterType = Type;
-    };
+        super(
+            monsterStats.get("PV"), 
+            monsterStats.get("AttackSpeed"), 
+            monsterStats.get("FireResistance"), 
+            monsterStats.get("PhysicResistance"), 
+            monsterStats.get("MagicResistance"), 
+            monsterStats.get("FireDamage"), 
+            monsterStats.get("PhysicDamage"), 
+            monsterStats.get("MagicDamage")
+        );
+        this.monsterType = Type;
+    }
 
+    /**
+     * affiche les données du monstre
+     */
     public void print ()
     {
+        System.out.println("Id : " + this.id);
         super.print();
-        System.out.println("Vitesse d'attaque : " + mAttackSpeed);
-        System.out.println("Armur : " + mArmor);
-        System.out.println("Resistance : " + mResistance);
-        System.out.println("Type : " + mMonsterType + "\n");
+        System.out.println("coordonée X = " + this.X + " Y = " + this.Y);
+        System.out.println("Type : " + monsterType + "\n");
     }
-    
-    public double getAttackSpeed()
-    {
-        return mAttackSpeed;
-    }
-
-    public int getArmor()
-    {
-        return mArmor;
+   
+    /**
+     * renvoie l'id du mosntre
+     * @return entier id : id du monstre
+     */
+    public int getId() {
+        return id;
     }
 
-    public DamageType getResistance()
+    /**
+     * définit l'id du monstre
+     * @param id : entier qui remplaceera l'id
+     */
+    public void setId(int id)
     {
-        return mResistance;
+        this.id = id;
+    }
+
+    /**
+     * définie les coordonées du monstre
+     * @param x la coordonnée de x
+     * @param y la coordonnée de y
+     */
+    public void setXY (double x, double y)
+    {
+        this.X = x;
+        this.Y = y;
+    }
+
+    public double getX()
+    {
+        return this.X;
+    }
+
+    public double getY()
+    {
+        return this.Y;
     }
 }
-

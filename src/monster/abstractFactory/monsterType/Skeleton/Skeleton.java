@@ -1,11 +1,15 @@
 package monster.abstractFactory.monsterType.Skeleton;
 import monster.abstractFactory.monsterType.Monster;
+import monster.game.monsterStats;
 
+/**
+ *implémentation de la classe Skeleton, extension de la classe Monster
+ */
 public class Skeleton extends Monster {
     
     public Skeleton () 
     {
-       super(10, 1, 1.2 , 0, DamageType.FIRE, monsterType.COMMON);
+       super(monsterType.COMMON, monsterStats.getStats("Skeleton"));
     };
 
     public void attack (Monster other_monster) 

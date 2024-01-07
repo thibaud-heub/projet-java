@@ -1,4 +1,4 @@
-package monster.factory.monsterFactory;
+package monster.trash.factory.monsterFactory;
 
 public class Main {
         public static void main(String[] args) {

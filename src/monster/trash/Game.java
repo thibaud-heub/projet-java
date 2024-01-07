@@ -1,4 +1,4 @@
-package monster.game;
+package monster.trash;
 
 public class Game {
     static int nbMonsterTurn = 10; //nombre de monstre pour chaque tour

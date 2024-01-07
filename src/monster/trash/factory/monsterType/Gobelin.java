@@ -1,4 +1,4 @@
-package monster.factory.monsterType;
+package monster.trash.factory.monsterType;
 
 
 //implementation de la classe gobelin, fille de la classe monstre

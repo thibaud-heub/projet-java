@@ -1,6 +1,6 @@
-package monster.factory;
+package monster.trash.factory;
 
-import monster.factory.monsterFactory.*;
+import monster.trash.factory.monsterFactory.*;
 
 public class Game {
     private int nbMonsterTurn = 10; //nombre de monstre pour chaque tour

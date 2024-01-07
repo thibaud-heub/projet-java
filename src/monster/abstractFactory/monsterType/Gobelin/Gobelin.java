@@ -1,22 +1,32 @@
 package monster.abstractFactory.monsterType.Gobelin;
-import monster.abstractFactory.monsterType.Monster;;
+import monster.abstractFactory.monsterType.Monster;
+import monster.game.monsterStats;
 
-//implementation de la classe gobelin, fille de la classe monstre
+/**
+ *implémentation de la classe gobelin, extension de la lasse Monster
+ */
 public class Gobelin extends Monster{
 
-//surchage du constructeur avec les stats du gobelin
+/** 
+ * on utilise le construire du parent (Monster) pour implémenter le gobelin avec ses spécificité
+ */    
     public Gobelin () 
     {
-       super(10, 1, 1.2 , 0, DamageType.NOTHING, monsterType.COMMON);
+       super(monsterType.COMMON, monsterStats.getStats("Gobelin"));
     }
 
-//rédifinition de la méthode attaque en réutilisant la méthode de la class parente
+/**
+ * rédifinition de la méthode attaque en réutilisant la méthode de la class parente
+ */
     public void attack (Monster other_monster) 
     {
         System.out.println("Gobelin attack");
         super.attack(other_monster);
     }
 
+    /**
+     * redéfinition de la méthode afin de l'adapter au gobelin
+     */
     @Override
     public void print() 
     {

@@ -1,10 +1,14 @@
 package monster.abstractFactory.monsterType.Orc;
 import monster.abstractFactory.monsterType.Monster;
+import monster.game.monsterStats;
 
+/**
+ *implémentation de la classe Orc elite, extension de la classe Monster
+ */
 public class EliteOrc extends Monster {
     public EliteOrc () 
     {
-       super(10, 1, 1.2 , 2, DamageType.FIRE, monsterType.ELITE);
+       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Orc")));
     };
 
     public void attack (Monster other_monster) 

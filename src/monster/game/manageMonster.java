@@ -8,21 +8,23 @@ import monster.abstractFactory.commonFactory;
 import monster.abstractFactory.eliteFactory;
 import monster.abstractFactory.monsterType.Monster;
 
-public class ManageMonster {
+public class manageMonster {
+    Map<String, Double> prob;
 
-/**
+    /**
     * génére un tableau de monstre aléatoire, de taille nbMonster
     * @param nbMonster, nombre de monstre souhaité
     * @param probMonster : probabilité d'apparition des monstres
     * @return retourne un tableaud de Monstre de taille nbMonster
-*/
-    static Monster[] generateMonster(int nbMonster, Map<String, Double> probMonster) 
+    */
+    public Monster[] generateMonsters(int nbMonster, Map<String, Double> probMonster) 
     {
         Monster[] monsters = new Monster[nbMonster];
         
         for (int i = 0; i<monsters.length; i++)
         {
             monsters[i] = sortMonster(probMonster);
+            monsters[i].setId(i);
         }
         return monsters;
     }
@@ -33,7 +35,7 @@ public class ManageMonster {
     * @return un monstre tiré au sort, avec une probabilité qu'il soit élite
 */
     
-    static Monster sortMonster(Map<String, Double> monstersProb) 
+    public Monster sortMonster(Map<String, Double> monstersProb) 
     {   
 
         AbstractFactory common = new commonFactory();
@@ -48,10 +50,7 @@ public class ManageMonster {
         Double sumProb = 0.0;
         
         Double probElite = monstersProb.get("Elite");
-        //si la somme des proba n'est pas égal à 1, renvoie une erreur
-        //if (sumProb != 1) throw new IllegalStateException("La somme des probabilités n'est pas égale à 100%");        
-
-
+        
         //pour chaque monstre compare la proba d'apparition avec la somme des proba précédente et créer la fabrique correspondante
         if (nbRandom <= (sumProb += monstersProb.get("Darkwizard"))) 
         {
@@ -83,7 +82,7 @@ public class ManageMonster {
 /**
  * affiche les monstres VIVANT du tableau de monstres
  */
-    static void printAliveMonsters (Monster[] monsters)
+    public void printAliveMonsters (Monster[] monsters)
     {
         for (int i =0; i<monsters.length; i++)
         {
@@ -96,7 +95,7 @@ public class ManageMonster {
     }
 
     /**
-     * place un monstre au premier emplacement libr edu tableau de monstres
+     * place un monstre au premier emplacement libre du tableau de monstres
      * @param tab : le tableau de monstres
      * @param monster : le monstre a placé dans le tableau
      */
@@ -107,6 +106,45 @@ public class ManageMonster {
                 tab[i] = monster;
             }
         }
+    }
+
+
+
+    /**
+     * création et gestion des monstres d'un nouveau level, chaque nouveau level généré a des monstres plus fort que le level précédent
+     * @param level : entier indiquant le level à générer
+     * @return un tableau contenenant les monstres du level 
+     */
+    public Monster[] newLevel(int level)
+    {
+        Monster[] monsters;
+        probaMonster probaMonster = new probaMonster();
+
+        prob = probaMonster.sortProb(monsterStats.probaElite);
+
+        monsters = generateMonsters(monsterStats.nbMonsterLevel, prob);
+
+        return monsters;
+    }
+
+    /**
+     * fin d'un level, augmentation des stats des monstres pour le prochain level si la partie n'est pas finit
+     * @param end : booelan indiquant la fin de partie ou non
+     */
+    public void endLevel(boolean end)
+    {
+        if(!end){
+            monsterStats.upgradeAllStats();
+        }
+    }
+
+    /**
+     * affiche la variable prob contenant les proba d'apparition des monstres
+     */
+    public void printProb()
+    {
+        probaMonster probaMonster = new probaMonster();
+        probaMonster.printProb(this.prob);
     }
 }
 
