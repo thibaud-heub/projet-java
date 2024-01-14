@@ -7,11 +7,7 @@ import weapons.*;
 public class witcher extends character {
 
     public witcher() {
-        this.name = "Magicien";
-        this.pv = 100;
-        this.level = 1;
-        this.mana = 100;
-        this.speed = 3;
+        super(100, 5, 0, 0, 10, 0, 0, 10, "Magicien", 1, 100, 3); 
     }
 
     public weapon chooseWeapon(Scanner scanner) {

@@ -7,11 +7,7 @@ import weapons.*;
 public class warrior extends character {
 
     public warrior() {
-        this.name = "Guerrier";
-        this.pv = 100;
-        this.level = 1;
-        this.mana = 100;
-        this.speed = 1;
+        super(100, 5, 0, 10, 0, 0, 10, 0, "Guerrier", 1, 100, 1);
     }
 
     public weapon chooseWeapon(Scanner scanner) {

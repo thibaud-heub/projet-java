@@ -1,17 +1,12 @@
 package characters;
 
 import java.util.Scanner;
-
 import weapons.*;
 
 public class hunter extends character {
 
     public hunter() {
-        this.name = "Chasseur";
-        this.pv = 100;
-        this.level = 1;
-        this.mana = 100;
-        this.speed = 5;
+        super(100, 10, 0, 5, 0, 0, 10, 0, "Chasseur", 1, 100, 5);
     }
 
     public weapon chooseWeapon(Scanner scanner) {
@@ -20,17 +15,19 @@ public class hunter extends character {
         System.out.println("2. Arc");
 
         System.out.print("Entrez le numéro de votre choix : ");
-        int chooseWeapon = scanner.nextInt();
+        int weaponChoice = scanner.nextInt();
+        scanner.nextLine(); 
 
-        switch (chooseWeapon) {
+        switch (weaponChoice) {
             case 1:
-                return new spike();
+                return new spike(); 
             case 2:
-                return new bow();
+                return new bow(); 
             default:
                 System.out.println("Choix invalide.");
                 System.exit(0);
                 return null;
         }
     }
+
 }
