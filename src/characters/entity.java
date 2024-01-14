@@ -62,13 +62,13 @@ public abstract class entity {
     public Boolean take_damage (typeDamage ennemyDamage) 
     {
         int damage = realDamage(ennemyDamage);
-        if ((PV - damage)< 0) {//si les dégats dépasse la vie actuelle du monstre, ses PV tombent à 0 et il devient mort
-            PV = 0;
-            Alive = false;
+        if ((this.PV - damage)< 0) {//si les dégats dépasse la vie actuelle du monstre, ses PV tombent à 0 et il devient mort
+            this.PV = 0;
+            this.Alive = false;
         }
     //sinon en réduit ses points de vies
         else {
-            PV -= damage;
+            this.PV -= damage;
         }
         return this.Alive;
     }
