@@ -1,4 +1,4 @@
-package monster.game;
+package monster.MonsterGame;
 
 import java.util.Map;
 import java.util.Random;

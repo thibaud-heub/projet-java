@@ -1,7 +1,7 @@
 package monster;
 
 /**
- * classe abstraite qui définit une entité (monster ou character) définie les méthodes commune : attack, takeDamage ...
+ * classe abstraite qui définit une entité (monster ou character), définit les méthodes commune : attack, takeDamage ...
  */
 public abstract class entity {
     private int PV;

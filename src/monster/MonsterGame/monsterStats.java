@@ -1,12 +1,13 @@
-package monster.game;
+package monster.MonsterGame;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 /**
- * class de définition et centralisation des statistiques des monstres
+ * class de définition et centralisation des statistiques des monstres, elle ne peut pa
  */
+
 public final class monsterStats {
     //pourcentage de supériorité des monstres élites, les monstres élites ont juste des stats n fois supérieur à celle des monstres commun
     static double elite = 4.0;

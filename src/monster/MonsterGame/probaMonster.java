@@ -1,4 +1,4 @@
-package monster.game;
+package monster.MonsterGame;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.Random;
  * genere la probabilité d'apparition pour chaque monstre, la somme des probabilités d'apparition est égal à 1
  * @return un hashmap contenant pour chaque monstre une biclé avec le nom du monstre auquel on associe sa proba d'apparition
  */
-public class proba {
+public class probaMonster {
 
     /**
      * méthode qui tire au sort les probabilités d'apparition de chaque monstre, la somme des probabilités est égal à 1
@@ -16,7 +16,7 @@ public class proba {
      * @return une strcuture de donnée Map qui associe une chaine de caractere à un double (fonctionne comme un dictionnaire)
      */
     
-    static Map<String, Double> sortProb(Double probElite)
+    public Map<String, Double> sortProb(Double probElite)
     {
         /** 
          *les probabilité d'apparition des montres seront stockés dans un hashmap
@@ -64,17 +64,16 @@ public class proba {
  * affiche les donnnées contenu dans le hashmap, la chaine de caractère et ensuite la valeur du double
  * @param monstersProb hashmap des probabilités d'apparition des monstres
  */
-    static void printProb(Map<String, Double> monstersProb)
+    public void printProb(Map<String, Double> monstersProb)
     {
-        System.out.println("\nProbabilités d'apparitions des monstres :\n");
+        System.out.println("\nProbabilités d'apparition des monstres :\n");
         for (String cle : monstersProb.keySet() )
         {
             if(cle != "Elite")
             {
-            System.out.println(cle + ":" + monstersProb.get(cle) + "\n");
+            System.out.println(cle + " : " + (int) Math.round(monstersProb.get(cle)*100) + "%\n");
             }
         }
-        System.out.println("Elite");
-        System.out.println(monstersProb.get("Elite") + "\n");
+        System.out.println("Elite : " + monstersProb.get("Elite")*100 + "%\n");
     }
 }

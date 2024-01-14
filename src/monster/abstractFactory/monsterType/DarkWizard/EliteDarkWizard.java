@@ -1,6 +1,6 @@
 package monster.abstractFactory.monsterType.DarkWizard;
+import monster.MonsterGame.monsterStats;
 import monster.abstractFactory.monsterType.Monster;
-import monster.game.monsterStats;
 
 /**
  *implémentation de la classe Dark Wizard Elite, extension de la classe Monster

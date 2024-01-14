@@ -1,6 +1,6 @@
 package monster.abstractFactory.monsterType.Orc;
+import monster.MonsterGame.monsterStats;
 import monster.abstractFactory.monsterType.Monster;
-import monster.game.monsterStats;
 
 /**
  *implémentation de la classe Orc elite, extension de la classe Monster

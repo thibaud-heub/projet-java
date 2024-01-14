@@ -1,5 +1,5 @@
 package monster.abstractFactory.monsterType;
-import monster.game.monsterStats;
+import monster.MonsterGame.monsterStats;
 
 public class MudPile extends Monster{
     public MudPile () 

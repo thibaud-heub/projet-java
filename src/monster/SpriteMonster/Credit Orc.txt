@@ -1,0 +1,36 @@
+Authors: bluecarrot16, Benjamin K. Smith (BenCreating), Evert, Eliza Wyatt (ElizaWy), TheraHedwig, MuffinElZangano, Durrani, Johannes Sj?lund (wulax), Stephen Challener (Redshrike), Matthew Krohn (makrohn), Zi Ye, Johannes Sjölund (wulax), Nila122, Michael Whitlock (bigbeargames), Pierre Vigier and DCSS artists (see https://github.com/crawl/tiles/blob/master/ARTISTS.md)
+
+- body/bodies/male/universal/olive.png: by bluecarrot16, Benjamin K. Smith (BenCreating), Evert, Eliza Wyatt (ElizaWy), TheraHedwig, MuffinElZangano, Durrani, Johannes Sj?lund (wulax), Stephen Challener (Redshrike). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+    - https://opengameart.org/content/lpc-male-jumping-animation-by-durrani
+    - https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle
+    - https://opengameart.org/content/lpc-revised-character-basics
+
+- head/heads/orc_male/universal/olive.png: by bluecarrot16, Matthew Krohn (makrohn), Stephen Challener (Redshrike), Zi Ye. License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/four-characters-my-lpc-entries
+    - https://opengameart.org/content/sinbad-the-ogre
+    - https://opengameart.org/content/lpc-male-sheets
+    - https://opengameart.org/content/lpc-character-bases
+
+- shoulders/plate/male/steel.png: by bluecarrot16, Johannes Sjölund (wulax). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+    - http://opengameart.org/content/lpc-clothing-updates
+
+- torso/armour/legion/male/iron.png: by bluecarrot16, Nila122. License(s): CC-BY-SA 3.0, GPL 2.0, GPL 3.0. 
+    - https://opengameart.org/content/lpc-roman-armor
+
+- legs/armour/plate/male/iron.png: by bluecarrot16, Michael Whitlock (bigbeargames), Johannes Sjölund (wulax). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+
+- weapon/sword/scimitar/walk/scimitar.png: by Pierre Vigier and DCSS artists (see https://github.com/crawl/tiles/blob/master/ARTISTS.md). License(s): OGA-BY 3.0. 
+    - https://opengameart.org/content/lpc-dcss-swords
+
+- weapon/sword/scimitar/walk/behind/scimitar.png: by Pierre Vigier and DCSS artists (see https://github.com/crawl/tiles/blob/master/ARTISTS.md). License(s): OGA-BY 3.0. 
+    - https://opengameart.org/content/lpc-dcss-swords
+
+- weapon/sword/scimitar/slash/scimitar.png: by Pierre Vigier and DCSS artists (see https://github.com/crawl/tiles/blob/master/ARTISTS.md). License(s): OGA-BY 3.0. 
+    - https://opengameart.org/content/lpc-dcss-swords
+
+- weapon/sword/scimitar/slash/behind/scimitar.png: by Pierre Vigier and DCSS artists (see https://github.com/crawl/tiles/blob/master/ARTISTS.md). License(s): OGA-BY 3.0. 
+    - https://opengameart.org/content/lpc-dcss-swords
