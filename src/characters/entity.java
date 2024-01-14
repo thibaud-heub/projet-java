@@ -66,7 +66,7 @@ public abstract class entity {
             PV = 0;
             Alive = false;
         }
-    //sinon en réduit ses ppints de vies
+    //sinon en réduit ses points de vies
         else {
             PV -= damage;
         }

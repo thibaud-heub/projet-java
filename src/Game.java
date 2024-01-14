@@ -34,9 +34,6 @@ public class Game {
         }
         
         weapon weapon = character.chooseWeapon(scanner);
-        System.out.println("Vous avez choisi: " + character.getName() + " avec l'arme " + weapon.getName());
-        character.printStats(); 
-        weapon.attack();
         
     }
 }

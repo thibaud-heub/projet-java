@@ -10,7 +10,6 @@ public abstract class character extends entity {
         // Appel du constructeur de la classe Entity avec les paramètres nécessaires
         super(PV, attackSpeed, Rfire, Rphysic, Rmagic, Dfire, Dphysic, Dmagic);
 
-        // Initialisation des attributs spécifiques à Character
         this.name = name;
         this.level = level;
         this.mana = mana;
@@ -23,13 +22,15 @@ public abstract class character extends entity {
     protected int mana;
     protected int speed;
 
-    public String getName() {
-        return name;
-    }
+    public abstract weapon chooseWeapon(Scanner scanner); 
 
-    public void printStats() {
-        System.out.println(" - Niveau: " + level + " - Mana: " + mana + " - Vitesse: " + speed);
-    }
-
-    public abstract weapon chooseWeapon(Scanner scanner);   
+    public void attack(entity otherEntity, weapon weaponUsed) {
+        if (this.mana >= weaponUsed.getManaUsed()) {
+            this.mana -= weaponUsed.getManaUsed(); // Déduire le mana utilisé pour l'attaque
+            super.attack(otherEntity); // Appelle la méthode attack de la classe entity
+            weaponUsed.decreaseDurability(); // Diminue la durabilité de l'arme après l'attaque
+        } else {
+            System.out.println(this.name + " n'a pas assez de mana pour attaquer avec " + weaponUsed.getName());
+        }
+    }  
 }
