@@ -40,7 +40,7 @@ public abstract class character extends entity {
     protected int mana;
     protected int speed;
 
-    public abstract weapon chooseWeapon(Scanner scanner); 
+    public abstract weapon chooseWeapon(Scanner scanner); // à changer une fois qu'on a l'interface
 
     /**
      * décrémente la mana, la durabilité en fonction de l'arme utilisée
@@ -50,7 +50,7 @@ public abstract class character extends entity {
      */
     public void attack(entity otherEntity, weapon weaponUsed) {
         if (this.mana >= weaponUsed.getManaUsed()) {
-            this.mana -= weaponUsed.getManaUsed(); // Déduire le mana utilisé pour l'attaque
+            this.mana -= weaponUsed.getManaUsed(); // Déduit le mana utilisé pour l'attaque
             super.attack(otherEntity); // Appelle la méthode attack de la classe entity
             weaponUsed.decreaseDurability(); // Diminue la durabilité de l'arme après l'attaque
         } else {
