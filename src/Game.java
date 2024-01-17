@@ -4,10 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import sprites.*;
 
-// GamePanel est responsable du dessin et de la mise à jour du jeu
 class GamePanel extends JPanel implements ActionListener, KeyListener {
     private KnightIdle knightIdle;
     private KnightRun knightRun;
@@ -16,11 +14,12 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     private int yPos = 100;
     private int spriteIndex = 0;
     private final int SPEED = 5;
-    private final int DELAY = 1000 / 60;
+    private final int DELAY = 1000 / 30;
     private Timer timer;
     private boolean runningLeft = false;
-    private boolean idle = true;
 
+    private enum State { IDLE, RUNNING, DEATH }
+    private State currentState = State.IDLE;
 
     public GamePanel() {
         knightIdle = new KnightIdle();
@@ -35,46 +34,55 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (runningLeft) {
-            g.drawImage(knightRun.getRunFrame(spriteIndex), xPos + knightRun.getWidth(), yPos, -knightRun.getWidth(), knightRun.getHeight(), this);
-        } 
-        else {
-            g.drawImage(knightRun.getRunFrame(spriteIndex), xPos, yPos, knightRun.getWidth(), knightRun.getHeight(), this);
+        Image sprite;
+        switch (currentState) {
+            case RUNNING:
+                sprite = knightRun.getRunFrame(spriteIndex);
+                break;
+            case DEATH:
+                sprite = knightDeath.getDeathFrame(spriteIndex);
+                break;
+            case IDLE:
+            default:
+                sprite = knightIdle.getIdleFrame(spriteIndex);
+                break;
         }
 
-
+        if (runningLeft) {
+            g.drawImage(sprite, xPos + sprite.getWidth(null), yPos, -sprite.getWidth(null), sprite.getHeight(null), this);
+        } else {
+            g.drawImage(sprite, xPos, yPos, sprite.getWidth(null), sprite.getHeight(null), this);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (currentState == State.RUNNING || currentState == State.IDLE) {
+            spriteIndex = (spriteIndex + 1) % knightRun.getFrameCount(); 
+        }
         repaint();
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
+        currentState = State.RUNNING;
         if (key == KeyEvent.VK_RIGHT) {
             runningLeft = false;
             xPos += SPEED;
-            spriteIndex = (spriteIndex + 1) % knightRun.getFrameCount();
-        }
-        if (key == KeyEvent.VK_LEFT) {
+        } else if (key == KeyEvent.VK_LEFT) {
             runningLeft = true;
             xPos -= SPEED;
-            spriteIndex = (spriteIndex + 1) % knightRun.getFrameCount();
-        }
-        if (key == KeyEvent.VK_UP) {
+        } else if (key == KeyEvent.VK_UP) {
             yPos -= SPEED;
-            spriteIndex = (spriteIndex + 1) % knightRun.getFrameCount();
-        }
-        if (key == KeyEvent.VK_DOWN) {
+        } else if (key == KeyEvent.VK_DOWN) {
             yPos += SPEED;
-            spriteIndex = (spriteIndex + 1) % knightRun.getFrameCount();
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        currentState = State.IDLE;
     }
 
     @Override
@@ -82,7 +90,6 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     }
 }
 
-// JFrame container for the game panel
 public class Game extends JFrame {
     public Game() {
         add(new GamePanel());
