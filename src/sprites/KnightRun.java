@@ -7,7 +7,7 @@ public class KnightRun extends SpriteSheet {
     private static final int WIDTH = 64;
     private static final int HEIGHT = 64;
 
-    private static final int FRAME_COUNT = 6;
+    private static final int FRAME_COUNT = 4;
     public KnightRun() {
         super("../../ressources/sprites/Heroes/Knight/Run/Run-Sheet.png");
     }
