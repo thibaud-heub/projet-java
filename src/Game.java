@@ -4,12 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import sprites.*;
+import characters.*;
 
 class GamePanel extends JPanel implements ActionListener, KeyListener {
-    private KnightIdle knightIdle;
-    private KnightRun knightRun;
-    private KnightDeath knightDeath;
+    private character currentCharacter;
     private int xPos = 100;
     private int yPos = 100;
     private int spriteIndex = 0;
@@ -25,9 +23,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     private State currentState = State.IDLE;
 
     public GamePanel() {
-        knightIdle = new KnightIdle();
-        knightRun = new KnightRun();
-        knightDeath = new KnightDeath();
+        currentCharacter = new hunter();
         timer = new Timer(DELAY, this);
         timer.start();
         setFocusable(true);
@@ -43,14 +39,14 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         
         switch (currentState) {
             case RUNNING:
-                sprite = knightRun.getRunFrame(spriteIndex);
+                sprite = currentCharacter.getRunSprite(spriteIndex);
                 break;
             case DEATH:
-                sprite = knightDeath.getDeathFrame(spriteIndex);
+                sprite = currentCharacter.getDeathSprite(spriteIndex);
                 break;
             case IDLE:
             default:
-                sprite = knightIdle.getIdleFrame(spriteIndex);
+                sprite = currentCharacter.getIdleSprite(spriteIndex);
                 break;
         }
 
@@ -79,16 +75,16 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         switch (currentState) {
             case RUNNING:
-                spriteIndex = (spriteIndex + 1) % knightRun.getFrameCount();
+                spriteIndex = (spriteIndex + 1) % currentCharacter.getRunFrameCount();
                 break;
             case IDLE:
-                spriteIndex = (spriteIndex + 1) % knightRun.getFrameCount();
+                spriteIndex = (spriteIndex + 1) % currentCharacter.getIdleFrameCount();
                 break;
             case DEATH:
             // implémentation d'un délai pour que ça aille plus lentement
             if (deathAnimationDelay++ >= DEATH_ANIMATION_SPEED) {
                 deathAnimationDelay = 0; 
-                if (spriteIndex < knightDeath.getFrameCount() - 1) {
+                if (spriteIndex < currentCharacter.getDeathFrameCount() - 1) {
                     spriteIndex++; 
                     deathAnimationPlayed = true;
                 }
