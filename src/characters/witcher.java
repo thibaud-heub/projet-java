@@ -12,9 +12,14 @@ public class witcher extends character {
 
     public witcher() {
         super(100, 5, 0, 0, 10, 0, 0, 10, "Magicien", 1, 100, 3); 
-        setIdleSheet("../../ressources/sprites/Heroes/Wizzard/Idle/Idle-Sheet.png", 32, 32);
-        setRunSheet("../../ressources/sprites/Heroes/Wizzard/Run/Run-Sheet.png", 64, 64);
-        setDeathSheet("../../ressources/sprites/Heroes/Wizzard/Death/Death-Sheet.png", 64, 32);
+        // si le joueur choisit batôn normal
+        // setIdleSheet("../../ressources/sprites/Heroes/Wizzard/Idle/Idle-Sheet-Wand.png", 32, 32);
+        // setRunSheet("../../ressources/sprites/Heroes/Wizzard/Run/Run-Sheet-Wand.png", 64, 64);
+        // setDeathSheet("../../ressources/sprites/Heroes/Wizzard/Death/Death-Sheet-Wand.png", 64, 32);
+        // si le joueur choisit grand baton
+        setIdleSheet("../../ressources/sprites/Heroes/Wizzard/Idle/Idle-Sheet-Big-Wand.png", 32, 32);
+        setRunSheet("../../ressources/sprites/Heroes/Wizzard/Run/Run-Sheet-Big-Wand.png", 64, 64);
+        setDeathSheet("../../ressources/sprites/Heroes/Wizzard/Death/Death-Sheet-Big-Wand.png", 64, 32);
     }
 
     public weapon chooseWeapon(Scanner scanner) {
