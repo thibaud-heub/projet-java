@@ -9,12 +9,18 @@ public class warrior extends character {
     private static final int IDLE_FRAME_COUNT = 4;
     private static final int RUN_FRAME_COUNT = 6;
     private static final int DEATH_FRAME_COUNT = 6;
+    
 
     public warrior() {
         super(100, 5, 0, 10, 0, 0, 10, 0, "Guerrier", 1, 100, 1);
-        setIdleSheet("../../ressources/sprites/Heroes/Knight/Idle/Idle-Sheet.png", 32, 32);
-        setRunSheet("../../ressources/sprites/Heroes/Knight/Run/Run-Sheet.png", 64, 64);
-        setDeathSheet("../../ressources/sprites/Heroes/Knight/Death/Death-Sheet.png", 48, 32);
+        // si le choix de l'utilisateur est shield sword =>
+        // setIdleSheet("../../ressources/sprites/Heroes/Knight/Idle/Idle-Sheet-Shield-Sword.png", 32, 32);
+        // setRunSheet("../../ressources/sprites/Heroes/Knight/Run/Run-Sheet-Shield-Sword.png", 64, 64);
+        // setDeathSheet("../../ressources/sprites/Heroes/Knight/Death/Death-Sheet-Shield-Sword.png", 48, 32);
+        // si le choix de l'utilisateur est big sword =>
+        setIdleSheet("../../ressources/sprites/Heroes/Knight/Idle/Idle-Sheet-Big-Sword.png", 32, 32);
+        setRunSheet("../../ressources/sprites/Heroes/Knight/Run/Run-Sheet-Big-Sword.png", 64, 64);
+        setDeathSheet("../../ressources/sprites/Heroes/Knight/Death/Death-Sheet-Big-Sword.png", 48, 32);
     }
 
     public weapon chooseWeapon(Scanner scanner) {

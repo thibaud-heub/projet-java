@@ -11,19 +11,20 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     private int xPos = 100;
     private int yPos = 100;
     private int spriteIndex = 0;
-    private final int SPEED = 5;
+    private final int SPEED = 3;
     private final int DELAY = 1000 / 30; // fps
     private Timer timer; // la boucle
     private boolean runningLeft = false;
     private boolean deathAnimationPlayed = false;
-    private int deathAnimationDelay = 0;
+    private int AnimationDelay = 0;
     private final int DEATH_ANIMATION_SPEED = 8; // plus c'est grand plus c'est lent
+    private final int ANIMATION_SPEED = 3;
 
     private enum State { IDLE, RUNNING, DEATH }
     private State currentState = State.IDLE;
 
     public GamePanel() {
-        currentCharacter = new hunter();
+        currentCharacter = new witcher();
         timer = new Timer(DELAY, this);
         timer.start();
         setFocusable(true);
@@ -75,15 +76,24 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         switch (currentState) {
             case RUNNING:
+            if (AnimationDelay++ >= ANIMATION_SPEED) {
+                AnimationDelay = 0; 
                 spriteIndex = (spriteIndex + 1) % currentCharacter.getRunFrameCount();
                 break;
-            case IDLE:
-                spriteIndex = (spriteIndex + 1) % currentCharacter.getIdleFrameCount();
+            }
+                
                 break;
+            case IDLE:
+            if (AnimationDelay++ >= ANIMATION_SPEED) {
+                AnimationDelay = 0; 
+                spriteIndex = (spriteIndex + 1) % currentCharacter.getIdleFrameCount();
+
+                break;
+            }
             case DEATH:
             // implémentation d'un délai pour que ça aille plus lentement
-            if (deathAnimationDelay++ >= DEATH_ANIMATION_SPEED) {
-                deathAnimationDelay = 0; 
+            if (AnimationDelay++ >= DEATH_ANIMATION_SPEED) {
+                AnimationDelay = 0; 
                 if (spriteIndex < currentCharacter.getDeathFrameCount() - 1) {
                     spriteIndex++; 
                     deathAnimationPlayed = true;
