@@ -1,6 +1,5 @@
 package characters;
 
-import java.util.Scanner;
 import java.awt.Image;
 
 
@@ -47,8 +46,6 @@ public abstract class character extends entity {
     protected int level;
     protected int mana;
     protected int speed;
-
-    public abstract weapon chooseWeapon(Scanner scanner); // à changer une fois qu'on a l'interface
 
     /**
      * décrémente la mana, la durabilité en fonction de l'arme utilisée

@@ -1,9 +1,9 @@
 package weapons;
 
-public class bow extends weapon {
+public class hoe extends weapon {
 
-    public bow() {
-        this.name = "Arc";
+    public hoe() {
+        this.name = "Houe";
         this.damage = 10;
         this.manaUsed = 5;
         this.durability = 100;

@@ -1,8 +1,8 @@
 package weapons;
 
 
-public class warAxe extends weapon {
-    public warAxe() {
+public class bigSword extends weapon {
+    public bigSword() {
         this.name = "Hache de guerre";
         this.damage = 50;
         this.manaUsed = 20;

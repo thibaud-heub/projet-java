@@ -23,8 +23,8 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     private enum State { IDLE, RUNNING, DEATH }
     private State currentState = State.IDLE;
 
-    public GamePanel() {
-        currentCharacter = new hunter();
+    public GamePanel(character chosenCharacter) {
+        this.currentCharacter = chosenCharacter;
         timer = new Timer(DELAY, this);
         timer.start();
         setFocusable(true);
@@ -146,18 +146,11 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
 }
 
 public class Game extends JFrame {
-    public Game() {
-        add(new GamePanel());
+    public Game(character chosenCharacter) {
+        add(new GamePanel(chosenCharacter));
         setTitle("DnD");
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            Game game = new Game();
-            game.setVisible(true);
-        });
     }
 }
