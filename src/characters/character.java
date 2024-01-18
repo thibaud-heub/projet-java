@@ -66,9 +66,11 @@ public abstract class character extends entity {
         }
     }  
 
+    // méthodes abstraites implémentées dans les classes filles
     public abstract int getIdleFrameCount();
     public abstract int getRunFrameCount();
     public abstract int getDeathFrameCount();
+    public abstract int getSpeed();
 
     // on obtient ici le chemin, la largeur et hauteur de chaque sprite 
     protected void setIdleSheet(String path, int frameWidth, int frameHeight) {
