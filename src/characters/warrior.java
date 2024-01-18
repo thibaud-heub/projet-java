@@ -54,4 +54,8 @@ public class warrior extends character {
     public int getDeathFrameCount() {
         return DEATH_FRAME_COUNT;
     }
+
+    public int getSpeed(){
+        return speed;
+    }
 }

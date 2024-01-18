@@ -11,10 +11,10 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     private int xPos = 100;
     private int yPos = 100;
     private int spriteIndex = 0;
-    private final int SPEED = 3;
     private final int DELAY = 1000 / 30; // fps
     private Timer timer; // la boucle
     private boolean runningLeft = false;
+    private int speed;
     private boolean deathAnimationPlayed = false;
     private int AnimationDelay = 0;
     private final int DEATH_ANIMATION_SPEED = 8; // plus c'est grand plus c'est lent
@@ -24,7 +24,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     private State currentState = State.IDLE;
 
     public GamePanel() {
-        currentCharacter = new witcher();
+        currentCharacter = new hunter();
         timer = new Timer(DELAY, this);
         timer.start();
         setFocusable(true);
@@ -37,6 +37,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         Image sprite;
         int spriteWidth;
         int spriteHeight;
+        speed = currentCharacter.getSpeed();
         
         switch (currentState) {
             case RUNNING:
@@ -110,17 +111,17 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         if (key == KeyEvent.VK_RIGHT) {
             currentState = State.RUNNING;
             runningLeft = false;
-            xPos += SPEED;
+            xPos += speed;
         } else if (key == KeyEvent.VK_LEFT) {
             currentState = State.RUNNING;
             runningLeft = true;
-            xPos -= SPEED;
+            xPos -= speed;
         } else if (key == KeyEvent.VK_UP) {
             currentState = State.RUNNING;
-            yPos -= SPEED;
+            yPos -= speed;
         } else if (key == KeyEvent.VK_DOWN) {
             currentState = State.RUNNING;
-            yPos += SPEED;
+            yPos += speed;
         }
 
         if (key == KeyEvent.VK_D) {
