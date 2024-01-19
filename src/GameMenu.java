@@ -162,7 +162,7 @@
 
     private void createRogueWeaponPanel() {
         JLabel spikeLabel = new JLabel("Dague", SwingConstants.CENTER);
-        JLabel hoeLabel = new JLabel("Faue", SwingConstants.CENTER);
+        JLabel hoeLabel = new JLabel("Katana", SwingConstants.CENTER);
 
         // label pour la sélection d'armes
         spikeLabel.setBounds(150, 250, 240, 50);
@@ -186,8 +186,8 @@
         hoeLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Faue");
-                //selectRogueWeapon(new hoe());
+                System.out.println("Katana");
+                selectRogueWeapon(new katana());
 
             }
         });

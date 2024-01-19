@@ -1,8 +1,8 @@
 package weapons;
 
-public class hoe extends weapon {
+public class katana extends weapon {
 
-    public hoe() {
+    public katana() {
         this.name = "Houe";
         this.damage = 10;
         this.manaUsed = 5;
