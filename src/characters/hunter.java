@@ -13,15 +13,15 @@ public class hunter extends character {
        
         // si le joueur choisit dagues
         if(chosenWeapon instanceof spike){
-            setIdleSheet("../../ressources/sprites/Heroes/Rogue/Idle/Idle-Sheet.png", 32, 32);
-            setRunSheet("../../ressources/sprites/Heroes/Rogue/Run/Run-Sheet.png", 64, 64);
-            setDeathSheet("../../ressources/sprites/Heroes/Rogue/Death/Death-Sheet.png", 64, 32);
+            setIdleSheet("../../ressources/sprites/Heroes/Rogue/Idle/Idle-Sheet-Spikes.png", 32, 32);
+            setRunSheet("../../ressources/sprites/Heroes/Rogue/Run/Run-Sheet-Spikes.png", 64, 64);
+            setDeathSheet("../../ressources/sprites/Heroes/Rogue/Death/Death-Sheet-Spikes.png", 64, 32);
         }
         // si le joueur choisit la houe
-        if(chosenWeapon instanceof hoe)
-        {setIdleSheet("../../ressources/sprites/Heroes/Rogue/Idle/Idle-Sheet.png", 32, 32);
-        setRunSheet("../../ressources/sprites/Heroes/Rogue/Run/Run-Sheet.png", 64, 64);
-        setDeathSheet("../../ressources/sprites/Heroes/Rogue/Death/Death-Sheet.png", 64, 32);}
+        if(chosenWeapon instanceof katana)
+        {setIdleSheet("../../ressources/sprites/Heroes/Rogue/Idle/Idle-Sheet-Katana.png", 32, 32);
+        setRunSheet("../../ressources/sprites/Heroes/Rogue/Run/Run-Sheet-Katana.png", 64, 64);
+        setDeathSheet("../../ressources/sprites/Heroes/Rogue/Death/Death-Sheet-Katana.png", 64, 32);}
     }
     
     public int getIdleFrameCount() {
