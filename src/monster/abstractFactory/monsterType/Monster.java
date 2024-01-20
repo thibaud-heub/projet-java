@@ -5,7 +5,7 @@ import java.util.Map;
 
 public abstract class Monster extends entity {
 
-    public enum monsterType {COMMON, ELITE}
+    public enum monsterType {COMMON, ELITE, BOSS}
     
     private int id = -1;
     private double X;

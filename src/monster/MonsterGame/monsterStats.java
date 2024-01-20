@@ -122,6 +122,24 @@ public final class monsterStats {
         mudPileStats.put("MagicDamage", 0);
     }
 
+
+//---------------Boss------------------
+
+    private static Map<String, Integer> bossStats = new HashMap<>();
+
+    static{
+        mudPileStats.put("PV", 500);
+        mudPileStats.put("AttackSpeed", 1);
+
+        mudPileStats.put("FireResistance", 10);
+        mudPileStats.put("PhysicResistance", 10);
+        mudPileStats.put("MagicResistance", 10);
+
+        mudPileStats.put("FireDamage", 10);
+        mudPileStats.put("PhysicDamage", 10);
+        mudPileStats.put("MagicDamage", 10);
+    }
+
 //place les states des monstres dans un hashmap pour la gestion
     static Map<String, Map<String, Integer>> monster = new HashMap<>();
     static
@@ -131,6 +149,7 @@ public final class monsterStats {
         monster.put("Orc", orcStats);
         monster.put("Skeleton", skeletonStats);
         monster.put("MudPile", mudPileStats);
+        monster.put("Boss", bossStats);
     }
 
     /**

@@ -13,11 +13,6 @@ public class EliteSkeleton extends Monster {
        super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Skeleton")));
     };
 
-    public void attack (Monster other_monster) 
-    {
-        System.out.println("Skeleton elite attack");
-        this.attack(other_monster);
-    }
 
     @Override
     public void print() 

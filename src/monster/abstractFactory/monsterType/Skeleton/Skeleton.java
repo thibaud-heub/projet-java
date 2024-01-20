@@ -12,12 +12,6 @@ public class Skeleton extends Monster {
        super(monsterType.COMMON, monsterStats.getStats("Skeleton"));
     };
 
-    public void attack (Monster other_monster) 
-    {
-        System.out.println("Skeleton attack");
-        this.attack(other_monster);
-    }
-
     @Override
     public void print() 
     {

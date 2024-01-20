@@ -6,9 +6,10 @@ import java.util.Random;
 import monster.abstractFactory.AbstractFactory;
 import monster.abstractFactory.commonFactory;
 import monster.abstractFactory.eliteFactory;
+import monster.abstractFactory.monsterType.Boss;
 import monster.abstractFactory.monsterType.Monster;
 
-public class manageMonster {
+public class monsterManager {
     Map<String, Double> prob;
 
     /**
@@ -28,7 +29,6 @@ public class manageMonster {
         }
         return monsters;
     }
-
 
 /**
  * tire un monstre au hasard avec différentes chances d'apparition des monstres (la somme des proba doit être egal à 1)
@@ -77,11 +77,23 @@ public class manageMonster {
             if (eliteRandom <= probElite) return elite.createSkeleton();
             else return common.createSkeleton();
         }
-}
+    }
+    /**
+     * génere un boss
+     * @return un boss
+     */
+    public Monster[] generateBoss ()
+    {
+        Monster[] boss = new Monster[1];
+        putMonster(boss, new Boss());
 
-/**
- * affiche les monstres VIVANT du tableau de monstres
- */
+        return boss;
+    }
+
+
+    /**
+     * affiche les monstres VIVANT du tableau de monstres
+     */
     public void printAliveMonsters (Monster[] monsters)
     {
         for (int i =0; i<monsters.length; i++)
@@ -90,6 +102,7 @@ public class manageMonster {
             {
                 System.out.print("\nMonstre numéro : " + i);
             monsters[i].print();
+
             }
         }
     }
@@ -104,6 +117,7 @@ public class manageMonster {
         for (int i = 0; i < tab.length; i++) {
             if (tab[i] == null) {
                 tab[i] = monster;
+                tab[i].setId(i);
             }
         }
     }
@@ -111,31 +125,28 @@ public class manageMonster {
 
 
     /**
-     * création et gestion des monstres d'un nouveau level, chaque nouveau level généré a des monstres plus fort que le level précédent
-     * @param level : entier indiquant le level à générer
-     * @return un tableau contenenant les monstres du level 
+     * création et gestion des monstres d'un nouveau level, chaque nouveau level généré a des monstres plus fort que le level précédent. Si le lvel est le dernier, génere un tableau contenant juste un boss
+     * @param endLevel : booléen indiquant si c'est le dernier level
+     * @return un tableau contenenant les monstres du level
      */
-    public Monster[] newLevel(int level)
+    public Monster[] monstersLevel(boolean endLevel)
     {
         Monster[] monsters;
-        probaMonster probaMonster = new probaMonster();
+        
+        if(!endLevel){
+            probaMonster probaMonster = new probaMonster();
 
-        prob = probaMonster.sortProb(monsterStats.probaElite);
+            prob = probaMonster.sortProb(monsterStats.probaElite);
 
-        monsters = generateMonsters(monsterStats.nbMonsterLevel, prob);
+            monsters = generateMonsters(monsterStats.nbMonsterLevel, prob);
 
-        return monsters;
-    }
-
-    /**
-     * fin d'un level, augmentation des stats des monstres pour le prochain level si la partie n'est pas finit
-     * @param end : booelan indiquant la fin de partie ou non
-     */
-    public void endLevel(boolean end)
-    {
-        if(!end){
             monsterStats.upgradeAllStats();
         }
+        else 
+        {
+            monsters = generateBoss();
+        }
+        return monsters;
     }
 
     /**
