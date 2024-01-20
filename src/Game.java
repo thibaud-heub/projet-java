@@ -34,6 +34,11 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        // put the background in black
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, getWidth(), getHeight());
+
+        
         Image sprite;
         int spriteWidth;
         int spriteHeight;

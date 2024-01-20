@@ -12,6 +12,8 @@ public class witcher extends character {
     public witcher(weapon chosenWeapon) {
         super(100, 5, 0, 0, 10, 0, 0, 10, "Magicien", 1, 100, 3); 
         
+        /* L'attaque avec le baton ou le grand baton se fait en 4 frames */
+
         // si le joueur choisit batôn normal
         if(chosenWeapon instanceof magicWand){
             setIdleSheet("../../ressources/sprites/Heroes/Wizzard/Idle/Idle-Sheet-Wand.png", 32, 32);
