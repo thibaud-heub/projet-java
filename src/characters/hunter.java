@@ -11,6 +11,10 @@ public class hunter extends character {
     public hunter(weapon chosenWeapon) {
         super(100, 10, 0, 5, 0, 0, 10, 0, "Chasseur", 1, 100, 5);
        
+        /* L'attaque avec les spikes se fait en 3 frames ou bien avec les frames (2-3) */
+        /* L'attaque avec le katana se fait en 4 frames ou bien avec les frames (2-3-4) */
+        
+
         // si le joueur choisit dagues
         if(chosenWeapon instanceof spike){
             setIdleSheet("../../ressources/sprites/Heroes/Rogue/Idle/Idle-Sheet-Spikes.png", 32, 32);
