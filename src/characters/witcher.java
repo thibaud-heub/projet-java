@@ -23,15 +23,15 @@ public class witcher extends character {
         if(chosenWeapon instanceof magicWand){
             setIdleSheet("../../ressources/sprites/Heroes/Wizzard/Idle/Idle-Sheet-Wand.png", 32, 32);
             setRunSheet("../../ressources/sprites/Heroes/Wizzard/Run/Run-Sheet-Wand.png", 64, 64);
-            setDeathSheet("../../ressources/sprites/Heroes/Wizzard/Death/Death-Sheet-Wand.png", 64, 32);
+            setDeathSheet("../../ressources/sprites/Heroes/Wizzard/Death/Death-Sheet-Wand.png", 64, 64);
             setAttackSheet("../../ressources/sprites/Heroes/Wizzard/Attack/Attack-Sheet-Wand.png", 32, 32);
         }
-        // si le joueur choisit grand baton
-        if(chosenWeapon instanceof bigMagicWand)
+        else if(chosenWeapon instanceof bigMagicWand){
         setIdleSheet("../../ressources/sprites/Heroes/Wizzard/Idle/Idle-Sheet-Big-Wand.png", 32, 32);
         setRunSheet("../../ressources/sprites/Heroes/Wizzard/Run/Run-Sheet-Big-Wand.png", 64, 64);
         setDeathSheet("../../ressources/sprites/Heroes/Wizzard/Death/Death-Sheet-Big-Wand.png", 64, 32);
         setAttackSheet("../../ressources/sprites/Heroes/Wizzard/Attack/Attack-Sheet-Big-Wand.png", 32, 32);
+        }
     }
 
     public int getIdleFrameCount() {
