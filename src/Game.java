@@ -140,16 +140,10 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
             break;
             case DEFENSE:
             if (AnimationDelay++ >= ANIMATION_SPEED) {
-                AnimationDelay = 0;
-                if (spriteIndex < currentCharacter.getDefenseFrameCount() - 1) {
-                    spriteIndex++;
-                } else {
-                    spriteIndex = 0; 
-                    currentState = State.IDLE;
-                    isDefending = false;
-                }
+                AnimationDelay = 0; 
+                spriteIndex = (spriteIndex + 1) % currentCharacter.getDefenseFrameCount();
             }
-            
+            break;
         }
         repaint();
     }
@@ -186,7 +180,6 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         }
 
         if (key == KeyEvent.VK_D && chosenWeapon == "Epee et bouclier"){
-            isDefending = true;
             currentState = State.DEFENSE;
         }
     }
@@ -194,7 +187,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_LEFT || key == KeyEvent.VK_UP || key == KeyEvent.VK_DOWN) {
+        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_LEFT || key == KeyEvent.VK_UP || key == KeyEvent.VK_DOWN || key == KeyEvent.VK_D) {
             currentState = State.IDLE;
         }
     }
