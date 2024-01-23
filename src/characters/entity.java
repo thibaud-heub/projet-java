@@ -5,7 +5,7 @@ package characters;
  */
 public abstract class entity {
     private int PV;
-    private int attackSpeed;
+    protected int attackSpeed;
     private Boolean Alive; //indique si le monstre est en vie ou mort
     private typeDamage resistance;
     private typeDamage damage;
@@ -122,6 +122,5 @@ public abstract class entity {
     {
         return this.attackSpeed;
     }
-
 
 }
