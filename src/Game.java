@@ -15,12 +15,17 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     private Timer timer; // la boucle
     private boolean runningLeft = false;
     private int speed;
+    private int attackSpeed;
+    private int attackDelay = 0;
     private boolean deathAnimationPlayed = false;
     private int AnimationDelay = 0;
+    private boolean isAttacking = false;
+    private boolean isDefending = false;
+    private String chosenWeapon;
     private final int DEATH_ANIMATION_SPEED = 8; // plus c'est grand plus c'est lent
     private final int ANIMATION_SPEED = 3;
 
-    private enum State { IDLE, RUNNING, DEATH }
+    private enum State { IDLE, RUNNING, DEATH, ATTACK, DEFENSE }
     private State currentState = State.IDLE;
 
     public GamePanel(character chosenCharacter) {
@@ -43,6 +48,9 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         int spriteWidth;
         int spriteHeight;
         speed = currentCharacter.getSpeed();
+        attackSpeed = currentCharacter.getAttackSpeed();
+        chosenWeapon = currentCharacter.getWeapon();
+
         
         switch (currentState) {
             case RUNNING:
@@ -55,7 +63,14 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
             default:
                 sprite = currentCharacter.getIdleSprite(spriteIndex);
                 break;
+            case ATTACK:
+                sprite = currentCharacter.getAttackSprite(spriteIndex);
+                break;
+            case DEFENSE:
+                sprite = currentCharacter.getDefenseSprite(spriteIndex);
+                break;
         }
+
 
         spriteWidth = sprite.getWidth(null);
         spriteHeight = sprite.getHeight(null);
@@ -97,7 +112,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
                 break;
             }
             case DEATH:
-            // implémentation d'un délai pour que ça aille plus lentement
+            // implémentation d'un autre délai pour que ça aille plus lentement
             if (AnimationDelay++ >= DEATH_ANIMATION_SPEED) {
                 AnimationDelay = 0; 
                 if (spriteIndex < currentCharacter.getDeathFrameCount() - 1) {
@@ -106,6 +121,35 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
                 }
             }
             break;
+            case ATTACK:
+            if (AnimationDelay++ >= ANIMATION_SPEED) {
+                AnimationDelay = 0;
+                if (spriteIndex < currentCharacter.getAttackFrameCount() - 1) {
+                    spriteIndex++;
+                } else if (attackDelay >= 20) {
+                    spriteIndex = 0; 
+                    currentState = State.IDLE;
+                }
+            }
+
+            if (attackDelay++ >= attackSpeed) {
+                isAttacking = false;    
+                attackDelay = 0;
+                currentState = State.IDLE;
+            }
+            break;
+            case DEFENSE:
+            if (AnimationDelay++ >= ANIMATION_SPEED) {
+                AnimationDelay = 0;
+                if (spriteIndex < currentCharacter.getDefenseFrameCount() - 1) {
+                    spriteIndex++;
+                } else {
+                    spriteIndex = 0; 
+                    currentState = State.IDLE;
+                    isDefending = false;
+                }
+            }
+            
         }
         repaint();
     }
@@ -129,18 +173,28 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
             yPos += speed;
         }
 
-        if (key == KeyEvent.VK_D) {
+        if (key == KeyEvent.VK_U) {
             currentState = State.DEATH;
+        }
+
+        
+        if (key == KeyEvent.VK_A && !isAttacking) {
+            isAttacking = true;
+            currentState = State.ATTACK;
+            spriteIndex = 0; 
+            attackDelay = 0; 
+        }
+
+        if (key == KeyEvent.VK_D && chosenWeapon == "Epee et bouclier"){
+            isDefending = true;
+            currentState = State.DEFENSE;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        if (key == KeyEvent.VK_D) {
-            // ne rien changer, on est mort
-        }
-        else {
+        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_LEFT || key == KeyEvent.VK_UP || key == KeyEvent.VK_DOWN) {
             currentState = State.IDLE;
         }
     }

@@ -13,6 +13,8 @@ public abstract class character extends entity {
     protected SpriteSheet idleSheet;
     protected SpriteSheet runSheet;
     protected SpriteSheet deathSheet;
+    protected SpriteSheet attackSheet;
+    protected SpriteSheet defenseSheet;
     protected int FRAME_COUNT;
 
 
@@ -67,9 +69,13 @@ public abstract class character extends entity {
     public abstract int getIdleFrameCount();
     public abstract int getRunFrameCount();
     public abstract int getDeathFrameCount();
+    public abstract int getAttackFrameCount();
+    public abstract int getDefenseFrameCount();
     public abstract int getSpeed();
+    public abstract int getAttackSpeed();
+    public abstract String getWeapon();
 
-    // on obtient ici le chemin, la largeur et hauteur de chaque sprite 
+    // chemin, largeur et hauteur de chaque sprite 
     protected void setIdleSheet(String path, int frameWidth, int frameHeight) {
         this.idleSheet = new SpriteSheet(path, frameWidth, frameHeight);
     }
@@ -80,6 +86,14 @@ public abstract class character extends entity {
 
     protected void setDeathSheet(String path, int frameWidth, int frameHeight) {
         this.deathSheet = new SpriteSheet(path, frameWidth, frameHeight);
+    }
+
+    protected void setAttackSheet(String path, int frameWidth, int frameHeight) {
+        this.attackSheet = new SpriteSheet(path, frameWidth, frameHeight);
+    }
+
+    protected void setDefenseSheet(String path, int frameWidth, int frameHeight) {
+        this.defenseSheet = new SpriteSheet(path, frameWidth, frameHeight);
     }
 
     // on obtient un sprite spécifique de la feuille de sprites
@@ -93,5 +107,13 @@ public abstract class character extends entity {
 
     public Image getDeathSprite(int col) {
         return deathSheet.getSprite(col, 0);
+    }
+
+    public Image getAttackSprite(int col) {
+        return attackSheet.getSprite(col, 0);
+    }
+
+    public Image getDefenseSprite(int col) {
+        return defenseSheet.getSprite(col, 0);
     }
 }
