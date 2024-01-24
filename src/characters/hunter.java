@@ -3,57 +3,62 @@ package characters;
 import weapons.*;
 
 public class hunter extends character {
-    private static final int IDLE_FRAME_COUNT = 4;
-    private static final int RUN_FRAME_COUNT = 6;
-    private static final int DEATH_FRAME_COUNT = 6;
-    private static final int ATTACK_FRAME_COUNT = 5;
-    private static final int DEFENSE_FRAME_COUNT = 0;
     private weapon chosenWeapon;
+    private int offsetWeaponX;
+    private int offsetWeaponY;
 
     public hunter(weapon chosenWeapon) {
         
         super(100, 10, 0, 5, 0, 0, 10, 0, "Chasseur", 1, 100, 5);
         this.chosenWeapon = chosenWeapon;
        
-        /* L'attaque avec les spikes se fait en 3 frames ou bien avec les frames (2-3) */
-        /* L'attaque avec le katana se fait en 4 frames ou bien avec les frames (2-3-4) */
+
+        String[] idlePaths = {
+            "../../ressources/sprites/Heroes/Rogue/Idle_1.png",
+            "../../ressources/sprites/Heroes/Rogue/Idle_2.png",
+            "../../ressources/sprites/Heroes/Rogue/Idle_3.png",
+            "../../ressources/sprites/Heroes/Rogue/Idle_4.png",
+        };
         
+        setIdleSprites(idlePaths);
+        String[] runPaths = {
+            "../../ressources/sprites/Heroes/Rogue/Run_1.png",
+            "../../ressources/sprites/Heroes/Rogue/Run_2.png",
+            "../../ressources/sprites/Heroes/Rogue/Run_3.png",
+            "../../ressources/sprites/Heroes/Rogue/Run_4.png",
+        };
+        setRunSprites(runPaths);
+
+        // String[] DeathPaths = {
+        //     "../../ressources/sprites/Heroes/Rogue/Death_1.png",
+        //     "../../ressources/sprites/Heroes/Rogue/Death_2.png",
+        //     "../../ressources/sprites/Heroes/Rogue/Death_3.png",
+        //     "../../ressources/sprites/Heroes/Rogue/Death_4.png",
+        // };
+        // setDeathSprites(DeathPaths);
+        String[] AttackPaths = {
+            "../../ressources/sprites/Heroes/Rogue/Hit.png"
+        };
+        setAttackSprites(AttackPaths);
 
         // si le joueur choisit dagues
         if(chosenWeapon instanceof spike){
-            setIdleSheet("../../ressources/sprites/Heroes/Rogue/Idle/Idle-Sheet-Spikes.png", 32, 32);
-            setRunSheet("../../ressources/sprites/Heroes/Rogue/Run/Run-Sheet-Spikes.png", 64, 64);
-            setDeathSheet("../../ressources/sprites/Heroes/Rogue/Death/Death-Sheet-Spikes.png", 64, 32);
-            setAttackSheet("../../ressources/sprites/Heroes/Rogue/Attack/Attack-Sheet-Spikes.png", 64, 64);
+            String[] weaponPaths = {
+                "../../ressources/sprites/Weapons/Rogue/spike/spike_1.png",
+                "../../ressources/sprites/Weapons/Rogue/spike/spike_2.png",
+                "../../ressources/sprites/Weapons/Rogue/spike/spike_3.png",
+            };
+        setWeaponSprites(weaponPaths);
         }
-        // si le joueur choisit la houe
+        // si le joueur choisit le katana
         if(chosenWeapon instanceof katana){
-            setIdleSheet("../../ressources/sprites/Heroes/Rogue/Idle/Idle-Sheet-Katana.png", 32, 32);
-            setRunSheet("../../ressources/sprites/Heroes/Rogue/Run/Run-Sheet-Katana.png", 64, 64);
-            setDeathSheet("../../ressources/sprites/Heroes/Rogue/Death/Death-Sheet-Katana.png", 64, 32);
-            setAttackSheet("../../ressources/sprites/Heroes/Rogue/Attack/Attack-Sheet-Katana.png", 64, 64);
+            String[] weaponPaths = {
+                "../../ressources/sprites/Weapons/Rogue/katana/katana_1.png",
+                "../../ressources/sprites/Weapons/Rogue/katana/katana_2.png",
+                "../../ressources/sprites/Weapons/Rogue/katana/katana_3.png",
+            };
+            setWeaponSprites(weaponPaths);
         }
-    
-    }
-    
-    public int getIdleFrameCount() {
-        return IDLE_FRAME_COUNT;
-    }
-
-    public int getRunFrameCount() {
-        return RUN_FRAME_COUNT;
-    }
-
-    public int getDeathFrameCount() {
-        return DEATH_FRAME_COUNT;
-    }
-
-    public int getAttackFrameCount() {
-        return ATTACK_FRAME_COUNT;
-    }
-
-    public int getDefenseFrameCount(){
-        return DEFENSE_FRAME_COUNT;
     }
 
     public String getWeapon(){
@@ -74,5 +79,23 @@ public class hunter extends character {
         return attackSpeed;
     }
 
+    public int getOffsetWeaponX(){
+        if (chosenWeapon instanceof spike){
+            offsetWeaponX = 12;
+        }
+        else if (chosenWeapon instanceof katana){
+            offsetWeaponX = 10;
+        }
+        return offsetWeaponX;
+    }
 
+    public int getOffsetWeaponY(){
+        if (chosenWeapon instanceof spike){
+            offsetWeaponY = 13;
+        }
+        else if (chosenWeapon instanceof katana){
+            offsetWeaponY = -2;
+        }
+        return offsetWeaponY;
+    }
 }
