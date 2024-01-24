@@ -137,7 +137,7 @@
         shieldAndSwordLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Epée et Bouclier");
+                System.out.println("Epée");
                 selectWarriorWeapon(new sword());
             }
         });

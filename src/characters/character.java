@@ -1,7 +1,10 @@
 package characters;
 
+import java.awt.image.BufferedImage;
 import java.awt.Image;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 
 import weapons.*;
 
@@ -10,11 +13,11 @@ import weapons.*;
  */
 public abstract class character extends entity {
     
-    protected SpriteSheet idleSheet;
-    protected SpriteSheet runSheet;
-    protected SpriteSheet deathSheet;
-    protected SpriteSheet attackSheet;
-    protected SpriteSheet defenseSheet;
+    protected BufferedImage[] idleSprites;
+    protected BufferedImage[] runSprites;
+    protected BufferedImage[] deathSprites;
+    protected BufferedImage[] attackSprites;
+    protected BufferedImage[] weaponSprites;
     protected int FRAME_COUNT;
 
 
@@ -66,54 +69,84 @@ public abstract class character extends entity {
     }  
 
     // méthodes abstraites implémentées dans les classes filles
-    public abstract int getIdleFrameCount();
-    public abstract int getRunFrameCount();
-    public abstract int getDeathFrameCount();
-    public abstract int getAttackFrameCount();
-    public abstract int getDefenseFrameCount();
     public abstract int getSpeed();
     public abstract int getAttackSpeed();
     public abstract String getWeapon();
+    public abstract int getOffsetWeaponX();
+    public abstract int getOffsetWeaponY();
 
-    // chemin, largeur et hauteur de chaque sprite 
-    protected void setIdleSheet(String path, int frameWidth, int frameHeight) {
-        this.idleSheet = new SpriteSheet(path, frameWidth, frameHeight);
+
+   protected void setIdleSprites(String[] paths) {
+    idleSprites = new BufferedImage[paths.length];
+    for (int i = 0; i < paths.length; i++) {
+        try {
+            idleSprites[i] = ImageIO.read(getClass().getResourceAsStream(paths[i]));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+     }
     }
-
-    protected void setRunSheet(String path, int frameWidth, int frameHeight) {
-        this.runSheet = new SpriteSheet(path, frameWidth, frameHeight);
+    protected void setRunSprites(String[] paths) {
+        runSprites = new BufferedImage[paths.length];
+        for (int i = 0; i < paths.length; i++) {
+            try {
+                runSprites[i] = ImageIO.read(getClass().getResourceAsStream(paths[i]));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
+   
 
-    protected void setDeathSheet(String path, int frameWidth, int frameHeight) {
-        this.deathSheet = new SpriteSheet(path, frameWidth, frameHeight);
-    }
-
-    protected void setAttackSheet(String path, int frameWidth, int frameHeight) {
-        this.attackSheet = new SpriteSheet(path, frameWidth, frameHeight);
-    }
-
-    protected void setDefenseSheet(String path, int frameWidth, int frameHeight) {
-        this.defenseSheet = new SpriteSheet(path, frameWidth, frameHeight);
-    }
-
-    // on obtient un sprite spécifique de la feuille de sprites
-    public Image getIdleSprite(int col) {
-        return idleSheet.getSprite(col, 0);
-    }
-
-    public Image getRunSprite(int col) {
-        return runSheet.getSprite(col, 0);
-    }
-
-    public Image getDeathSprite(int col) {
-        return deathSheet.getSprite(col, 0);
-    }
-
-    public Image getAttackSprite(int col) {
-        return attackSheet.getSprite(col, 0);
-    }
-
-    public Image getDefenseSprite(int col) {
-        return defenseSheet.getSprite(col, 0);
+   protected void setDeathSprites(String[] paths) {
+    deathSprites = new BufferedImage[paths.length];
+    for (int i = 0; i < paths.length; i++) {
+        try {
+            deathSprites[i] = ImageIO.read(getClass().getResourceAsStream(paths[i]));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
+    protected void setAttackSprites(String[] paths) {
+        attackSprites = new BufferedImage[paths.length];
+        for (int i = 0; i < paths.length; i++) {
+            try {
+                attackSprites[i] = ImageIO.read(getClass().getResourceAsStream(paths[i]));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    protected void setWeaponSprites(String[] paths) {
+        weaponSprites = new BufferedImage[paths.length];
+        for (int i = 0; i < paths.length; i++) {
+            try {
+                weaponSprites[i] = ImageIO.read(getClass().getResourceAsStream(paths[i]));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public BufferedImage[] getIdleSprites() {
+        return idleSprites;
+    }
+    public BufferedImage[] getRunSprites() {
+        return runSprites;
+    }
+    public BufferedImage[] getDeathSprites() {
+        return deathSprites;
+    }
+    public BufferedImage[] getAttackSprites() {
+        return attackSprites;
+    }
+    public BufferedImage[] getWeaponSprites() {
+        return weaponSprites;
+    }
+
+}
+
+

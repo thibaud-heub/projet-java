@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+
 import characters.*;
 
 class GamePanel extends JPanel implements ActionListener, KeyListener {
@@ -24,8 +26,10 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     private String chosenWeapon;
     private final int DEATH_ANIMATION_SPEED = 8; // plus c'est grand plus c'est lent
     private final int ANIMATION_SPEED = 3;
+    private int weaponYAdjustment = 0;
+    private int amountToAdjust;
 
-    private enum State { IDLE, RUNNING, DEATH, ATTACK, DEFENSE }
+    private enum State { IDLE, RUNNING, DEATH, ATTACK }
     private State currentState = State.IDLE;
 
     public GamePanel(character chosenCharacter) {
@@ -44,53 +48,72 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         g.fillRect(0, 0, getWidth(), getHeight());
 
         
+        BufferedImage[] sprites;
+        BufferedImage[] weaponSprites;
         Image sprite;
-        int spriteWidth;
-        int spriteHeight;
+        Image weaponSprite;
         speed = currentCharacter.getSpeed();
         attackSpeed = currentCharacter.getAttackSpeed();
         chosenWeapon = currentCharacter.getWeapon();
+        int spriteWidth;
+        int spriteHeight;
+        int weaponWidth;
+        int weaponHeight;
 
-        
+        weaponSprites = currentCharacter.getWeaponSprites();
+        weaponSprite = weaponSprites[0];
+
+
         switch (currentState) {
             case RUNNING:
-                sprite = currentCharacter.getRunSprite(spriteIndex);
+                sprites = currentCharacter.getRunSprites();
                 break;
-            case DEATH:
-                sprite = currentCharacter.getDeathSprite(spriteIndex);
-                break;
+            // case DEATH:
+            //     sprites = currentCharacter.getDeathSprites();
+            //     break;
             case IDLE:
             default:
-                sprite = currentCharacter.getIdleSprite(spriteIndex);
+                sprites = currentCharacter.getIdleSprites();
                 break;
             case ATTACK:
-                sprite = currentCharacter.getAttackSprite(spriteIndex);
-                break;
-            case DEFENSE:
-                sprite = currentCharacter.getDefenseSprite(spriteIndex);
+                sprites = currentCharacter.getIdleSprites();
+                weaponSprite = weaponSprites[spriteIndex];
                 break;
         }
 
+        sprite = sprites[spriteIndex];
 
-        spriteWidth = sprite.getWidth(null);
-        spriteHeight = sprite.getHeight(null);
         int drawX = xPos;
         int drawY = yPos;
+        int offsetWeaponX = currentCharacter.getOffsetWeaponX();
+        int offsetWeaponY = currentCharacter.getOffsetWeaponY();
+        int weaponX = xPos + offsetWeaponX;
+        int weaponY = yPos + offsetWeaponY;
+        amountToAdjust = 32;
 
-        // logique pour rendre des sprites plus petits aussi grand que le 64x64
-        if (spriteWidth < 64) {
-            drawX += (64 - spriteWidth)/2;
+        spriteWidth = sprite.getWidth(null);
+        weaponWidth = weaponSprite.getWidth(null);
+        spriteHeight = sprite.getHeight(null);
+        weaponHeight = weaponSprite.getHeight(null);
+
+        int weaponYAdjusted = weaponY + weaponYAdjustment;
+
+        if (currentState == State.RUNNING) {
+            weaponYAdjusted -= 2; 
         }
-        if (spriteHeight < 64) {
-            drawY += (64 - spriteHeight);
-        }
+        
+
+
 
         if (runningLeft) {
             // inversion de l'image du sprite pour courir vers la gauche
+            g.drawImage(weaponSprite, drawX + spriteWidth - weaponWidth - offsetWeaponX + amountToAdjust, weaponYAdjusted, -weaponWidth, weaponHeight, this);
             g.drawImage(sprite, drawX + spriteWidth, drawY, -spriteWidth, spriteHeight, this);
         } else {
+            g.drawImage(weaponSprite, weaponX, weaponYAdjusted, this);
             g.drawImage(sprite, drawX, drawY, spriteWidth, spriteHeight, this);
         }
+
     }
 
     @Override
@@ -99,49 +122,51 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
             case RUNNING:
             if (AnimationDelay++ >= ANIMATION_SPEED) {
                 AnimationDelay = 0; 
-                spriteIndex = (spriteIndex + 1) % currentCharacter.getRunFrameCount();
+                spriteIndex = (spriteIndex + 1) % currentCharacter.getRunSprites().length;
+                if (spriteIndex % 2 == 0) { 
+                if (weaponYAdjustment == 0) {
+                    weaponYAdjustment = 1; 
+                } else {
+                    weaponYAdjustment = 0; 
+                }
+            }
                 break;
             }
-                
-                break;
             case IDLE:
             if (AnimationDelay++ >= ANIMATION_SPEED) {
                 AnimationDelay = 0; 
-                spriteIndex = (spriteIndex + 1) % currentCharacter.getIdleFrameCount();
-
-                break;
-            }
-            case DEATH:
-            // implémentation d'un autre délai pour que ça aille plus lentement
-            if (AnimationDelay++ >= DEATH_ANIMATION_SPEED) {
-                AnimationDelay = 0; 
-                if (spriteIndex < currentCharacter.getDeathFrameCount() - 1) {
-                    spriteIndex++; 
-                    deathAnimationPlayed = true;
+                spriteIndex = (spriteIndex + 1) % currentCharacter.getIdleSprites().length;
+                if (spriteIndex % 2 == 0) { 
+                if (weaponYAdjustment == 0) {
+                    weaponYAdjustment = 1;
+                } else {
+                    weaponYAdjustment = 0; 
                 }
             }
-            break;
+                break;
+                
+            }
+            // case DEATH:
+            // // implémentation d'un autre délai pour que ça aille plus lentement
+            // if (AnimationDelay++ >= DEATH_ANIMATION_SPEED) {
+            //     AnimationDelay = 0; 
+            //     if (spriteIndex < currentCharacter.getDeathSprites().length - 1) {
+            //         spriteIndex++; 
+            //         deathAnimationPlayed = true;
+            //     }
+            // }
+            // break;
             case ATTACK:
-            if (AnimationDelay++ >= ANIMATION_SPEED) {
-                AnimationDelay = 0;
-                if (spriteIndex < currentCharacter.getAttackFrameCount() - 1) {
+                if (spriteIndex < currentCharacter.getWeaponSprites().length - 1) {
                     spriteIndex++;
-                } else if (attackDelay >= 20) {
+                } else  {
                     spriteIndex = 0; 
                     currentState = State.IDLE;
                 }
-            }
 
             if (attackDelay++ >= attackSpeed) {
                 isAttacking = false;    
                 attackDelay = 0;
-                currentState = State.IDLE;
-            }
-            break;
-            case DEFENSE:
-            if (AnimationDelay++ >= ANIMATION_SPEED) {
-                AnimationDelay = 0; 
-                spriteIndex = (spriteIndex + 1) % currentCharacter.getDefenseFrameCount();
             }
             break;
         }
@@ -177,10 +202,6 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
             currentState = State.ATTACK;
             spriteIndex = 0; 
             attackDelay = 0; 
-        }
-
-        if (key == KeyEvent.VK_D && chosenWeapon == "Epee et bouclier"){
-            currentState = State.DEFENSE;
         }
     }
 
