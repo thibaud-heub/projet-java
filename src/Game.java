@@ -57,7 +57,9 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
         
+        // draw the character
         DrawCharacters drawer = new DrawCharacters(currentCharacter, xPos, yPos, spriteIndex, runningLeft, this);
+        // draw the weapon
         DrawWeapons weaponDrawer = new DrawWeapons(currentWeapon, currentCharacter, xPos, yPos, weaponSpriteIndex, runningLeft, weaponYAdjustment, this);
 
         drawer.draw(g);
@@ -70,9 +72,11 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         switch (currentState) {
             case RUNNING:
+            // running animation
             if (AnimationDelay++ >= ANIMATION_SPEED) {
                 AnimationDelay = 0; 
                 spriteIndex = (spriteIndex + 1) % currentCharacter.getRunSprites().length;
+                // pour que l'arme bouge avec le personnage
                 if (spriteIndex % 2 == 0) { 
                     if (weaponYAdjustment == 0) {
                         weaponYAdjustment = 1; 
@@ -83,9 +87,11 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
                 break;
             }
             case IDLE:
+            // idle animation
             if (AnimationDelay++ >= ANIMATION_SPEED) {
                 AnimationDelay = 0; 
                 spriteIndex = (spriteIndex + 1) % currentCharacter.getIdleSprites().length;
+                // pour que l'arme bouge avec le personnage
                 if (spriteIndex % 2 == 0) { 
                     if (weaponYAdjustment == 0) {
                         weaponYAdjustment = 1;
@@ -109,8 +115,10 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
 
             switch(currentWeaponState){
                 case ATTACK:
+                // attack weapon
                     if (weaponSpriteIndex < currentWeapon.getWeaponSprites().length - 1) {
                         weaponSpriteIndex++;
+                    // délai de chaque arme
                     } else if (attackDelay++ >= attackSpeed) {
                         isAttacking = false;    
                         attackDelay = 0;
@@ -121,6 +129,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
                 break;  
 
                 case IDLE:
+                // idle weapon
                     if(!isAttacking){
                         weaponSpriteIndex = 0;
                     }
@@ -187,11 +196,12 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
             isMoving = true;
         }
         if (pressedKeys.contains(KeyEvent.VK_U)) {
-            // Déplacer vers le bas
+            // Mourir
             currentState = character.State.DEATH;
             currentCharacter.setState(character.State.DEATH);
         }
         if (!isMoving) {
+            // Arrêter le personnage
             currentState = character.State.IDLE;
             currentCharacter.setState(character.State.IDLE);
         }
