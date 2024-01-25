@@ -13,6 +13,27 @@ public class Gobelin extends Monster{
     public Gobelin () 
     {
        super(monsterType.COMMON, monsterStats.getStats("Gobelin"));
+
+       String[] idlePaths = {
+        "../../../../../ressources/sprites/Monster/Goblin/Idle_1.png",
+        "../../../../../ressources/sprites/Monster/Goblin/Idle_2.png",
+        "../../../../../ressources/sprites/Monster/Goblin/Idle_3.png",
+        "../../../../../ressources/sprites/Monster/Goblin/Idle_4.png",
+    };
+    setIdleSprites(idlePaths);
+
+    String[] walkPaths = {
+        "../../../../../ressources/sprites/Monster/Goblin/Run_1.png",
+        "../../../../../ressources/sprites/Monster/Goblin/Run_2.png",
+        "../../../../../ressources/sprites/Monster/Goblin/Run_3.png",
+        "../../../../../ressources/sprites/Monster/Goblin/Run_4.png",
+    };
+    setWalkSprites(walkPaths);
+
+    String[] DeathPaths = {
+        "../../../../../ressources/sprites/Monster/Goblin/Death_1.png",
+    };
+    setDeathSprites(DeathPaths);
     }
 
 /**

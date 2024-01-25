@@ -56,20 +56,20 @@ public final class monsterStats {
     }
 
 
-//--------------dark wizard-------------------
-    private static Map<String, Integer> darkWizardStats = new HashMap<>();
+//--------------ogre-------------------
+    private static Map<String, Integer> ogreStats = new HashMap<>();
 
     static {
-        darkWizardStats.put("PV", 100);
-        darkWizardStats.put("AttackSpeed", 15);
+        ogreStats.put("PV", 100);
+        ogreStats.put("AttackSpeed", 15);
 
-        darkWizardStats.put("FireResistance", 20);
-        darkWizardStats.put("PhysicResistance", 15);
-        darkWizardStats.put("MagicResistance", 25);
+        ogreStats.put("FireResistance", 20);
+        ogreStats.put("PhysicResistance", 15);
+        ogreStats.put("MagicResistance", 25);
 
-        darkWizardStats.put("FireDamage", 30);
-        darkWizardStats.put("PhysicDamage", 40);
-        darkWizardStats.put("MagicDamage", 50);
+        ogreStats.put("FireDamage", 30);
+        ogreStats.put("PhysicDamage", 40);
+        ogreStats.put("MagicDamage", 50);
     }
 
 
@@ -145,7 +145,7 @@ public final class monsterStats {
     static
     {
         monster.put("Gobelin", gobStats);
-        monster.put("DarkWizard", darkWizardStats);
+        monster.put("Ogre", ogreStats);
         monster.put("Orc", orcStats);
         monster.put("Skeleton", skeletonStats);
         monster.put("MudPile", mudPileStats);

@@ -17,7 +17,6 @@ public class hunter extends character {
             "../../ressources/sprites/Heroes/Rogue/Idle_3.png",
             "../../ressources/sprites/Heroes/Rogue/Idle_4.png",
         };
-        
         setIdleSprites(idlePaths);
         String[] runPaths = {
             "../../ressources/sprites/Heroes/Rogue/Run_1.png",

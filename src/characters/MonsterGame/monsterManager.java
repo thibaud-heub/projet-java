@@ -10,7 +10,7 @@ import characters.abstractFactory.monsterType.Boss;
 import characters.abstractFactory.monsterType.Monster;
 
 public class monsterManager {
-    Map<String, Double> prob;
+     Map<String, Double> prob;
 
     /**
     * génére un tableau de monstre aléatoire, de taille nbMonster
@@ -52,11 +52,11 @@ public class monsterManager {
         Double probElite = monstersProb.get("Elite");
         
         //pour chaque monstre compare la proba d'apparition avec la somme des proba précédente et créer la fabrique correspondante
-        if (nbRandom <= (sumProb += monstersProb.get("Darkwizard"))) 
+        if (nbRandom <= (sumProb += monstersProb.get("Ogre"))) 
         {
             // pour chaque génération de monstre, il y'a une probabilité que le monstre généré soit élite
-            if (eliteRandom <= probElite)return elite.createDarkWizard();
-            else return common.createDarkWizard();
+            if (eliteRandom <= probElite)return elite.createOgre();
+            else return common.createOgre();
         }
     
         else if (nbRandom <= (sumProb += monstersProb.get("Gobelin"))) 

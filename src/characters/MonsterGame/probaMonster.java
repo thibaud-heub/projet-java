@@ -28,7 +28,7 @@ public class probaMonster {
         Double mProb, sum = 0.0;
 
         monstersProb.put("Gobelin", 0.0);
-        monstersProb.put("Darkwizard", 0.0);
+        monstersProb.put("Ogre", 0.0);
         monstersProb.put("Skeleton", 0.0);
         monstersProb.put("Orc", 0.0);
         monstersProb.put("Elite", probElite);

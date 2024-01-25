@@ -9,16 +9,30 @@ import java.util.Set;
 
 import characters.*;
 import weapons.*;
+import characters.abstractFactory.monsterType.Monster;
 import weapons.Drawing.DrawWeapons;
-import characters.Drawing.DrawCharacters;
+import characters.Drawing.*;
+import characters.MonsterGame.probaMonster;
+import characters.MonsterGame.monsterManager;
+
 
 class GamePanel extends JPanel implements ActionListener, KeyListener {
     private character currentCharacter;
     private weapon currentWeapon;
+    private Monster[] monsters;
+
     private int xPos = 100;
     private int yPos = 100;
+
+    private int monsterXPos = 100;
+    private int monsterYPos = 100;
+
+
     private int spriteIndex = 0;
     private int weaponSpriteIndex = 0;
+    private int monsterSpriteIndex = 0;
+
+
     private final int DELAY = 1000 / 30; // fps
     private Timer timer; // la boucle
     private boolean runningLeft = false;
@@ -33,16 +47,22 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     private int weaponYAdjustment = 0;
     private character.State currentState;
     private weapon.State currentWeaponState;
+    private Monster.State currentMonsterState;
     private Set<Integer> pressedKeys = new HashSet<>();
 
 
-    public GamePanel(character chosenCharacter) {
+    public GamePanel(character chosenCharacter, Monster[] monsters) {
         this.currentCharacter = chosenCharacter;
+        this.monsters = monsters;
         currentState = currentCharacter.getState();
         speed = currentCharacter.getSpeed();
         attackSpeed = currentCharacter.getAttackSpeed();
         currentWeapon = currentCharacter.getWeapon();
         currentWeaponState = currentWeapon.getState();
+
+        for (int i = 0; i < monsters.length; i++){
+            currentMonsterState = monsters[i].getState();
+        }
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -61,12 +81,19 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         DrawCharacters drawer = new DrawCharacters(currentCharacter, xPos, yPos, spriteIndex, runningLeft, this);
         // draw the weapon
         DrawWeapons weaponDrawer = new DrawWeapons(currentWeapon, currentCharacter, xPos, yPos, weaponSpriteIndex, runningLeft, weaponYAdjustment, this);
+        // draw the monsters
+        for (int i = 0; i < monsters.length; i++) {
+            DrawMonsters monsterDrawer = new DrawMonsters(monsters[i], monsterXPos + i*10, monsterYPos + i*3, monsterSpriteIndex, runningLeft, this);
+            monsterDrawer.draw(g);
+        }
 
         drawer.draw(g);
         weaponDrawer.draw(g);
         }
 
     
+    
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -134,6 +161,25 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
                         weaponSpriteIndex = 0;
                     }
                     break;
+            }
+
+            switch(currentMonsterState){
+                case IDLE:
+                if (AnimationDelay++ >= ANIMATION_SPEED) {
+                    AnimationDelay = 0; 
+                    for (int i = 0; i < monsters.length; i++){
+                        Monster currentMonster = monsters[i];
+                        monsterSpriteIndex = (monsterSpriteIndex + 1) % currentMonster.getIdleSprites().length;
+                    }
+                }
+                break;
+                case WALK:
+                    monsterSpriteIndex++;
+                break;
+                case DEATH:
+                break;
+                case ATTACK:
+                break;
             }
         repaint();
     }
@@ -209,11 +255,18 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
 }
 
 public class Game extends JFrame {
+    private Monster[] monsters;
+    private GamePanel gamePanel;
     public Game(character chosenCharacter) {
-        add(new GamePanel(chosenCharacter));
         setTitle("DnD");
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        monsterManager manager = new monsterManager();
+        monsters = manager.monstersLevel(false); // Générer les monstres (false pour un niveau non final)
+
+        gamePanel = new GamePanel(chosenCharacter, monsters); // Passer les monstres à GamePanel
+        add(gamePanel);
     }
 }
