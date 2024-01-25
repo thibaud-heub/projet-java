@@ -21,6 +21,8 @@ public class MudPile extends Monster{
 
     String[] DeathPaths = {
         "../../../../ressources/sprites/Monster/Muddy/Death_1.png",
+        "../../../../ressources/sprites/Monster/Muddy/Death_2.png",
+        "../../../../ressources/sprites/Monster/Muddy/Death_3.png",
     };
     setDeathSprites(DeathPaths);
     };

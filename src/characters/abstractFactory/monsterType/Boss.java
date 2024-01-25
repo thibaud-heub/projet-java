@@ -25,7 +25,20 @@ public class Boss extends Monster{
     
         String[] DeathPaths = {
             "../../../../ressources/sprites/Monster/Boss/Death_1.png",
+            "../../../../ressources/sprites/Monster/Boss/Death_2.png",
+            "../../../../ressources/sprites/Monster/Boss/Death_3.png",
+            "../../../../ressources/sprites/Monster/Boss/Death_4.png",
         };
         setDeathSprites(DeathPaths);
+
+        String[] attackPaths = {
+            "../../../../ressources/sprites/Monster/Boss/Attack_1.png",
+            "../../../../ressources/sprites/Monster/Boss/Attack_2.png",
+            "../../../../ressources/sprites/Monster/Boss/Attack_3.png",
+            "../../../../ressources/sprites/Monster/Boss/Attack_4.png",
+            "../../../../ressources/sprites/Monster/Boss/Attack_5.png",
+            "../../../../ressources/sprites/Monster/Boss/Attack_6.png",
+        };
+        setAttackSprites(attackPaths);
     }
 }

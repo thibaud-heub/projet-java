@@ -30,8 +30,17 @@ public class EliteSkeleton extends Monster {
 
     String[] DeathPaths = {
         "../../../../../ressources/sprites/Monster/EliteSkeleton/Death_1.png",
+        "../../../../../ressources/sprites/Monster/EliteSkeleton/Death_2.png",
+        "../../../../../ressources/sprites/Monster/EliteSkeleton/Death_3.png",
+        "../../../../../ressources/sprites/Monster/EliteSkeleton/Death_4.png",
     };
     setDeathSprites(DeathPaths);
+    };
+
+    String[] attackPaths = {
+        "../../../../../ressources/sprites/Monster/EliteSkeleton/Attack_1.png",
+        "../../../../../ressources/sprites/Monster/EliteSkeleton/Attack_2.png",
+        "../../../../../ressources/sprites/Monster/EliteSkeleton/Attack_3.png",
     };
 
 

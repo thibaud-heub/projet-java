@@ -32,8 +32,17 @@ public class Ogre extends Monster{
 
     String[] DeathPaths = {
         "../../../../../ressources/sprites/Monster/Ogre/Death_1.png",
+        "../../../../../ressources/sprites/Monster/Ogre/Death_2.png",
+        "../../../../../ressources/sprites/Monster/Ogre/Death_3.png",
     };
     setDeathSprites(DeathPaths);
+
+    String[] attackPaths = {
+        "../../../../../ressources/sprites/Monster/Ogre/Attack_1.png",
+        "../../../../../ressources/sprites/Monster/Ogre/Attack_2.png",
+        "../../../../../ressources/sprites/Monster/Ogre/Attack_3.png",
+    };
+    setAttackSprites(attackPaths);
     };
     
 

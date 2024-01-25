@@ -30,10 +30,19 @@ public class Skeleton extends Monster {
 
     String[] DeathPaths = {
         "../../../../../ressources/sprites/Monster/Skeleton/Death_1.png",
+        "../../../../../ressources/sprites/Monster/Skeleton/Death_2.png",
+        "../../../../../ressources/sprites/Monster/Skeleton/Death_3.png",
+        "../../../../../ressources/sprites/Monster/Skeleton/Death_4.png",
     };
     setDeathSprites(DeathPaths);
 
+    String[] attackPaths = {
+        "../../../../../ressources/sprites/Monster/Skeleton/Attack_1.png",
+        "../../../../../ressources/sprites/Monster/Skeleton/Attack_2.png",
+        "../../../../../ressources/sprites/Monster/Skeleton/Attack_3.png",
+    };
 
+    setAttackSprites(attackPaths);
     };
 
     @Override
