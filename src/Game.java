@@ -4,15 +4,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
+import java.util.HashSet;
+import java.util.Set;
 
 import characters.*;
+import weapons.*;
+import weapons.Drawing.DrawWeapons;
+import characters.Drawing.DrawCharacters;
 
 class GamePanel extends JPanel implements ActionListener, KeyListener {
     private character currentCharacter;
+    private weapon currentWeapon;
     private int xPos = 100;
     private int yPos = 100;
     private int spriteIndex = 0;
+    private int weaponSpriteIndex = 0;
     private final int DELAY = 1000 / 30; // fps
     private Timer timer; // la boucle
     private boolean runningLeft = false;
@@ -22,18 +28,22 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     private boolean deathAnimationPlayed = false;
     private int AnimationDelay = 0;
     private boolean isAttacking = false;
-    private boolean isDefending = false;
-    private String chosenWeapon;
     private final int DEATH_ANIMATION_SPEED = 8; // plus c'est grand plus c'est lent
     private final int ANIMATION_SPEED = 3;
     private int weaponYAdjustment = 0;
-    private int amountToAdjust;
+    private character.State currentState;
+    private weapon.State currentWeaponState;
+    private Set<Integer> pressedKeys = new HashSet<>();
 
-    private enum State { IDLE, RUNNING, DEATH, ATTACK }
-    private State currentState = State.IDLE;
 
     public GamePanel(character chosenCharacter) {
         this.currentCharacter = chosenCharacter;
+        currentState = currentCharacter.getState();
+        speed = currentCharacter.getSpeed();
+        attackSpeed = currentCharacter.getAttackSpeed();
+        currentWeapon = currentCharacter.getWeapon();
+        currentWeaponState = currentWeapon.getState();
+
         timer = new Timer(DELAY, this);
         timer.start();
         setFocusable(true);
@@ -46,75 +56,15 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         // put the background in black
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
-
         
-        BufferedImage[] sprites;
-        BufferedImage[] weaponSprites;
-        Image sprite;
-        Image weaponSprite;
-        speed = currentCharacter.getSpeed();
-        attackSpeed = currentCharacter.getAttackSpeed();
-        chosenWeapon = currentCharacter.getWeapon();
-        int spriteWidth;
-        int spriteHeight;
-        int weaponWidth;
-        int weaponHeight;
+        DrawCharacters drawer = new DrawCharacters(currentCharacter, xPos, yPos, spriteIndex, runningLeft, this);
+        DrawWeapons weaponDrawer = new DrawWeapons(currentWeapon, currentCharacter, xPos, yPos, weaponSpriteIndex, runningLeft, weaponYAdjustment, this);
 
-        weaponSprites = currentCharacter.getWeaponSprites();
-        weaponSprite = weaponSprites[0];
-
-
-        switch (currentState) {
-            case RUNNING:
-                sprites = currentCharacter.getRunSprites();
-                break;
-            // case DEATH:
-            //     sprites = currentCharacter.getDeathSprites();
-            //     break;
-            case IDLE:
-            default:
-                sprites = currentCharacter.getIdleSprites();
-                break;
-            case ATTACK:
-                sprites = currentCharacter.getIdleSprites();
-                weaponSprite = weaponSprites[spriteIndex];
-                break;
+        drawer.draw(g);
+        weaponDrawer.draw(g);
         }
 
-        sprite = sprites[spriteIndex];
-
-        int drawX = xPos;
-        int drawY = yPos;
-        int offsetWeaponX = currentCharacter.getOffsetWeaponX();
-        int offsetWeaponY = currentCharacter.getOffsetWeaponY();
-        int weaponX = xPos + offsetWeaponX;
-        int weaponY = yPos + offsetWeaponY;
-        amountToAdjust = 32;
-
-        spriteWidth = sprite.getWidth(null);
-        weaponWidth = weaponSprite.getWidth(null);
-        spriteHeight = sprite.getHeight(null);
-        weaponHeight = weaponSprite.getHeight(null);
-
-        int weaponYAdjusted = weaponY + weaponYAdjustment;
-
-        if (currentState == State.RUNNING) {
-            weaponYAdjusted -= 2; 
-        }
-        
-
-
-
-        if (runningLeft) {
-            // inversion de l'image du sprite pour courir vers la gauche
-            g.drawImage(weaponSprite, drawX + spriteWidth - weaponWidth - offsetWeaponX + amountToAdjust, weaponYAdjusted, -weaponWidth, weaponHeight, this);
-            g.drawImage(sprite, drawX + spriteWidth, drawY, -spriteWidth, spriteHeight, this);
-        } else {
-            g.drawImage(weaponSprite, weaponX, weaponYAdjusted, this);
-            g.drawImage(sprite, drawX, drawY, spriteWidth, spriteHeight, this);
-        }
-
-    }
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -124,12 +74,12 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
                 AnimationDelay = 0; 
                 spriteIndex = (spriteIndex + 1) % currentCharacter.getRunSprites().length;
                 if (spriteIndex % 2 == 0) { 
-                if (weaponYAdjustment == 0) {
-                    weaponYAdjustment = 1; 
-                } else {
-                    weaponYAdjustment = 0; 
+                    if (weaponYAdjustment == 0) {
+                        weaponYAdjustment = 1; 
+                    } else {
+                        weaponYAdjustment = 0; 
+                    }
                 }
-            }
                 break;
             }
             case IDLE:
@@ -137,84 +87,114 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
                 AnimationDelay = 0; 
                 spriteIndex = (spriteIndex + 1) % currentCharacter.getIdleSprites().length;
                 if (spriteIndex % 2 == 0) { 
-                if (weaponYAdjustment == 0) {
-                    weaponYAdjustment = 1;
-                } else {
-                    weaponYAdjustment = 0; 
+                    if (weaponYAdjustment == 0) {
+                        weaponYAdjustment = 1;
+                    } else {
+                        weaponYAdjustment = 0; 
+                    }
                 }
+                break;     
             }
-                break;
-                
-            }
-            // case DEATH:
-            // // implémentation d'un autre délai pour que ça aille plus lentement
-            // if (AnimationDelay++ >= DEATH_ANIMATION_SPEED) {
-            //     AnimationDelay = 0; 
-            //     if (spriteIndex < currentCharacter.getDeathSprites().length - 1) {
-            //         spriteIndex++; 
-            //         deathAnimationPlayed = true;
-            //     }
-            // }
-            // break;
-            case ATTACK:
-                if (spriteIndex < currentCharacter.getWeaponSprites().length - 1) {
-                    spriteIndex++;
-                } else  {
-                    spriteIndex = 0; 
-                    currentState = State.IDLE;
+            case DEATH:
+            // implémentation d'un autre délai pour que ça aille plus lentement
+            if (AnimationDelay++ >= DEATH_ANIMATION_SPEED) {
+                AnimationDelay = 0; 
+                if (spriteIndex < currentCharacter.getDeathSprites().length - 1) {
+                    spriteIndex++; 
+                    deathAnimationPlayed = true;
                 }
-
-            if (attackDelay++ >= attackSpeed) {
-                isAttacking = false;    
-                attackDelay = 0;
             }
             break;
         }
+
+            switch(currentWeaponState){
+                case ATTACK:
+                    if (weaponSpriteIndex < currentWeapon.getWeaponSprites().length - 1) {
+                        weaponSpriteIndex++;
+                    } else if (attackDelay++ >= attackSpeed) {
+                        isAttacking = false;    
+                        attackDelay = 0;
+                        weaponSpriteIndex = 0; 
+                        currentWeaponState = weapon.State.IDLE;
+                        currentWeapon.setState(weapon.State.IDLE);
+                    }
+                break;  
+
+                case IDLE:
+                    if(!isAttacking){
+                        weaponSpriteIndex = 0;
+                    }
+                    break;
+            }
         repaint();
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
-        if (key == KeyEvent.VK_RIGHT) {
-            currentState = State.RUNNING;
-            runningLeft = false;
-            xPos += speed;
-        } else if (key == KeyEvent.VK_LEFT) {
-            currentState = State.RUNNING;
-            runningLeft = true;
-            xPos -= speed;
-        } else if (key == KeyEvent.VK_UP) {
-            currentState = State.RUNNING;
-            yPos -= speed;
-        } else if (key == KeyEvent.VK_DOWN) {
-            currentState = State.RUNNING;
-            yPos += speed;
-        }
-
-        if (key == KeyEvent.VK_U) {
-            currentState = State.DEATH;
-        }
-
-        
-        if (key == KeyEvent.VK_A && !isAttacking) {
-            isAttacking = true;
-            currentState = State.ATTACK;
-            spriteIndex = 0; 
-            attackDelay = 0; 
-        }
+        pressedKeys.add(e.getKeyCode());
+        updateState();   
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        int key = e.getKeyCode();
-        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_LEFT || key == KeyEvent.VK_UP || key == KeyEvent.VK_DOWN || key == KeyEvent.VK_D) {
-            currentState = State.IDLE;
-        }
+        pressedKeys.remove(e.getKeyCode());
+        updateState();
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
+    }
+
+    public void updateState() {
+        boolean isMoving = false;
+        if (pressedKeys.contains(KeyEvent.VK_A) && !isAttacking) {
+            // Commencer l'attaque
+            isAttacking = true;
+            currentWeaponState = weapon.State.ATTACK;
+            currentWeapon.setState(weapon.State.ATTACK);
+            weaponSpriteIndex = 0;
+            attackDelay = 0;
+        }
+        
+        if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+            // Déplacer vers la droite
+            currentState = character.State.RUNNING;
+            currentCharacter.setState(character.State.RUNNING);
+            runningLeft = false;
+            xPos += speed;
+            isMoving = true;
+        }
+        if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
+            // Déplacer vers la gauche
+            currentState = character.State.RUNNING;
+            currentCharacter.setState(character.State.RUNNING);
+            runningLeft = true;
+            xPos -= speed;
+            isMoving = true;
+        }
+        if (pressedKeys.contains(KeyEvent.VK_UP)) {
+            // Déplacer vers le haut
+            currentState = character.State.RUNNING;
+            currentCharacter.setState(character.State.RUNNING);
+            yPos -= speed;
+            isMoving = true;
+        }
+        if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
+            // Déplacer vers le bas
+            currentState = character.State.RUNNING;
+            currentCharacter.setState(character.State.RUNNING);
+            yPos += speed;
+            isMoving = true;
+        }
+        if (pressedKeys.contains(KeyEvent.VK_U)) {
+            // Déplacer vers le bas
+            currentState = character.State.DEATH;
+            currentCharacter.setState(character.State.DEATH);
+        }
+        if (!isMoving) {
+            currentState = character.State.IDLE;
+            currentCharacter.setState(character.State.IDLE);
+        }
     }
 }
 

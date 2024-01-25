@@ -1,7 +1,6 @@
 package characters;
 
 import java.awt.image.BufferedImage;
-import java.awt.Image;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -17,8 +16,9 @@ public abstract class character extends entity {
     protected BufferedImage[] runSprites;
     protected BufferedImage[] deathSprites;
     protected BufferedImage[] attackSprites;
-    protected BufferedImage[] weaponSprites;
     protected int FRAME_COUNT;
+    public enum State {IDLE, RUNNING, DEATH}; 
+    private State currentState = State.IDLE;
 
 
     /**
@@ -71,9 +71,8 @@ public abstract class character extends entity {
     // méthodes abstraites implémentées dans les classes filles
     public abstract int getSpeed();
     public abstract int getAttackSpeed();
-    public abstract String getWeapon();
-    public abstract int getOffsetWeaponX();
-    public abstract int getOffsetWeaponY();
+    public abstract weapon getWeapon();
+    
 
 
    protected void setIdleSprites(String[] paths) {
@@ -120,17 +119,6 @@ public abstract class character extends entity {
     }
 
 
-    protected void setWeaponSprites(String[] paths) {
-        weaponSprites = new BufferedImage[paths.length];
-        for (int i = 0; i < paths.length; i++) {
-            try {
-                weaponSprites[i] = ImageIO.read(getClass().getResourceAsStream(paths[i]));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public BufferedImage[] getIdleSprites() {
         return idleSprites;
     }
@@ -143,10 +131,14 @@ public abstract class character extends entity {
     public BufferedImage[] getAttackSprites() {
         return attackSprites;
     }
-    public BufferedImage[] getWeaponSprites() {
-        return weaponSprites;
+
+    public void setState(State newState) {
+        this.currentState = newState;
     }
 
+    public State getState() {
+        return currentState;
+    }
 }
 
 
