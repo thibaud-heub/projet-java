@@ -15,7 +15,6 @@ public abstract class character extends entity {
     protected BufferedImage[] idleSprites;
     protected BufferedImage[] runSprites;
     protected BufferedImage[] deathSprites;
-    protected BufferedImage[] attackSprites;
     protected int FRAME_COUNT;
     public enum State {IDLE, RUNNING, DEATH}; 
     private State currentState = State.IDLE;
@@ -107,16 +106,6 @@ public abstract class character extends entity {
         }
     }
 }
-    protected void setAttackSprites(String[] paths) {
-        attackSprites = new BufferedImage[paths.length];
-        for (int i = 0; i < paths.length; i++) {
-            try {
-                attackSprites[i] = ImageIO.read(getClass().getResourceAsStream(paths[i]));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
 
     public BufferedImage[] getIdleSprites() {
@@ -127,9 +116,6 @@ public abstract class character extends entity {
     }
     public BufferedImage[] getDeathSprites() {
         return deathSprites;
-    }
-    public BufferedImage[] getAttackSprites() {
-        return attackSprites;
     }
 
     public void setState(State newState) {

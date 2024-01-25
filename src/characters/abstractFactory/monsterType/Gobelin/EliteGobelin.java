@@ -32,8 +32,17 @@ public class EliteGobelin extends Monster{
 
     String[] DeathPaths = {
         "../../../../../ressources/sprites/Monster/EliteGoblin/Death_1.png",
+        "../../../../../ressources/sprites/Monster/EliteGoblin/Death_2.png",
+        "../../../../../ressources/sprites/Monster/EliteGoblin/Death_3.png",
     };
     setDeathSprites(DeathPaths);
+
+    String[] attackPaths = {
+        "../../../../../ressources/sprites/Monster/EliteGoblin/Attack_1.png",
+        "../../../../../ressources/sprites/Monster/EliteGoblin/Attack_2.png",
+        "../../../../../ressources/sprites/Monster/EliteGoblin/Attack_3.png",
+    };
+    setAttackSprites(attackPaths);
     }
 
 /** 

@@ -17,6 +17,7 @@ public abstract class Monster extends entity {
     protected BufferedImage[] idleSprites;
     protected BufferedImage[] walkSprites;
     protected BufferedImage[] deathSprites;
+    protected BufferedImage[] attackSprites;
 
     private State state = State.IDLE;
     private int id = -1;
@@ -135,6 +136,17 @@ public abstract class Monster extends entity {
         }
     }
 
+    protected void setAttackSprites(String[] paths) {
+        attackSprites = new BufferedImage[paths.length];
+        for (int i = 0; i < paths.length; i++) {
+            try {
+                attackSprites[i] = ImageIO.read(getClass().getResourceAsStream(paths[i]));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public BufferedImage[] getIdleSprites() {
         return idleSprites;
     }
@@ -143,5 +155,8 @@ public abstract class Monster extends entity {
     }
     public BufferedImage[] getDeathSprites() {
         return deathSprites;
+    }
+    public BufferedImage[] getAttackSprites() {
+        return attackSprites;
     }
 }

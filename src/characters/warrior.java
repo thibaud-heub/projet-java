@@ -29,14 +29,14 @@ public class warrior extends character {
 
         String[] DeathPaths = {
             "../../ressources/sprites/Heroes/Warrior/Death_1.png",
+            // "../../ressources/sprites/Heroes/Warrior/Death_2.png",
+            // "../../ressources/sprites/Heroes/Warrior/Death_3.png",
+            // "../../ressources/sprites/Heroes/Warrior/Death_4.png",
         };
         setDeathSprites(DeathPaths);
 
 
-        String[] AttackPaths = {
-            "../../ressources/sprites/Heroes/Warrior/Hit.png"
-        };
-        setAttackSprites(AttackPaths);
+        
     }
 
     public weapon getWeapon(){

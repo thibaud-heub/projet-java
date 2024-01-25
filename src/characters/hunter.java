@@ -30,10 +30,8 @@ public class hunter extends character {
             "../../ressources/sprites/Heroes/Rogue/Death_1.png",
         };
         setDeathSprites(DeathPaths);
-        String[] AttackPaths = {
-            "../../ressources/sprites/Heroes/Rogue/Hit.png"
-        };
-        setAttackSprites(AttackPaths);
+        
+      
 
     }
 

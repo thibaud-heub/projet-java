@@ -28,8 +28,17 @@ public class EliteOgre extends Monster{
 
     String[] DeathPaths = {
         "../../../../../ressources/sprites/Monster/EliteOgre/Death_1.png",
+        "../../../../../ressources/sprites/Monster/EliteOgre/Death_2.png",
+        "../../../../../ressources/sprites/Monster/EliteOgre/Death_3.png",
     };
     setDeathSprites(DeathPaths);
+
+    String[] attackPaths = {
+        "../../../../../ressources/sprites/Monster/EliteOgre/Attack_1.png",
+        "../../../../../ressources/sprites/Monster/EliteOgre/Attack_2.png",
+        "../../../../../ressources/sprites/Monster/EliteOgre/Attack_3.png",
+    };
+    setAttackSprites(attackPaths);
     };
 
     public void attack (Monster other_monster) 

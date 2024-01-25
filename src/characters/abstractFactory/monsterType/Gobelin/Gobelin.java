@@ -32,8 +32,18 @@ public class Gobelin extends Monster{
 
     String[] DeathPaths = {
         "../../../../../ressources/sprites/Monster/Goblin/Death_1.png",
+        "../../../../../ressources/sprites/Monster/Goblin/Death_2.png",
+        "../../../../../ressources/sprites/Monster/Goblin/Death_3.png",
     };
     setDeathSprites(DeathPaths);
+
+    String[] attackPaths = {
+        "../../../../../ressources/sprites/Monster/Goblin/Attack_1.png",
+        "../../../../../ressources/sprites/Monster/Goblin/Attack_2.png",
+        "../../../../../ressources/sprites/Monster/Goblin/Attack_3.png",
+    };
+    setAttackSprites(attackPaths);
+    
     }
 
 /**

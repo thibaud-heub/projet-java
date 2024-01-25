@@ -79,16 +79,18 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         
         // draw the character
         DrawCharacters drawer = new DrawCharacters(currentCharacter, xPos, yPos, spriteIndex, runningLeft, this);
+        drawer.draw(g);
         // draw the weapon
-        DrawWeapons weaponDrawer = new DrawWeapons(currentWeapon, currentCharacter, xPos, yPos, weaponSpriteIndex, runningLeft, weaponYAdjustment, this);
+        if (!deathAnimationPlayed){
+             DrawWeapons weaponDrawer = new DrawWeapons(currentWeapon, currentCharacter, xPos, yPos, weaponSpriteIndex, runningLeft, weaponYAdjustment, this);
+            weaponDrawer.draw(g);
+        }
         // draw the monsters
         for (int i = 0; i < monsters.length; i++) {
             DrawMonsters monsterDrawer = new DrawMonsters(monsters[i], monsterXPos + i*10, monsterYPos + i*3, monsterSpriteIndex, runningLeft, this);
             monsterDrawer.draw(g);
         }
 
-        drawer.draw(g);
-        weaponDrawer.draw(g);
         }
 
     
@@ -111,8 +113,8 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
                         weaponYAdjustment = 0; 
                     }
                 }
-                break;
             }
+            break;
             case IDLE:
             // idle animation
             if (AnimationDelay++ >= ANIMATION_SPEED) {
@@ -126,8 +128,8 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
                         weaponYAdjustment = 0; 
                     }
                 }
-                break;     
             }
+            break;     
             case DEATH:
             // implémentation d'un autre délai pour que ça aille plus lentement
             if (AnimationDelay++ >= DEATH_ANIMATION_SPEED) {
@@ -137,6 +139,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
                     deathAnimationPlayed = true;
                 }
             }
+            
             break;
         }
 
@@ -243,10 +246,11 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         }
         if (pressedKeys.contains(KeyEvent.VK_U)) {
             // Mourir
+            isMoving = true;
             currentState = character.State.DEATH;
             currentCharacter.setState(character.State.DEATH);
         }
-        if (!isMoving) {
+        if (!isMoving && !isAttacking) {
             // Arrêter le personnage
             currentState = character.State.IDLE;
             currentCharacter.setState(character.State.IDLE);

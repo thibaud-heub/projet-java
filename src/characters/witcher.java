@@ -32,10 +32,7 @@ public class witcher extends character {
             "../../ressources/sprites/Heroes/Witcher/Death_1.png",
         };
         setDeathSprites(DeathPaths);
-        String[] AttackPaths = {
-            "../../ressources/sprites/Heroes/Witcher/Hit.png"
-        };
-        setAttackSprites(AttackPaths);
+       
     }
 
     public int getSpeed(){

@@ -38,6 +38,9 @@ public class DrawCharacters {
             default:
                 sprites = currentCharacter.getIdleSprites();
                 break;
+            case DEATH:
+                sprites = currentCharacter.getDeathSprites();
+                break;
         }
 
         Image sprite = sprites[spriteIndex];
