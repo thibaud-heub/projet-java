@@ -9,6 +9,27 @@ public class EliteOrc extends Monster {
     public EliteOrc () 
     {
        super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Orc")));
+
+    String[] idlePaths = {
+        "../../../../../ressources/sprites/Monster/EliteOrc/Idle_1.png",
+        "../../../../../ressources/sprites/Monster/EliteOrc/Idle_2.png",
+        "../../../../../ressources/sprites/Monster/EliteOrc/Idle_3.png",
+        "../../../../../ressources/sprites/Monster/EliteOrc/Idle_4.png",
+    };
+    setIdleSprites(idlePaths);
+
+    String[] walkPaths = {
+        "../../../../../ressources/sprites/Monster/EliteOrc/Run_1.png",
+        "../../../../../ressources/sprites/Monster/EliteOrc/Run_2.png",
+        "../../../../../ressources/sprites/Monster/EliteOrc/Run_3.png",
+        "../../../../../ressources/sprites/Monster/EliteOrc/Run_4.png",
+    };
+    setWalkSprites(walkPaths);
+
+    String[] DeathPaths = {
+        "../../../../../ressources/sprites/Monster/EliteOrc/Death_1.png",
+    };
+    setDeathSprites(DeathPaths);
     };
 
     public void attack (Monster other_monster) 

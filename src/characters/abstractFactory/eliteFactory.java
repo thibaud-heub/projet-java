@@ -1,8 +1,8 @@
 package characters.abstractFactory;
 
 import characters.abstractFactory.monsterType.Monster;
-import characters.abstractFactory.monsterType.DarkWizard.EliteDarkWizard;
 import characters.abstractFactory.monsterType.Gobelin.EliteGobelin;
+import characters.abstractFactory.monsterType.Ogre.EliteOgre;
 import characters.abstractFactory.monsterType.Orc.EliteOrc;
 import characters.abstractFactory.monsterType.Skeleton.EliteSkeleton;
 
@@ -10,9 +10,9 @@ import characters.abstractFactory.monsterType.Skeleton.EliteSkeleton;
  * implémente la fabrique de monstre d'élites
  */
 public class eliteFactory implements AbstractFactory{
-    public Monster createDarkWizard()
+    public Monster createOgre()
     {
-        return new EliteDarkWizard();
+        return new EliteOgre();
     }
     public Monster createGobelin()
     {

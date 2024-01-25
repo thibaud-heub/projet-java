@@ -9,6 +9,27 @@ public class Orc extends Monster {
     public Orc () 
     {
        super(monsterType.COMMON, monsterStats.getStats("Orc"));
+
+    String[] idlePaths = {
+        "../../../../../ressources/sprites/Monster/Orc/Idle_1.png",
+        "../../../../../ressources/sprites/Monster/Orc/Idle_2.png",
+        "../../../../../ressources/sprites/Monster/Orc/Idle_3.png",
+        "../../../../../ressources/sprites/Monster/Orc/Idle_4.png",
+    };
+    setIdleSprites(idlePaths);
+
+    String[] walkPaths = {
+        "../../../../../ressources/sprites/Monster/Orc/Run_1.png",
+        "../../../../../ressources/sprites/Monster/Orc/Run_2.png",
+        "../../../../../ressources/sprites/Monster/Orc/Run_3.png",
+        "../../../../../ressources/sprites/Monster/Orc/Run_4.png",
+    };
+    setWalkSprites(walkPaths);
+
+    String[] DeathPaths = {
+        "../../../../../ressources/sprites/Monster/Orc/Death_1.png",
+    };
+    setDeathSprites(DeathPaths);
     };
 
     public void attack (Monster other_monster) 
