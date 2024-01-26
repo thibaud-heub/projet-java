@@ -9,8 +9,12 @@ public class warrior extends character {
 
     
     public warrior(weapon chosenWeapon) {
-    super(100, 5, 0, 10, 0, 0, 10, 0, "Guerrier", 1, 100, 1);
+            
+        // Appel du constructeur de la classe Entity avec les paramètres nécessaires
+        super(100, 0, 10, 0, 0, 10, 0, "Guerrier", 1, 100, 1);
         this.chosenWeapon = chosenWeapon;
+
+        // Initialisation des sprites
         String[] idlePaths = {
             "../../ressources/sprites/Heroes/Warrior/Idle_1.png",
             "../../ressources/sprites/Heroes/Warrior/Idle_2.png",
@@ -33,11 +37,11 @@ public class warrior extends character {
             // "../../ressources/sprites/Heroes/Warrior/Death_3.png",
             // "../../ressources/sprites/Heroes/Warrior/Death_4.png",
         };
-        setDeathSprites(DeathPaths);
-
-
-        
+        setDeathSprites(DeathPaths);      
     }
+
+
+    // Getters pour l'arme, la vitesse
 
     public weapon getWeapon(){
         return chosenWeapon;
@@ -45,15 +49,5 @@ public class warrior extends character {
 
     public int getSpeed(){
         return speed;
-    }
-
-    public int getAttackSpeed(){
-        if (chosenWeapon instanceof sword){
-            attackSpeed = 10;
-        }
-        else if (chosenWeapon instanceof bigSword){
-            attackSpeed = 20;
-        }
-        return attackSpeed;
     }
 }

@@ -7,10 +7,13 @@ public class hunter extends character {
     
     public hunter(weapon chosenWeapon) {
         
-        super(100, 10, 0, 5, 0, 0, 10, 0, "Chasseur", 1, 100, 5);
+        // Appel du constructeur de la classe Entity avec les paramètres nécessaires
+        super(100, 0, 5, 0, 0, 10, 0, "Chasseur", 1, 100, 5);
         this.chosenWeapon = chosenWeapon;
        
 
+
+        // Initialisation des sprites
         String[] idlePaths = {
             "../../ressources/sprites/Heroes/Rogue/Idle_1.png",
             "../../ressources/sprites/Heroes/Rogue/Idle_2.png",
@@ -30,11 +33,10 @@ public class hunter extends character {
             "../../ressources/sprites/Heroes/Rogue/Death_1.png",
         };
         setDeathSprites(DeathPaths);
-        
-      
+     }
 
-    }
 
+    // Getters pour l'arme, la vitesse
     public weapon getWeapon(){
         return chosenWeapon;
     }
@@ -42,15 +44,4 @@ public class hunter extends character {
     public int getSpeed(){
         return speed;
     }
-
-    public int getAttackSpeed(){
-        if (chosenWeapon instanceof spike){
-            attackSpeed = 5;
-        }
-        else if (chosenWeapon instanceof katana){
-            attackSpeed = 10;
-        }
-        return attackSpeed;
-    }
-
 }

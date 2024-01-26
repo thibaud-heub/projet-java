@@ -5,23 +5,24 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * genere la probabilité d'apparition pour chaque monstre, la somme des probabilités d'apparition est égal à 1
- * @return un hashmap contenant pour chaque monstre une biclé avec le nom du monstre auquel on associe sa proba d'apparition
+ * Genere la probabilité d'apparition pour chaque monstre, la somme des probabilités d'apparition est égal à 1
+ * @return Un hashmap contenant pour chaque monstre une biclé avec le nom du monstre auquel on associe sa proba d'apparition
  */
 public class probaMonster {
 
     /**
-     * méthode qui tire au sort les probabilités d'apparition de chaque monstre, la somme des probabilités est égal à 1
-     * @param probElite : la probabilité d'apparition des monstres élites (elle est n'ai pas généré aléatoirement et évolue avec le niveau)
-     * @return une strcuture de donnée Map qui associe une chaine de caractere à un double (fonctionne comme un dictionnaire)
+     * Méthode qui tire au sort les probabilités d'apparition de chaque monstre, la somme des probabilités est égal à 1
+     * @param probElite : La probabilité d'apparition des monstres élites (elle n'est as généré aléatoirement et évolue avec le niveau)
+     * @return Une structure de donnée Map qui associe une chaine de caractère à un double (fonctionne comme un dictionnaire)
      */
     
     public Map<String, Double> sortProb(Double probElite)
     {
         /** 
-         *les probabilité d'apparition des montres seront stockés dans un hashmap
-         *hashmap est une sorte de tableau de biclé, on a une valeur string (le nom du monstre) à laquelle on associe un double (proba d'apparition du mosntre)
-         * on peut accéder à la valeur du double en spécifiant seuelement le nom
+         * Les probabilités d'apparition des montres seront stockés dans un hashmap
+         * hashmap est une sorte de tableau de biclé, on a une valeur string (le nom du monstre) 
+         * à laquelle on associe un double (proba d'apparition du monstre)
+         * On peut accéder à la valeur du double en spécifiant seuelement le nom
          */
         Map<String, Double> monstersProb = new HashMap<>();
         Random random = new Random();
@@ -33,7 +34,7 @@ public class probaMonster {
         monstersProb.put("Orc", 0.0);
         monstersProb.put("Elite", probElite);
 
-/** pour chaque valeur du hash map, on tire une value aléatoire entre 0 et 1 (pour chaque monstre on tire sa probabilité d'apparition) */
+        // Pour chaque valeur du hash map, on tire une value aléatoire entre 0 et 1 (pour chaque monstre on tire sa probabilité d'apparition) 
         for (String cle : monstersProb.keySet()) 
         {
             if (cle != "Elite")
@@ -44,7 +45,7 @@ public class probaMonster {
             }
         }
 
-        /** on normalise les probabilités des monstres afin que leur somme soit égal à 1 */
+        // On normalise les probabilités des monstres afin que leur somme soit égal à 1 
         if(sum!=1)
         {
             for (String cle : monstersProb.keySet()) 
@@ -61,8 +62,8 @@ public class probaMonster {
     }
 
 /**
- * affiche les donnnées contenu dans le hashmap, la chaine de caractère et ensuite la valeur du double
- * @param monstersProb hashmap des probabilités d'apparition des monstres
+ * Affiche les données contenu dans le hashmap, la chaîne de caractère et ensuite la valeur du double
+ * @param monstersProb Hashmap des probabilités d'apparition des monstres
  */
     public void printProb(Map<String, Double> monstersProb)
     {

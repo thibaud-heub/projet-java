@@ -5,7 +5,6 @@
     import java.awt.Image;
     import java.awt.image.ImageObserver;
     import java.awt.image.BufferedImage;
-    import characters.character;
     import characters.abstractFactory.monsterType.Monster;
 
     public class DrawMonsters {
@@ -16,7 +15,15 @@
         private boolean runningLeft;
         private ImageObserver observer;
 
-        // Constructeur
+        /**
+         * Constructeur de la classe DrawMonsters
+         * @param currentMonster : Le monstre à dessiner
+         * @param xPos : La position en x du monstre
+         * @param yPos : La position en y du monstre
+         * @param spriteIndex : L'index du sprite à dessiner
+         * @param runningLeft : Booléen qui indique si le monstre court vers la gauche
+         * @param observer : L'observer
+         */
         public DrawMonsters(Monster currentMonster, int xPos, int yPos, int spriteIndex, boolean runningLeft, ImageObserver observer) {
             this.currentMonster = currentMonster;
             this.xPos = xPos;
@@ -26,11 +33,17 @@
             this.observer = observer;
         }
 
+        /**
+         * Méthode qui dessine le monstre
+         * @param g : Le graphique
+         */
         public void draw(Graphics g) {
 
+            // Récupère l'état du monstre et les sprites du monstre
             Monster.State currentState = currentMonster.getState();
             BufferedImage[] sprites;
 
+            // Définit les sprites en fonction de l'état du monstre
             switch (currentState) {
                 case WALK:
                     sprites = currentMonster.getWalkSprites();
@@ -48,15 +61,10 @@
 
             int drawX = xPos;
             int drawY = yPos;
-            
-            
-
             int spriteWidth = sprite.getWidth(null);
             int spriteHeight = sprite.getHeight(null);
 
-
-            
-
+            // Dessine le monstre
             if (runningLeft) {
                 // inversion de l'image du sprite pour courir vers la gauche
                 g.drawImage(sprite, drawX + spriteWidth, drawY, -spriteWidth, spriteHeight, observer);

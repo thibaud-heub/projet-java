@@ -11,8 +11,8 @@ public class Skeleton extends Monster {
     {
        super(monsterType.COMMON, monsterStats.getStats("Skeleton"));
 
-
-       String[] idlePaths = {
+    // Chemins des sprites    
+    String[] idlePaths = {
         "../../../../../ressources/sprites/Monster/Skeleton/Idle_1.png",
         "../../../../../ressources/sprites/Monster/Skeleton/Idle_2.png",
         "../../../../../ressources/sprites/Monster/Skeleton/Idle_3.png",

@@ -10,6 +10,7 @@ public class Orc extends Monster {
     {
        super(monsterType.COMMON, monsterStats.getStats("Orc"));
 
+    // Chemins des sprites    
     String[] idlePaths = {
         "../../../../../ressources/sprites/Monster/Orc/Idle_1.png",
         "../../../../../ressources/sprites/Monster/Orc/Idle_2.png",

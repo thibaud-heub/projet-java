@@ -9,7 +9,7 @@ import characters.abstractFactory.monsterType.MudPile;
 
 
 /** 
- * implémente une factory de monstre commun, chaque méthode retourne le type de monstre souhaité
+ * Implémente une factory de monstre commun, chaque méthode retourne le type de monstre souhaité
  */
 public class commonFactory implements AbstractFactory {
     public Monster createOgre() 
