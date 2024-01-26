@@ -3,13 +3,10 @@ import characters.MonsterGame.monsterStats;
 import characters.abstractFactory.monsterType.Monster;
 
 /**
- *implémentation de la classe gobelin, extension de la lasse Monster
+ * Implémentation de la classe gobelin, extension de la classe Monster
  */
 public class EliteGobelin extends Monster{
 
-/** 
- * surchage du constructeur avec les stats du gobelin élite en appelant le constructeur du parent
- */
     public EliteGobelin () 
     {
        super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Gobelin")));
