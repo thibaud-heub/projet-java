@@ -12,7 +12,8 @@ public class EliteSkeleton extends Monster {
     {
        super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Skeleton")));
 
-       String[] idlePaths = {
+    // Chemins des sprites
+    String[] idlePaths = {
         "../../../../../ressources/sprites/Monster/EliteSkeleton/Idle_1.png",
         "../../../../../ressources/sprites/Monster/EliteSkeleton/Idle_2.png",
         "../../../../../ressources/sprites/Monster/EliteSkeleton/Idle_3.png",

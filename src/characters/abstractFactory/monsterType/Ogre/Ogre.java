@@ -3,18 +3,16 @@ import characters.MonsterGame.monsterStats;
 import characters.abstractFactory.monsterType.Monster;
 
 /**
- *implémentation de la classe ogre, extension de la classe Monster
+ * Implémentation de la classe ogre, extension de la classe Monster
  */
 public class Ogre extends Monster{
 
-    /** 
- * surchage du constructeur avec les stats du ogre en appelant le constructeur du parent
- */
     public Ogre () 
     {
        super(monsterType.COMMON, monsterStats.getStats("Ogre"));
 
-       String[] idlePaths = {
+    // Chemins des sprites    
+    String[] idlePaths = {
         "../../../../../ressources/sprites/Monster/Ogre/Idle_1.png",
         "../../../../../ressources/sprites/Monster/Ogre/Idle_2.png",
         "../../../../../ressources/sprites/Monster/Ogre/Idle_3.png",

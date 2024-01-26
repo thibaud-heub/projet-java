@@ -3,14 +3,15 @@ import characters.MonsterGame.monsterStats;
 import characters.abstractFactory.monsterType.Monster;
 
 /**
- *implémentation de la classe OgreElite Elite, extension de la classe Monster
+ * Implémentation de la classe OgreElite Elite, extension de la classe Monster
  */
 public class EliteOgre extends Monster{
     public EliteOgre () 
     {
        super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("EliteOgre")));
 
-       String[] idlePaths = {
+    // Chemins des sprites
+    String[] idlePaths = {
         "../../../../../ressources/sprites/Monster/EliteOgre/Idle_1.png",
         "../../../../../ressources/sprites/Monster/EliteOgre/Idle_2.png",
         "../../../../../ressources/sprites/Monster/EliteOgre/Idle_3.png",

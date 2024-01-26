@@ -2,13 +2,20 @@ package characters;
 
 
 /**
- * classe qui permet de définir les type de dégats, que ce soit en resistance ou en attaque. Implémente les fonctions de manipulation des attributs de la classe
+ * Classe qui permet de définir les type de dégats, que ce soit en résistance ou en attaque. 
+ * Implémente les fonctions de manipulation des attributs de la classe
  */
 public class typeDamage {
     private int fire;
     private int physic;
     private int magic;
 
+    /**
+     * Constructeur de la classe typeDamage
+     * @param fire : Dégâts de feu
+     * @param physic : Dégâts physiques
+     * @param magic : Dégâts magiques
+     */
     public typeDamage (int fire, int physic, int magic)
     {
         this.fire = fire;
@@ -16,6 +23,8 @@ public class typeDamage {
         this.magic = magic;
     }
     
+    // Getters pour le feu, la physique et la magie
+
     public int getFire ()
     {
         return this.fire;
@@ -31,21 +40,25 @@ public class typeDamage {
         return this.magic;
     }
 
-    public void changeFire (int fire)
+    // Setters les dégâts de feu, de physique et de magie
+
+    public void setFire (int fire)
     {
         this.fire=fire;
     }
 
-    public void changePhysic (int physic)
+    public void setPhysic (int physic)
     {
         this.physic = physic;
     }
 
-    public void changeMagic (int magic)
+    public void setMagic (int magic)
     {
         this.magic = magic;
     }
 
+
+    // Méthode pour afficher les dégâts
     public void print()
     {
         System.out.println("Fire : " + fire);

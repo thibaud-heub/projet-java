@@ -11,29 +11,27 @@ public abstract class entity {
     private typeDamage damage;
 
     /**
-     * constructeur de la classe entity
-     * @param PV : entier nombr de point de vie 
-     * @param attackSpeed : double vitesse d'attack
-     * @param Rfire : resistance au feu
-     * @param Rphysic : resistance physique
-     * @param Rmagic : reistance magic
-     * @param Dfire : degats de feu
-     * @param Dphysic : degats physic
-     * @param Dmagic : degats magic
+     * Constructeur de la classe entity
+     * @param PV : Nombre de points de vie 
+     * @param Rfire : Résistance au feu
+     * @param Rphysic : Résistance physique
+     * @param Rmagic : Résistance magique
+     * @param Dfire : Dégâts de feu
+     * @param Dphysic : Dégâts physiques
+     * @param Dmagic : Dégâts magiques
      */
-    public entity(int PV, int attackSpeed, int Rfire, int Rphysic, int Rmagic, int Dfire, int Dphysic, int Dmagic)
+    public entity(int PV, int Rfire, int Rphysic, int Rmagic, int Dfire, int Dphysic, int Dmagic)
     {
         this.PV = PV;
-        this.attackSpeed = attackSpeed;
         this.Alive = true;
         this.damage = new typeDamage(Dfire, Dphysic, Dmagic);
         this.resistance = new typeDamage(Rfire, Rphysic, Rmagic);
     }
 
 /**
- * retoourne les dégats réel reçus, en fonction de la résistance
- * @param damage : les dégats de l'ennemie
- * @return : un entier représentant les dégats reel
+ * Retourne les dégats réel reçus, en fonction de la résistance
+ * @param damage : Les dégâts de l'ennemi
+ * @return : Entier représentant les dégâts réels
  */
     private int realDamage(typeDamage damage)
     {
@@ -58,16 +56,19 @@ public abstract class entity {
     }
 
     /**
-     * recevoir une quantité définie (entier) de dégats, qui va modifier la vie du monstre
+     * Reçoit une quantité définie (entier) de dégats, qui va modifier la vie de l'entité
+     * @param ennemyDamage : Les dégats de l'ennemi
+     * @return : Un booléen indiquant si l'entité est en vie ou morte
      */
     public Boolean take_damage (typeDamage ennemyDamage) 
     {
         int damage = realDamage(ennemyDamage);
-        if ((this.PV - damage)< 0) {//si les dégats dépasse la vie actuelle du monstre, ses PV tombent à 0 et il devient mort
+        // Si les dégats dépasse la vie actuelle du monstre, ses PV tombent à 0 et il meurt
+        if ((this.PV - damage)< 0) {
             this.PV = 0;
             this.Alive = false;
         }
-    //sinon en réduit ses points de vies
+    // Sinon on réduit ses points de vies
         else {
             this.PV -= damage;
         }
@@ -75,14 +76,17 @@ public abstract class entity {
     }
 
 /**
- * permet d'infliger des dégats à une autre entité en appelantla méthode takeDamage de l'autre entité
- * @param other_monster : entité à attaquer
+ * Permet d'infliger des dégats à une autre entité en appelant la méthode takeDamage de l'autre entité
+ * @param other_Entity : Entité à attaquer
  */
     public void attack (entity otherEntity) 
     {
         otherEntity.take_damage(this.damage);
     }
 
+    /**
+     * Méthode pour print les caractéristiques de l'entité
+     */
     public void print()
     {
         System.out.println("Vie : " + PV);
@@ -93,6 +97,9 @@ public abstract class entity {
         resistance.print();
         System.out.println("\nEn vie : " + Alive);
     }
+
+
+    // Getters pour les dégats, la résistance, les PV et l'état de l'entité
 
     public typeDamage getDamage ()
     {
@@ -114,10 +121,6 @@ public abstract class entity {
         return this.Alive;
     }
      
-    /**
-     * renvoie la vitesse d'attaque du monstre
-     * @return un double représentant la vitesse d'attaque
-     */
     public int getAttackSpeed()
     {
         return this.attackSpeed;

@@ -7,7 +7,7 @@ import characters.abstractFactory.monsterType.Orc.EliteOrc;
 import characters.abstractFactory.monsterType.Skeleton.EliteSkeleton;
 
 /**
- * implémente la fabrique de monstre d'élites
+ * Implémente la fabrique de monstre d'élites
  */
 public class eliteFactory implements AbstractFactory{
     public Monster createOgre()

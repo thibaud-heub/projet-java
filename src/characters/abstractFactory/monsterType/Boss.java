@@ -7,6 +7,7 @@ public class Boss extends Monster{
     {
         super(monsterType.BOSS, monsterStats.getStats("Boss"));
 
+        // Chemins des sprites
         String[] idlePaths = {
             "../../../../ressources/sprites/Monster/Boss/Idle_1.png",
             "../../../../ressources/sprites/Monster/Boss/Idle_2.png",

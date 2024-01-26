@@ -5,24 +5,25 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * class de définition et centralisation des statistiques des monstres, elle ne peut pa
+ * Classe de définition et centralisation des statistiques des monstres
+ * Les statistiques sont définies dans des HashMaps, un pour chaque monstre
  */
 
 public final class monsterStats {
-    //pourcentage de supériorité des monstres élites, les monstres élites ont juste des stats n fois supérieur à celle des monstres commun
+    // Pourcentage de supériorité des monstres élites, les monstres élites ont des stats n fois supérieur à celle des monstres communs
     static double elite = 4.0;
 
     static double probaElite =0.2;
     static double upProbaElite = 0.05;
 
-    //permet d'implémenter des niveaux de difficulté
+    // Permet d'implémenter des niveaux de difficulté
     static double difficulty = 1;
 
     static int nbMonsterLevel = 10;
     static int variationNbMonster = 4;
 
 
-//-----facteur d'augmentation des stats-------
+//-----Facteur d'augmentation des stats-------
     private static Map<String, Double> upgrade = new HashMap<>();
 
     static{
@@ -38,7 +39,7 @@ public final class monsterStats {
         upgrade.put("MagicDamage", 1.2);
     }
 
-//--------------gobelin----------------------
+//--------------Gobelin----------------------
 
     private static Map<String, Integer> gobStats = new HashMap<>();
 
@@ -56,7 +57,7 @@ public final class monsterStats {
     }
 
 
-//--------------ogre-------------------
+//--------------Ogre-------------------
     private static Map<String, Integer> ogreStats = new HashMap<>();
 
     static {
@@ -73,7 +74,7 @@ public final class monsterStats {
     }
 
 
-// -----------------orc------------------------
+// -----------------Orc------------------------
     private static Map<String, Integer> orcStats = new HashMap<>();
 
     static {
@@ -90,7 +91,7 @@ public final class monsterStats {
     }
 
 
-//---------------skeleton--------------------
+//---------------Squelette--------------------
     private static Map<String, Integer> skeletonStats = new HashMap<>();
     
     static{
@@ -106,7 +107,7 @@ public final class monsterStats {
         skeletonStats.put("MagicDamage", 10);
     }
 
-//---------------Mudpile--------------------
+//---------------Tas de boue--------------------
     private static Map<String, Integer> mudPileStats = new HashMap<>();
 
     static{
@@ -140,7 +141,7 @@ public final class monsterStats {
         mudPileStats.put("MagicDamage", 10);
     }
 
-//place les states des monstres dans un hashmap pour la gestion
+// Place les stats des monstres dans un hashmap pour la gestion
     static Map<String, Map<String, Integer>> monster = new HashMap<>();
     static
     {
@@ -153,8 +154,8 @@ public final class monsterStats {
     }
 
     /**
-     * augmente les statistiques d'un monstre selectionné
-     * @param monster : monstre que l'on veut améliorer
+     * Augmente les statistiques d'un monstre selectionné
+     * @param monster : Monstre que l'on veut améliorer
      */
 
     public static void upgradeStats(Map<String, Integer> monster)
@@ -168,7 +169,7 @@ public final class monsterStats {
     }
 
     /**
-     * augmente les stats de tous les monstres
+     * Augmente les stats de tous les monstres
      */
     public static void upgradeAllStats()
     {
@@ -182,8 +183,8 @@ public final class monsterStats {
     }
 
     /**
-     * affiche les statistiques d'un monstre
-     * @param monster : monstre dont on veut afficher les stats
+     * Affiche les statistiques d'un monstre
+     * @param monster : Monstre dont on veut afficher les stats
      */
     public static void printStat(Map<String, Integer> monster)
     {
@@ -194,7 +195,7 @@ public final class monsterStats {
     }
 
     /**
-     * affiche les stats de tous les monstres
+     * Affiche les stats de tous les monstres
      */
     public static void printAll()
     {  
@@ -205,6 +206,10 @@ public final class monsterStats {
         }
     }
 
+    /**
+     * Affiche les stats des monstres élites
+     * @param monster : Monstre dont on veut afficher les stats
+     */
     public static void printElite(Map<String, Integer> monster)
     {
         for(String cle : monster.keySet())
@@ -213,6 +218,9 @@ public final class monsterStats {
             }
     }
 
+    /**
+     * Affiche les stats de tous les monstres élites
+     */
     public static void printAllElite()
     {
         for(String cle : monster.keySet())
@@ -223,6 +231,11 @@ public final class monsterStats {
     }
 
 
+    /**
+     * Renvoie les stats d'un monstre élite
+     * @param monster : Monstre dont on veut les stats 
+     * @return Les stats du monstre
+     */
     public static Map<String,Integer> elite(Map<String, Integer> monster)
     {
         Map<String, Integer> eliteMonster = new HashMap<>();
@@ -235,9 +248,9 @@ public final class monsterStats {
     }
     
     /**
-     * renvoie le monstre spécifié en paramètre
-     * @param mons : chaine de caractère, nom du monstre voulue
-     * @return le monstre correspondant
+     * Renvoie le monstre spécifié en paramètre
+     * @param mons : Chaine de caractère, nom du monstre voulu
+     * @return Le monstre correspondant
      */
     public static Map<String, Integer> getStats(String mons)
     {

@@ -8,10 +8,12 @@ public class witcher extends character {
     private weapon chosenWeapon;
     
     public witcher(weapon chosenWeapon) {
-        super(100, 5, 0, 0, 10, 0, 0, 10, "Magicien", 1, 100, 3); 
-       
+        // Appel du constructeur de la classe Entity avec les paramètres nécessaires
+        super(100, 0, 0, 10, 0, 0, 10, "Magicien", 1, 100, 3); 
         this.chosenWeapon = chosenWeapon;
         
+
+        // Initialisation des sprites
         String[] idlePaths = {
             "../../ressources/sprites/Heroes/Witcher/Idle_1.png",
             "../../ressources/sprites/Heroes/Witcher/Idle_2.png",
@@ -35,21 +37,13 @@ public class witcher extends character {
        
     }
 
+    // Getters pour l'arme, la vitesse
+
     public int getSpeed(){
         return speed;
     }
 
     public weapon getWeapon(){
         return chosenWeapon;
-    }
-
-    public int getAttackSpeed(){
-        if (chosenWeapon instanceof magicWand){
-            attackSpeed = 10;
-        }
-        else if (chosenWeapon instanceof bigMagicWand){
-            attackSpeed = 15;
-        }
-        return attackSpeed;
     }
 }

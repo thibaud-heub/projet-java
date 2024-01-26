@@ -26,15 +26,14 @@ public abstract class Monster extends entity {
     private monsterType monsterType; //indique si le monstre est common ou elite
 
 /**
- * constructeur de la classe monstre, permet de créer un monstre en définissant tous ses paremètres
- * @param monsterStats ; les stats du monstre que l'ont souhaite créer, issu de la classe monsterStats
- * @param Type : type du monstre : commun ou elite
+ * Constructeur de la classe monstre, permet de créer un monstre en définissant tous ses paramètres
+ * @param monsterStats : Les stats du monstre que l'on souhaite créer, issu de la classe monsterStats
+ * @param Type : Type du monstre : commun ou elite
  */
     public Monster (monsterType Type, Map<String, Integer> monsterStats)
     {
         super(
             monsterStats.get("PV"), 
-            monsterStats.get("AttackSpeed"), 
             monsterStats.get("FireResistance"), 
             monsterStats.get("PhysicResistance"), 
             monsterStats.get("MagicResistance"), 
@@ -43,10 +42,11 @@ public abstract class Monster extends entity {
             monsterStats.get("MagicDamage")
         );
         this.monsterType = Type;
+        this.attackSpeed = monsterStats.get("AttackSpeed");
     }
 
     /**
-     * affiche les données du monstre
+     * Affiche les données du monstre
      */
     public void print ()
     {
@@ -55,49 +55,20 @@ public abstract class Monster extends entity {
         System.out.println("coordonée X = " + this.X + " Y = " + this.Y);
         System.out.println("Type : " + monsterType + "\n");
     }
-   
-    /**
-     * renvoie l'id du mosntre
-     * @return entier id : id du monstre
-     */
-    public int getId() {
-        return id;
-    }
+       
+    // Setters pour définir l'id, les coordonnées l'état et les sprites du monstre
 
-    /**
-     * définit l'id du monstre
-     * @param id : entier qui remplaceera l'id
-     */
     public void setId(int id)
     {
         this.id = id;
     }
 
-    /**
-     * définie les coordonées du monstre
-     * @param x la coordonnée de x
-     * @param y la coordonnée de y
-     */
     public void setXY (double x, double y)
     {
         this.X = x;
         this.Y = y;
     }
 
-    public double getX()
-    {
-        return this.X;
-    }
-
-    public double getY()
-    {
-        return this.Y;
-    }
-
-    public State getState()
-    {
-        return this.state;
-    }
 
     public void setState(State state)
     {
@@ -114,6 +85,7 @@ public abstract class Monster extends entity {
         }
      }
     }
+
     protected void setWalkSprites(String[] paths) {
         walkSprites = new BufferedImage[paths.length];
         for (int i = 0; i < paths.length; i++) {
@@ -145,6 +117,27 @@ public abstract class Monster extends entity {
                 e.printStackTrace();
             }
         }
+    }
+
+    // Getters pour obtenir les sprites, l'id, les coordonnées et l'état du monstre
+
+    public int getId() {
+        return id;
+    }
+
+    public double getX()
+    {
+        return this.X;
+    }
+
+    public double getY()
+    {
+        return this.Y;
+    }
+
+    public State getState()
+    {
+        return this.state;
     }
 
     public BufferedImage[] getIdleSprites() {

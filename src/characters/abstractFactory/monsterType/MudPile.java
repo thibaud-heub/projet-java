@@ -1,12 +1,16 @@
 package characters.abstractFactory.monsterType;
 import characters.MonsterGame.monsterStats;
 
+/*
+ * Implémente le tas de boue
+ */
 public class MudPile extends Monster{
     public MudPile () 
     {
        super(monsterType.COMMON, monsterStats.getStats("MudPile"));
 
-       String[] idlePaths = {
+       // Chemins des sprites
+    String[] idlePaths = {
         "../../../../ressources/sprites/Monster/Muddy/Idle_1.png",
     };
     setIdleSprites(idlePaths);

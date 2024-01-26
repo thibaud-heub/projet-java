@@ -10,6 +10,7 @@ public class EliteOrc extends Monster {
     {
        super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Orc")));
 
+    // Chemins des sprites    
     String[] idlePaths = {
         "../../../../../ressources/sprites/Monster/EliteOrc/Idle_1.png",
         "../../../../../ressources/sprites/Monster/EliteOrc/Idle_2.png",
