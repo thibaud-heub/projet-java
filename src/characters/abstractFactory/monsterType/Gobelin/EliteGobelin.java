@@ -9,7 +9,7 @@ public class EliteGobelin extends Monster{
 
     public EliteGobelin () 
     {
-       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Gobelin")));
+       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Gobelin")), 20);
 
        String[] idlePaths = {
         "../../../../../ressources/sprites/Monster/EliteGoblin/Idle_1.png",
@@ -40,15 +40,6 @@ public class EliteGobelin extends Monster{
         "../../../../../ressources/sprites/Monster/EliteGoblin/Attack_3.png",
     };
     setAttackSprites(attackPaths);
-    }
-
-/** 
- * rédifinition de la méthode attaque en réutilisant la méthode de la class parente
- */
-    public void attack (Monster other_monster) 
-    {
-        System.out.println("Gobelin elite attack");
-        super.attack(other_monster);
     }
 
     @Override

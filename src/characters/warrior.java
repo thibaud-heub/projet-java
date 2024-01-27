@@ -2,17 +2,14 @@ package characters;
 
 
 
-import weapons.*;
 
 public class warrior extends character {
-    private weapon chosenWeapon;
 
     
-    public warrior(weapon chosenWeapon) {
+    public warrior() {
             
         // Appel du constructeur de la classe Entity avec les paramètres nécessaires
-        super(100, 0, 10, 0, 0, 10, 0, "Guerrier", 1, 100, 1);
-        this.chosenWeapon = chosenWeapon;
+        super(100, 0, 10, 0, 0, 10, 0, "Guerrier", 1);
 
         // Initialisation des sprites
         String[] idlePaths = {
@@ -42,10 +39,6 @@ public class warrior extends character {
 
 
     // Getters pour l'arme, la vitesse
-
-    public weapon getWeapon(){
-        return chosenWeapon;
-    }
 
     public int getSpeed(){
         return speed;

@@ -1,6 +1,7 @@
 package characters.abstractFactory.monsterType;
 
 import characters.entity;
+import characters.typeDamage;
 
 import java.io.IOException;
 import java.util.Map;
@@ -24,13 +25,14 @@ public abstract class Monster extends entity {
     private double X;
     private double Y;
     private monsterType monsterType; //indique si le monstre est common ou elite
+    private int difficulty;
 
 /**
  * Constructeur de la classe monstre, permet de créer un monstre en définissant tous ses paramètres
  * @param monsterStats : Les stats du monstre que l'on souhaite créer, issu de la classe monsterStats
  * @param Type : Type du monstre : commun ou elite
  */
-    public Monster (monsterType Type, Map<String, Integer> monsterStats)
+    public Monster (monsterType Type, Map<String, Integer> monsterStats, int difficulty)
     {
         super(
             monsterStats.get("PV"), 
@@ -43,6 +45,7 @@ public abstract class Monster extends entity {
         );
         this.monsterType = Type;
         this.attackSpeed = monsterStats.get("AttackSpeed");
+        this.difficulty = difficulty;
     }
 
     /**
@@ -54,6 +57,25 @@ public abstract class Monster extends entity {
         super.print();
         System.out.println("coordonée X = " + this.X + " Y = " + this.Y);
         System.out.println("Type : " + monsterType + "\n");
+    }
+
+    /**
+     * Attaque le joueur 
+     * @param Player Le joueur attaqué
+     */
+    public void attack(entity Player) {           
+
+        typeDamage damage = this.getDamage();
+        // Attaque le monstre
+        Player.take_damage(damage);
+    }  
+
+    public int isDead(){
+        // Si le monstre est mort, transformer la difficulté en XP
+        if (!this.getAlive()){
+            return this.difficulty;
+        }
+        else return 0;
     }
        
     // Setters pour définir l'id, les coordonnées l'état et les sprites du monstre

@@ -8,7 +8,7 @@ import characters.abstractFactory.monsterType.Monster;
 public class EliteOgre extends Monster{
     public EliteOgre () 
     {
-       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("EliteOgre")));
+       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("EliteOgre")), 40);
 
     // Chemins des sprites
     String[] idlePaths = {

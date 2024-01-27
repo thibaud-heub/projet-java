@@ -4,10 +4,12 @@ public class bigMagicWand extends weapon {
 
     public bigMagicWand() {
         this.name = "Grand bâton magique";
-        this.damage = 15;
         this.manaUsed = 5;
         this.durability = 100;
         this.attackSpeed = 15;
+        damage.setPhysic(5);
+        damage.setFire(0);
+        damage.setMagic(25);
 
         // Chargement des sprites
         String[] weaponPaths = {
@@ -19,22 +21,6 @@ public class bigMagicWand extends weapon {
         setWeaponSprites(weaponPaths);
     }
 
-
-    // Setters pour la mana, les dégâts et la durabilité
-
-    public int setDamage() {
-        return this.damage;
-    }
-
-    public int setDurability() {
-        return this.durability;
-    }
-
-    public int setMana() {
-        return this.manaUsed;
-    }
-
-    
     // Getters pour repositionner l'arme
     
     public int getOffsetWeaponX(){

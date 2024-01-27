@@ -11,6 +11,8 @@ import items.*;
 
 import weapons.*;
 
+import characters.abstractFactory.monsterType.*;
+
 /**
  * Classe abstraite représentant un personnage, qui hérite de la classe Entity
  */
@@ -20,6 +22,7 @@ public abstract class character extends entity {
     protected BufferedImage[] runSprites;
     protected BufferedImage[] deathSprites;
     protected int FRAME_COUNT;
+    protected weapon chosenWeapon;
     public enum State {IDLE, RUNNING, DEATH}; 
     private State currentState = State.IDLE;
     private double X;
@@ -41,40 +44,70 @@ public abstract class character extends entity {
      * @param mana Mana du personnage
      * @param speed Vitesse du personnage
      */
-    public character(int PV, int Rfire, int Rphysic, int Rmagic, int Dfire, int Dphysic, int Dmagic, String name, int level, int mana, int speed) {
+    public character(int PV, int Rfire, int Rphysic, int Rmagic, int Dfire, int Dphysic, int Dmagic, String name, int speed) {
         // Appel du constructeur de la classe Entity avec les paramètres nécessaires
         super(PV, Rfire, Rphysic, Rmagic, Dfire, Dphysic, Dmagic);
 
         this.name = name;
-        this.level = level;
-        this.mana = mana;
         this.speed = speed;
     }
 
     protected String name;
-    protected int level;
-    protected int mana;
+    protected int level = 1;
+    protected int littleLevel = 0;
+    protected int mana = 100;
     protected int speed;
 
     // Méthodes abstraites implémentées dans les classes filles
     public abstract int getSpeed();
-    public abstract weapon getWeapon();
-
 
     /**
-     * Décrémente la mana, la durabilité en fonction de l'arme utilisée et appelle la méthode attack de la classe entity
-     * @param otherEntity L'autre entité attaquée
+     * Décrémente la mana, la durabilité en fonction de l'arme utilisée 
+     * Attaque le monstre s'il est dans la range
+     * @param Monster Le monstre attaqué
      * @param weaponUsed  L'arme utilisée
      */
-    public void attack(entity otherEntity, weapon weaponUsed) {
-        if (this.mana >= weaponUsed.getManaUsed()) {
-            this.mana -= weaponUsed.getManaUsed(); // Déduit le mana utilisé pour l'attaque
-            super.attack(otherEntity); // Appelle la méthode attack de la classe entity
-            weaponUsed.decreaseDurability(1); // Diminue la durabilité de l'arme après l'attaque
-        } else {
-            System.out.println(this.name + " n'a pas assez de mana pour attaquer avec " + weaponUsed.getName());
+    public void attack(Monster Monster) {
+
+        // Vérifier si l'arme est cassée
+        if(!chosenWeapon.getIsWeaponBroken()){
+            if (this.mana >= chosenWeapon.getManaUsed()) {
+                // Déduit le mana utilisé pour l'attaque
+                this.mana -= chosenWeapon.getManaUsed(); 
+                // Intégrer les dégâts de l'arme
+                typeDamage weaponDamage = chosenWeapon.getDamage();
+
+                
+                // Vérifier que Monster est dans la range du joueur
+                // ...
+
+                // Attaque le monstre
+                Monster.take_damage(weaponDamage);
+                // Diminue la durabilité de l'arme après l'attaque
+                chosenWeapon.decreaseDurability(1); 
+            } else {
+                System.out.println(this.name + " n'a pas assez de mana pour attaquer avec " + chosenWeapon.getName());
+                // Logique pour plus de mana
+            }
+        }
+        else{
+            System.out.println("L'arme est cassée");
+            // Logique pour l'arme cassée
+        }
+
+        // Logique pour vérifier si le monstre est morte
+        // Si le monstre est mort, récupération d'un certain XP en fonction du niveau du monstre
+        if (Monster.isDead() != 0){
+            this.littleLevel += Monster.isDead();
+            increaseLittleLevel();
         }
     }  
+
+    public void increaseLittleLevel(){
+        if (this.littleLevel >=100){
+            increaseLevel();
+        }
+    }
 
     /**
      * Augmente le niveau du personnage
@@ -178,6 +211,10 @@ public abstract class character extends entity {
 
     public List<Item> getInventory() {
         return inventory;
+    }
+
+    public weapon getWeapon(){
+        return chosenWeapon;
     }
 }
 

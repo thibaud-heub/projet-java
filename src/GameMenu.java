@@ -92,7 +92,6 @@
         warriorLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Guerrier");
                 cardLayout.show(mainPanel, "WarriorWeapon");
             }
         });
@@ -100,7 +99,6 @@
         rogueLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Chasseur");
                 cardLayout.show(mainPanel, "RogueWeapon");
             }
         });
@@ -108,7 +106,6 @@
         wizardLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Sorcier");
                 cardLayout.show(mainPanel, "WizardWeapon");
             }
         });
@@ -137,7 +134,6 @@
         shieldAndSwordLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Epée");
                 selectWarriorWeapon(new sword());
             }
         });
@@ -145,7 +141,6 @@
         bigSwordLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Grande épée");
                 selectWarriorWeapon(new bigSword());
             }
         });
@@ -156,7 +151,7 @@
 
     private void selectWarriorWeapon(weapon weapon) {
         selectedWeapon = weapon;
-        selectedCharacter = new warrior(selectedWeapon);
+        selectedCharacter = new warrior();
         launchGame();
     }
 
@@ -177,7 +172,6 @@
         spikeLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Dague");
                 selectRogueWeapon(new spike());
 
             }
@@ -186,7 +180,6 @@
         hoeLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Katana");
                 selectRogueWeapon(new katana());
 
             }
@@ -198,7 +191,7 @@
 
     private void selectRogueWeapon(weapon weapon) {
         selectedWeapon = weapon;
-        selectedCharacter = new hunter(selectedWeapon);
+        selectedCharacter = new hunter();
         launchGame();
     }
 
@@ -219,7 +212,6 @@
         wandLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Bâton");
                 selectWizardWeapon(new magicWand());
             }
         });
@@ -227,7 +219,6 @@
         bigWandLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Grand bâton");
                 selectWizardWeapon(new bigMagicWand());
 
             }
@@ -239,13 +230,15 @@
 
     private void selectWizardWeapon(weapon weapon) {
         selectedWeapon = weapon;
-        selectedCharacter = new witcher(selectedWeapon);
+        selectedCharacter = new witcher();
         launchGame();
     }
 
     private void launchGame() {
         SwingUtilities.invokeLater(() -> {
-            Game game = new Game(selectedCharacter);
+            System.out.println(selectedCharacter);
+            System.out.println(selectedWeapon);
+            Game game = new Game(selectedCharacter, selectedWeapon);
             game.setVisible(true);
             GameMenu.this.dispose(); 
         });

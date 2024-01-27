@@ -4,10 +4,12 @@ public class sword extends weapon {
 
     public sword() {
         this.name = "Epee";
-        this.damage = 25;
         this.manaUsed = 5;
         this.durability = 100;
         this.attackSpeed = 10;
+        damage.setPhysic(20);
+        damage.setFire(0);
+        damage.setMagic(0);
 
 
         // Chargement des sprites
@@ -20,23 +22,6 @@ public class sword extends weapon {
         setWeaponSprites(weaponPaths);
     }
 
-
-
-    // Setters pour la mana, les dégâts et la durabilité
-
-    public int setDamage() {
-        return this.damage;
-    }
-
-    public int setDurability() {
-        return this.durability;
-    }
-
-    public int setMana() {
-        return this.manaUsed;
-    }
-
-    
     // Getters pour repositionner l'arme
 
     public int getOffsetWeaponX(){

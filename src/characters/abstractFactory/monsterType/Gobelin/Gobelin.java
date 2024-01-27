@@ -12,7 +12,7 @@ public class Gobelin extends Monster{
  */    
     public Gobelin () 
     {
-       super(monsterType.COMMON, monsterStats.getStats("Gobelin"));
+       super(monsterType.COMMON, monsterStats.getStats("Gobelin"), 10);
 
        String[] idlePaths = {
         "../../../../../ressources/sprites/Monster/Goblin/Idle_1.png",
@@ -45,16 +45,6 @@ public class Gobelin extends Monster{
     setAttackSprites(attackPaths);
     
     }
-
-/**
- * rédifinition de la méthode attaque en réutilisant la méthode de la class parente
- */
-    public void attack (Monster other_monster) 
-    {
-        System.out.println("Gobelin attack");
-        super.attack(other_monster);
-    }
-
     /**
      * redéfinition de la méthode afin de l'adapter au gobelin
      */

@@ -4,10 +4,12 @@ public class magicWand extends weapon {
 
     public magicWand() {
         this.name = "Baton magique";
-        this.damage = 15;
         this.manaUsed = 5;
         this.durability = 100;
         this.attackSpeed = 10;
+        damage.setPhysic(0);
+        damage.setFire(0);
+        damage.setMagic(15);
 
         // Chargement des sprites
         String[] weaponPaths = {
@@ -18,22 +20,6 @@ public class magicWand extends weapon {
         };
         setWeaponSprites(weaponPaths);
     }
-
-
-    // Setters pour la mana, les dégâts et la durabilité
-
-    public int setDamage() {
-        return this.damage;
-    }
-
-    public int setDurability() {
-        return this.durability;
-    }
-
-    public int setMana() {
-        return this.manaUsed;
-    }
-
     
     // Getters pour repositionner l'arme
 

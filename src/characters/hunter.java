@@ -1,15 +1,11 @@
 package characters;
 
-import weapons.*;
-
 public class hunter extends character {
-    private weapon chosenWeapon;
     
-    public hunter(weapon chosenWeapon) {
+    public hunter() {
         
         // Appel du constructeur de la classe Entity avec les paramètres nécessaires
-        super(100, 0, 5, 0, 0, 10, 0, "Chasseur", 1, 100, 5);
-        this.chosenWeapon = chosenWeapon;
+        super(100, 0, 5, 3, 0, 10, 3, "Chasseur", 5);
        
 
 
@@ -37,9 +33,7 @@ public class hunter extends character {
 
 
     // Getters pour l'arme, la vitesse
-    public weapon getWeapon(){
-        return chosenWeapon;
-    }
+    
 
     public int getSpeed(){
         return speed;
