@@ -1,16 +1,13 @@
 package characters;
 
 
-import weapons.*;
 
 public class witcher extends character {
 
-    private weapon chosenWeapon;
     
-    public witcher(weapon chosenWeapon) {
+    public witcher() {
         // Appel du constructeur de la classe Entity avec les paramètres nécessaires
-        super(100, 0, 0, 10, 0, 0, 10, "Magicien", 1, 100, 3); 
-        this.chosenWeapon = chosenWeapon;
+        super(100, 0, 0, 10, 0, 0, 10, "Magicien", 3); 
         
 
         // Initialisation des sprites
@@ -41,9 +38,5 @@ public class witcher extends character {
 
     public int getSpeed(){
         return speed;
-    }
-
-    public weapon getWeapon(){
-        return chosenWeapon;
     }
 }

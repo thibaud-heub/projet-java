@@ -28,11 +28,11 @@ public abstract class entity {
         this.resistance = new typeDamage(Rfire, Rphysic, Rmagic);
     }
 
-/**
- * Retourne les dégats réel reçus, en fonction de la résistance
- * @param damage : Les dégâts de l'ennemi
- * @return : Entier représentant les dégâts réels
- */
+    /**
+     * Retourne les dégats réel reçus, en fonction de la résistance
+     * @param damage : Les dégâts de l'ennemi
+     * @return : Entier représentant les dégâts réels
+     */
     private int realDamage(typeDamage damage)
     {
         int fire = 0, physic = 0, magic = 0;
@@ -60,10 +60,10 @@ public abstract class entity {
      * @param ennemyDamage : Les dégats de l'ennemi
      * @return : Un booléen indiquant si l'entité est en vie ou morte
      */
-    public Boolean take_damage (typeDamage ennemyDamage) 
+    public Boolean take_damage ( typeDamage weaponDamage) 
     {
-        int damage = realDamage(ennemyDamage);
-        // Si les dégats dépasse la vie actuelle du monstre, ses PV tombent à 0 et il meurt
+        int damage = realDamage(weaponDamage);
+        // Si les dégats dépasse la vie actuelle, ses PV tombent à 0 et il meurt
         if ((this.PV - damage)< 0) {
             this.PV = 0;
             this.Alive = false;
@@ -75,14 +75,13 @@ public abstract class entity {
         return this.Alive;
     }
 
-/**
- * Permet d'infliger des dégats à une autre entité en appelant la méthode takeDamage de l'autre entité
- * @param other_Entity : Entité à attaquer
- */
-    public void attack (entity otherEntity) 
-    {
+    
+
+    public void monsterAttack (entity otherEntity){
         otherEntity.take_damage(this.damage);
     }
+
+
 
     /**
      * Méthode pour print les caractéristiques de l'entité
@@ -97,6 +96,7 @@ public abstract class entity {
         resistance.print();
         System.out.println("\nEn vie : " + Alive);
     }
+
 
 
     // Getters pour les dégats, la résistance, les PV et l'état de l'entité

@@ -9,7 +9,7 @@ public class Ogre extends Monster{
 
     public Ogre () 
     {
-       super(monsterType.COMMON, monsterStats.getStats("Ogre"));
+       super(monsterType.COMMON, monsterStats.getStats("Ogre"), 20);
 
     // Chemins des sprites    
     String[] idlePaths = {

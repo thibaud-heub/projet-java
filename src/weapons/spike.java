@@ -4,10 +4,12 @@ public class spike extends weapon {
 
     public spike() {
         this.name = "Dague";
-        this.damage = 10;
         this.manaUsed = 2;
         this.durability = 100;
         this.attackSpeed = 5;
+        damage.setPhysic(7);
+        damage.setFire(0);
+        damage.setMagic(0);
 
         // Chargement des sprites
         String[] weaponPaths = {
@@ -18,22 +20,6 @@ public class spike extends weapon {
         };
         setWeaponSprites(weaponPaths);
     }
-
-
-    // Setters pour la mana, les dégâts et la durabilité
-
-    public int setDamage() {
-        return this.damage;
-    }
-
-    public int setDurability() {
-        return this.durability;
-    }
-
-    public int setMana() {
-        return this.manaUsed;
-    }
-
 
     // Getters pour repositionner l'arme
     

@@ -51,13 +51,13 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     private Set<Integer> pressedKeys = new HashSet<>();
 
 
-    public GamePanel(character chosenCharacter, Monster[] monsters) {
+    public GamePanel(character chosenCharacter, Monster[] monsters, weapon currentWeapon) {
         this.currentCharacter = chosenCharacter;
         this.monsters = monsters;
+        this.currentWeapon = currentWeapon;
         currentState = currentCharacter.getState();
         speed = currentCharacter.getSpeed();
         attackSpeed = currentCharacter.getAttackSpeed();
-        currentWeapon = currentCharacter.getWeapon();
         currentWeaponState = currentWeapon.getState();
 
         for (int i = 0; i < monsters.length; i++){
@@ -261,7 +261,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
 public class Game extends JFrame {
     private Monster[] monsters;
     private GamePanel gamePanel;
-    public Game(character chosenCharacter) {
+    public Game(character chosenCharacter, weapon chosenWeapon) {
         setTitle("DnD");
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -270,7 +270,7 @@ public class Game extends JFrame {
         monsterManager manager = new monsterManager();
         monsters = manager.monstersLevel(false); // Générer les monstres (false pour un niveau non final)
 
-        gamePanel = new GamePanel(chosenCharacter, monsters); // Passer les monstres à GamePanel
+        gamePanel = new GamePanel(chosenCharacter, monsters, chosenWeapon); // Passer les monstres à GamePanel
         add(gamePanel);
     }
 }

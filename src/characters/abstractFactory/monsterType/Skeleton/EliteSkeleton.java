@@ -10,7 +10,7 @@ public class EliteSkeleton extends Monster {
     
     public EliteSkeleton () 
     {
-       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Skeleton")));
+       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Skeleton")), 16);
 
     // Chemins des sprites
     String[] idlePaths = {

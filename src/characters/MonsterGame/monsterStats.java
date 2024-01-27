@@ -45,15 +45,15 @@ public final class monsterStats {
 
     static {
         gobStats.put("PV", 100);
-        gobStats.put("AttackSpeed", 10);
+        gobStats.put("AttackSpeed", 20);
 
-        gobStats.put("FireResistance", 8);
-        gobStats.put("PhysicResistance", 25);
-        gobStats.put("MagicResistance", 12);
+        gobStats.put("FireResistance", 0);
+        gobStats.put("PhysicResistance", 3);
+        gobStats.put("MagicResistance", 2);
 
-        gobStats.put("FireDamage", 20);
-        gobStats.put("PhysicDamage", 35);
-        gobStats.put("MagicDamage", 15);
+        gobStats.put("FireDamage", 4);
+        gobStats.put("PhysicDamage", 8);
+        gobStats.put("MagicDamage", 4);
     }
 
 
@@ -61,16 +61,16 @@ public final class monsterStats {
     private static Map<String, Integer> ogreStats = new HashMap<>();
 
     static {
-        ogreStats.put("PV", 100);
-        ogreStats.put("AttackSpeed", 15);
+        ogreStats.put("PV", 150);
+        ogreStats.put("AttackSpeed", 5);
 
-        ogreStats.put("FireResistance", 20);
-        ogreStats.put("PhysicResistance", 15);
-        ogreStats.put("MagicResistance", 25);
+        ogreStats.put("FireResistance", 0);
+        ogreStats.put("PhysicResistance", 6);
+        ogreStats.put("MagicResistance", 0);
 
-        ogreStats.put("FireDamage", 30);
-        ogreStats.put("PhysicDamage", 40);
-        ogreStats.put("MagicDamage", 50);
+        ogreStats.put("FireDamage", 0);
+        ogreStats.put("PhysicDamage", 15);
+        ogreStats.put("MagicDamage", 0);
     }
 
 
@@ -78,16 +78,16 @@ public final class monsterStats {
     private static Map<String, Integer> orcStats = new HashMap<>();
 
     static {
-        orcStats.put("PV", 150);
+        orcStats.put("PV", 100);
         orcStats.put("AttackSpeed", 12);
 
-        orcStats.put("FireResistance", 10);
-        orcStats.put("PhysicResistance", 30);
-        orcStats.put("MagicResistance", 15);
+        orcStats.put("FireResistance", 5);
+        orcStats.put("PhysicResistance", 5);
+        orcStats.put("MagicResistance", 0);
 
-        orcStats.put("FireDamage", 25);
-        orcStats.put("PhysicDamage", 40);
-        orcStats.put("MagicDamage", 20);        
+        orcStats.put("FireDamage", 5);
+        orcStats.put("PhysicDamage", 5);
+        orcStats.put("MagicDamage", 0);        
     }
 
 
@@ -99,12 +99,12 @@ public final class monsterStats {
         skeletonStats.put("AttackSpeed", 8);
 
         skeletonStats.put("FireResistance", 5);
-        skeletonStats.put("PhysicResistance", 20);
-        skeletonStats.put("MagicResistance", 10);
+        skeletonStats.put("PhysicResistance", 3);
+        skeletonStats.put("MagicResistance", 0);
 
-        skeletonStats.put("FireDamage", 15);
-        skeletonStats.put("PhysicDamage", 30);
-        skeletonStats.put("MagicDamage", 10);
+        skeletonStats.put("FireDamage", 0);
+        skeletonStats.put("PhysicDamage", 5);
+        skeletonStats.put("MagicDamage", 3);
     }
 
 //---------------Tas de boue--------------------

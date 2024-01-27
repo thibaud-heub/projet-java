@@ -5,12 +5,14 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import characters.*;
+
 /**
  * Classe abstraite pour les armes
  */
 public abstract class weapon {
     protected String name;
-    protected int damage;
+    protected typeDamage damage;
     protected int durability;
     protected int manaUsed;
     protected int attackSpeed;
@@ -19,10 +21,10 @@ public abstract class weapon {
     private State currentState = State.IDLE;
     private boolean isWeaponBroken = false;
 
+    public weapon(){
+        this.damage = new typeDamage(0, 0, 0);
+    }
 
-    public abstract int setDamage();
-    public abstract int setDurability();
-    public abstract int setMana();
     public abstract int getOffsetWeaponX();
     public abstract int getOffsetWeaponY();
 
@@ -33,12 +35,23 @@ public abstract class weapon {
         System.out.println("Attaque avec " + name + " pour " + damage + " points de dégâts" + " et -" + manaUsed + " points de mana !");
     }
 
-    
 
-    // Augmente les dégats de l'arme de value
-    public void increaseDamage(int value) {
-        this.damage += value;
+     // Augmente les dégats de l'arme de value
+     public void increaseDamagePhysic(int value) {
+        int damagePhysic = damage.getPhysic();
+        damage.setPhysic(value + damagePhysic);
     }
+
+    public void increaseDamageMagic(int value){
+        int damageMagic = damage.getMagic();
+        damage.setMagic(damageMagic + value);
+    }
+
+    public void increaseDamageFire(int value){
+        int damageFire = damage.getFire();
+        damage.setFire(damageFire + value);
+    }
+
 
     // Augmente la mana utilisée de l'arme de value
     public void increaseManaUsed(int value) {
@@ -85,8 +98,6 @@ public abstract class weapon {
         this.currentState = newState;
     }
 
-    
-
 
     // Getters pour l'état, les sprites, la mana, la durabilité, les dégats, le nom et l'état de l'arme
 
@@ -105,7 +116,7 @@ public abstract class weapon {
         return this.durability;
     }
 
-    public int getDamage() {
+    public typeDamage getDamage() {
         return this.damage;
     }
 
