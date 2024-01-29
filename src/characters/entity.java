@@ -33,9 +33,9 @@ public abstract class entity {
      * @param damage : Les dégâts de l'ennemi
      * @return : Entier représentant les dégâts réels
      */
-    private int realDamage(typeDamage damage)
+    private double realDamage(typeDamage damage)
     {
-        int fire = 0, physic = 0, magic = 0;
+        double fire = 0, physic = 0, magic = 0;
 
         if( (fire = damage.getFire()-this.resistance.getFire()) < 0)
         {
@@ -60,9 +60,9 @@ public abstract class entity {
      * @param ennemyDamage : Les dégats de l'ennemi
      * @return : Un booléen indiquant si l'entité est en vie ou morte
      */
-    public Boolean take_damage ( typeDamage weaponDamage) 
+    public Boolean take_damage (typeDamage weaponDamage) 
     {
-        int damage = realDamage(weaponDamage);
+        double damage = realDamage(weaponDamage);
         // Si les dégats dépasse la vie actuelle, ses PV tombent à 0 et il meurt
         if ((this.PV - damage)< 0) {
             this.PV = 0;
@@ -97,6 +97,15 @@ public abstract class entity {
         System.out.println("\nEn vie : " + Alive);
     }
 
+    // Setters pour damage et resistance
+
+    public void setDamage(typeDamage newDamage){
+        this.damage = newDamage;
+    }
+
+    public void setResistance(typeDamage newResistance){
+        this.resistance = newResistance;
+    }
 
 
     // Getters pour les dégats, la résistance, les PV et l'état de l'entité

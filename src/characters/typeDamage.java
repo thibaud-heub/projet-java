@@ -6,9 +6,9 @@ package characters;
  * Implémente les fonctions de manipulation des attributs de la classe
  */
 public class typeDamage {
-    private int fire;
-    private int physic;
-    private int magic;
+    private double fire;
+    private double physic;
+    private double magic;
 
     /**
      * Constructeur de la classe typeDamage
@@ -25,39 +25,45 @@ public class typeDamage {
     
     // Getters pour le feu, la physique et la magie
 
-    public int getFire ()
+    public double getFire ()
     {
         return this.fire;
     }
 
-    public int getPhysic ()
+    public double getPhysic ()
     {
         return this.physic;
     } 
 
-    public int getMagic()
+    public double getMagic()
     {
         return this.magic;
     }
 
     // Setters les dégâts de feu, de physique et de magie
 
-    public void setFire (int fire)
+    public void setFire (double fire)
     {
         this.fire=fire;
     }
 
-    public void setPhysic (int physic)
+    public void setPhysic (double physic)
     {
         this.physic = physic;
     }
 
-    public void setMagic (int magic)
+    public void setMagic (double magic)
     {
         this.magic = magic;
     }
 
+    public void increaseDamage (double value){
+        this.magic = this.magic * value;
+        this.fire = this.fire * value;
+        this.physic = this.physic * value;
+    }
 
+    
     // Méthode pour afficher les dégâts
     public void print()
     {

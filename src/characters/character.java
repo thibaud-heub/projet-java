@@ -67,7 +67,7 @@ public abstract class character extends entity {
      * @param Monster Le monstre attaqué
      * @param weaponUsed  L'arme utilisée
      */
-    public void attack(Monster Monster) {
+    public void attack() {
 
         // Vérifier si l'arme est cassée
         if(!chosenWeapon.getIsWeaponBroken()){
@@ -78,31 +78,53 @@ public abstract class character extends entity {
                 typeDamage weaponDamage = chosenWeapon.getDamage();
 
                 
-                // Vérifier que Monster est dans la range du joueur
-                // ...
+                // // Vérifier s'il y a un Monster dans la range du joueur
+                // if(monsterInRange() != null){
+                //     Monster monster = monsterInRange();
+                //     // Attaque le monstre
+                //     Monster.take_damage(weaponDamage);
+                //     // Diminue la durabilité de l'arme après l'attaque
+                //     chosenWeapon.decreaseDurability(1); 
+                //     // Logique pour vérifier si le monstre est morte
+                //     // Si le monstre est mort, récupération d'un certain XP en fonction du niveau du monstre
+                //     if (Monster.isDead() != 0){
+                //         this.littleLevel += Monster.isDead();
+                //         increaseLittleLevel();
+                //     }
+                // }
+                // else{
+                //     System.out.println("Il n'y a pas de monstre dans la range");
+                // }
 
-                // Attaque le monstre
-                Monster.take_damage(weaponDamage);
-                // Diminue la durabilité de l'arme après l'attaque
-                chosenWeapon.decreaseDurability(1); 
+                
             } else {
                 System.out.println(this.name + " n'a pas assez de mana pour attaquer avec " + chosenWeapon.getName());
-                // Logique pour plus de mana
+                // Logique pour plus de mana, il faut empêcher l'attaque
             }
         }
         else{
             System.out.println("L'arme est cassée");
-            // Logique pour l'arme cassée
-        }
-
-        // Logique pour vérifier si le monstre est morte
-        // Si le monstre est mort, récupération d'un certain XP en fonction du niveau du monstre
-        if (Monster.isDead() != 0){
-            this.littleLevel += Monster.isDead();
-            increaseLittleLevel();
+            // Logique pour l'arme cassée, il faut faire disparaître l'épée
         }
     }  
 
+    /**
+     * Vérification de la présence d'un monstre dans la range du joueur
+     * @return Monster : Le monstre s'il y en a un, sinon null
+     */
+    // private Monster monsterInRange(){
+    //     if(un monstre est dans la range du joueur){
+
+    //     }
+    //     else{
+    //       return null;
+    //     }
+    // }
+
+
+    /**
+     * Si l'XP atteint 100, on appelle increaseLevel
+     */
     public void increaseLittleLevel(){
         if (this.littleLevel >=100){
             increaseLevel();
@@ -111,9 +133,19 @@ public abstract class character extends entity {
 
     /**
      * Augmente le niveau du personnage
+     * Augmente en même temps sa résistance et ses dégats, de 1.2
      */
     public void increaseLevel() {
         this.level += 1;
+        // Récupération des dégats et résistances du player
+        typeDamage damage = this.getDamage();
+        typeDamage resistance = this.getResistance();
+        // Augmentation de 1.2 les dégats et résistances
+        damage.increaseDamage(1.2);
+        resistance.increaseDamage(1.2);
+        // Attribution des nouveaux dégats et résistances 
+        this.setDamage(damage);
+        this.setResistance(resistance);
     }
 
 

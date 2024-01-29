@@ -269,6 +269,8 @@ public class Game extends JFrame {
 
         monsterManager manager = new monsterManager();
         monsters = manager.monstersLevel(false); // Générer les monstres (false pour un niveau non final)
+        // manager.printAliveMonsters(monsters); // Afficher les monstres
+
 
         gamePanel = new GamePanel(chosenCharacter, monsters, chosenWeapon); // Passer les monstres à GamePanel
         add(gamePanel);
