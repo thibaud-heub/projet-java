@@ -37,18 +37,18 @@ public abstract class weapon {
 
 
      // Augmente les dégats de l'arme de value
-     public void increaseDamagePhysic(int value) {
-        int damagePhysic = damage.getPhysic();
+     public void increaseDamagePhysic(double value) {
+        double damagePhysic = damage.getPhysic();
         damage.setPhysic(value + damagePhysic);
     }
 
-    public void increaseDamageMagic(int value){
-        int damageMagic = damage.getMagic();
+    public void increaseDamageMagic(double value){
+        double damageMagic = damage.getMagic();
         damage.setMagic(damageMagic + value);
     }
 
-    public void increaseDamageFire(int value){
-        int damageFire = damage.getFire();
+    public void increaseDamageFire(double value){
+        double damageFire = damage.getFire();
         damage.setFire(damageFire + value);
     }
 

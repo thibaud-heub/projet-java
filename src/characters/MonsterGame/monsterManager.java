@@ -25,6 +25,7 @@ public class monsterManager {
         for (int i = 0; i<monsters.length; i++)
         {
             monsters[i] = sortMonster(probMonster);
+
             monsters[i].setId(i);
         }
         return monsters;
@@ -50,7 +51,7 @@ public class monsterManager {
         
         Double probElite = monstersProb.get("Elite");
         
-        // Pour chaque monstre compare la proba d'apparition avec la somme des proba précédente et créer la fabrique correspondante
+        // Pour chaque monstre compare la proba d'apparition avec la somme des probas précédente et créer la fabrique correspondante
         if (nbRandom <= (sumProb += monstersProb.get("Ogre"))) 
         {
             // Pour chaque génération de monstre, il y a une probabilité que le monstre généré soit élite
@@ -139,6 +140,7 @@ public class monsterManager {
             probaMonster probaMonster = new probaMonster();
 
             prob = probaMonster.sortProb(monsterStats.probaElite);
+
 
             monsters = generateMonsters(monsterStats.nbMonsterLevel, prob);
 
