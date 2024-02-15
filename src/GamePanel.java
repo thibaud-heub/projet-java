@@ -303,7 +303,6 @@ public class GamePanel extends JPanel implements KeyListener {
                         }
                     }
                 }
-                i++;
             }
 
         currentCharacter.setMana(0.2);
