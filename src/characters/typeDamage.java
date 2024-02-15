@@ -58,9 +58,9 @@ public class typeDamage {
     }
 
     public void increaseDamage (double value){
-        this.magic = this.magic * value;
-        this.fire = this.fire * value;
-        this.physic = this.physic * value;
+        this.magic = Math.ceil(this.magic * value); // on arrondit au supérieur
+        this.fire = Math.ceil(this.fire * value);
+        this.physic = Math.ceil(this.physic * value);
     }
 
     

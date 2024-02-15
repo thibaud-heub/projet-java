@@ -1,4 +1,6 @@
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -321,6 +323,10 @@ public class GamePanel extends JPanel implements KeyListener {
                 }
             }
 
+        if(!currentCharacter.getAlive()){
+            gameLoop.stop();
+            SwingUtilities.getWindowAncestor(this).dispose();
+        }
         currentCharacter.setMana(0.2);
         currentCharacter.setPV(0.02);
         repaint();
