@@ -318,7 +318,9 @@ public abstract class Monster extends entity {
      * @param monster Le monstre en question
      */
     public void ride_monster(Monster monster) {
-        monster.setState(State.WALK);
+        if(monster.getState() != Monster.State.DEATH){
+            monster.setState(State.WALK);
+        }
         // Si un mur est proche, on inverse la direction
         if (isWallAhead(monster, direction)) {
             direction = reverseDirection(direction);
@@ -387,7 +389,9 @@ public abstract class Monster extends entity {
      * @param direction La direction actuelle du monstre
      */
     private void moveMonster(Monster monster, Direction direction) {
-        monster.setState(State.WALK);
+        if(monster.getState() != Monster.State.DEATH){
+            monster.setState(State.WALK);
+        }
         double speed = monster.getSpeed();
 
         // Récupérer les positions actuelles
