@@ -7,6 +7,7 @@ public class spike extends weapon {
         this.manaUsed = 2;
         this.durability = 100;
         this.attackSpeed = 5;
+        this.range = 7.0;
         damage.setPhysic(7);
         damage.setFire(0);
         damage.setMagic(0);

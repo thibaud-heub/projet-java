@@ -7,6 +7,7 @@ public class katana extends weapon {
         this.manaUsed = 5;
         this.durability = 100;
         this.attackSpeed = 10;
+        this.range = 12.0;
         damage.setPhysic(15);
         damage.setFire(0);
         damage.setMagic(0);

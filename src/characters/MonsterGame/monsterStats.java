@@ -28,7 +28,7 @@ public final class monsterStats {
 
     static{
         upgrade.put("PV", 4.0);
-        upgrade.put("AttackSpeed", 1.2);
+        upgrade.put("AttackSpeed", 0.0);
 
         upgrade.put("FireResistance", 1.2);
         upgrade.put("PhysicResistance", 1.2);
@@ -44,8 +44,8 @@ public final class monsterStats {
     private static Map<String, Integer> gobStats = new HashMap<>();
 
     static {
-        gobStats.put("PV", 100);
-        gobStats.put("AttackSpeed", 20);
+        gobStats.put("PV", 50);
+        gobStats.put("AttackSpeed", 15);
 
         gobStats.put("FireResistance", 0);
         gobStats.put("PhysicResistance", 3);
@@ -61,8 +61,8 @@ public final class monsterStats {
     private static Map<String, Integer> ogreStats = new HashMap<>();
 
     static {
-        ogreStats.put("PV", 150);
-        ogreStats.put("AttackSpeed", 5);
+        ogreStats.put("PV", 75);
+        ogreStats.put("AttackSpeed", 8);
 
         ogreStats.put("FireResistance", 0);
         ogreStats.put("PhysicResistance", 6);
@@ -78,7 +78,7 @@ public final class monsterStats {
     private static Map<String, Integer> orcStats = new HashMap<>();
 
     static {
-        orcStats.put("PV", 100);
+        orcStats.put("PV", 50);
         orcStats.put("AttackSpeed", 12);
 
         orcStats.put("FireResistance", 5);
@@ -95,8 +95,8 @@ public final class monsterStats {
     private static Map<String, Integer> skeletonStats = new HashMap<>();
     
     static{
-        skeletonStats.put("PV", 80);
-        skeletonStats.put("AttackSpeed", 8);
+        skeletonStats.put("PV", 40);
+        skeletonStats.put("AttackSpeed", 12);
 
         skeletonStats.put("FireResistance", 5);
         skeletonStats.put("PhysicResistance", 3);
@@ -111,7 +111,7 @@ public final class monsterStats {
     private static Map<String, Integer> mudPileStats = new HashMap<>();
 
     static{
-        mudPileStats.put("PV", 100);
+        mudPileStats.put("PV", 50);
         mudPileStats.put("AttackSpeed", 0);
 
         mudPileStats.put("FireResistance", 0);
@@ -129,8 +129,8 @@ public final class monsterStats {
     private static Map<String, Integer> bossStats = new HashMap<>();
 
     static{
-        mudPileStats.put("PV", 500);
-        mudPileStats.put("AttackSpeed", 1);
+        mudPileStats.put("PV", 250);
+        mudPileStats.put("AttackSpeed", 10);
 
         mudPileStats.put("FireResistance", 10);
         mudPileStats.put("PhysicResistance", 10);
@@ -165,7 +165,6 @@ public final class monsterStats {
             int statUp = (int) Math.round(monster.get(cle) * upgrade.get(cle));
             monster.put(cle, statUp);
         }
-
     }
 
     /**
@@ -241,8 +240,13 @@ public final class monsterStats {
         Map<String, Integer> eliteMonster = new HashMap<>();
         for (String cle : monster.keySet())
         {
-            int up = (int) Math.round(monster.get(cle)*elite);
-            eliteMonster.put(cle, up);
+            if(!cle.equals("AttackSpeed")){
+                int up = (int) Math.round(monster.get(cle)*elite);
+                eliteMonster.put(cle, up);
+            }
+            else{
+                eliteMonster.put(cle, monster.get(cle));
+            }
         }
         return eliteMonster;
     }

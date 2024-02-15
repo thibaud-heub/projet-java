@@ -7,6 +7,7 @@ public class sword extends weapon {
         this.manaUsed = 5;
         this.durability = 100;
         this.attackSpeed = 10;
+        this.range = 10.0;
         damage.setPhysic(20);
         damage.setFire(0);
         damage.setMagic(0);

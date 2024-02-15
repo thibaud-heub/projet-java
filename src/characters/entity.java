@@ -4,7 +4,7 @@ package characters;
  * classe abstraite qui définit une entité (monster ou character) définie les méthodes commune : attack, takeDamage ...
  */
 public abstract class entity {
-    private int PV;
+    private double PV;
     protected int attackSpeed;
     private Boolean Alive; //indique si le monstre est en vie ou mort
     private typeDamage resistance;
@@ -20,7 +20,7 @@ public abstract class entity {
      * @param Dphysic : Dégâts physiques
      * @param Dmagic : Dégâts magiques
      */
-    public entity(int PV, int Rfire, int Rphysic, int Rmagic, int Dfire, int Dphysic, int Dmagic)
+    public entity(double PV, int Rfire, int Rphysic, int Rmagic, int Dfire, int Dphysic, int Dmagic)
     {
         this.PV = PV;
         this.Alive = true;
@@ -50,6 +50,8 @@ public abstract class entity {
         if ((magic = damage.getMagic()-resistance.getMagic())<0)
         {
             magic = 0;
+
+
         }
 
         return fire + physic + magic;
@@ -73,12 +75,6 @@ public abstract class entity {
             this.PV -= damage;
         }
         return this.Alive;
-    }
-
-    
-
-    public void monsterAttack (entity otherEntity){
-        otherEntity.take_damage(this.damage);
     }
 
 
@@ -107,6 +103,12 @@ public abstract class entity {
         this.resistance = newResistance;
     }
 
+    public void setPV(double newPV){
+        if(this.PV < 100){
+            this.PV += newPV;
+        }
+    }
+
 
     // Getters pour les dégats, la résistance, les PV et l'état de l'entité
 
@@ -120,7 +122,7 @@ public abstract class entity {
         return this.resistance;
     }
 
-    public int getPV()
+    public double getPV()
     {
         return this.PV;
     }

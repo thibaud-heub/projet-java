@@ -7,7 +7,7 @@ import characters.MonsterGame.monsterStats;
 public class MudPile extends Monster{
     public MudPile () 
     {
-       super(monsterType.COMMON, monsterStats.getStats("MudPile"), 5);
+       super(monsterType.COMMON, monsterStats.getStats("MudPile"), 5, 1);
        // Chemins des sprites
     String[] idlePaths = {
         "../../../../ressources/sprites/Monster/Muddy/Idle_1.png",

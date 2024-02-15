@@ -10,7 +10,7 @@ public class EliteSkeleton extends Monster {
     
     public EliteSkeleton () 
     {
-       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Skeleton")), 16);
+       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Skeleton")), 16, 1.1);
 
     // Chemins des sprites
     String[] idlePaths = {
@@ -36,15 +36,18 @@ public class EliteSkeleton extends Monster {
         "../../../../../ressources/sprites/Monster/EliteSkeleton/Death_4.png",
     };
     setDeathSprites(DeathPaths);
-    };
 
     String[] attackPaths = {
         "../../../../../ressources/sprites/Monster/EliteSkeleton/Attack_1.png",
         "../../../../../ressources/sprites/Monster/EliteSkeleton/Attack_2.png",
         "../../../../../ressources/sprites/Monster/EliteSkeleton/Attack_3.png",
     };
+    setAttackSprites(attackPaths);
+    };
 
-
+    
+    
+    
     @Override
     public void print() 
     {

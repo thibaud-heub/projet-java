@@ -46,18 +46,25 @@
             // Définit les sprites en fonction de l'état du monstre
             switch (currentState) {
                 case WALK:
+                    default:
                     sprites = currentMonster.getWalkSprites();
-                    break;
-                case IDLE:
-                default:
-                    sprites = currentMonster.getIdleSprites();
                     break;
                 case DEATH:
                     sprites = currentMonster.getDeathSprites();
                     break;
+                case ATTACK:
+                    sprites = currentMonster.getAttackSprites();
+                    break;
+                case IDLE:
+                    sprites = currentMonster.getIdleSprites();
+                    break;
             }
 
-            Image sprite = sprites[spriteIndex];
+            if(currentState == Monster.State.DEATH){
+                System.out.println("spriteIndex : " + spriteIndex);
+            }
+            int adjustedSpriteIndex = spriteIndex % sprites.length;
+            Image sprite = sprites[adjustedSpriteIndex];
 
             int drawX = xPos;
             int drawY = yPos;

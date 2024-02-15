@@ -9,7 +9,7 @@ public class Ogre extends Monster{
 
     public Ogre () 
     {
-       super(monsterType.COMMON, monsterStats.getStats("Ogre"), 20);
+       super(monsterType.COMMON, monsterStats.getStats("Ogre"), 20, 0.7);
 
     // Chemins des sprites    
     String[] idlePaths = {
@@ -32,6 +32,8 @@ public class Ogre extends Monster{
         "../../../../../ressources/sprites/Monster/Ogre/Death_1.png",
         "../../../../../ressources/sprites/Monster/Ogre/Death_2.png",
         "../../../../../ressources/sprites/Monster/Ogre/Death_3.png",
+        "../../../../../ressources/sprites/Monster/Ogre/Death_4.png",
+
     };
     setDeathSprites(DeathPaths);
 
@@ -39,6 +41,9 @@ public class Ogre extends Monster{
         "../../../../../ressources/sprites/Monster/Ogre/Attack_1.png",
         "../../../../../ressources/sprites/Monster/Ogre/Attack_2.png",
         "../../../../../ressources/sprites/Monster/Ogre/Attack_3.png",
+        "../../../../../ressources/sprites/Monster/Ogre/Attack_4.png",
+        "../../../../../ressources/sprites/Monster/Ogre/Attack_5.png",
+        "../../../../../ressources/sprites/Monster/Ogre/Attack_6.png"
     };
     setAttackSprites(attackPaths);
     };

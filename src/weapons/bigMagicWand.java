@@ -7,6 +7,7 @@ public class bigMagicWand extends weapon {
         this.manaUsed = 5;
         this.durability = 100;
         this.attackSpeed = 15;
+        this.range = 20.0;
         damage.setPhysic(5);
         damage.setFire(0);
         damage.setMagic(25);

@@ -16,6 +16,7 @@ public abstract class weapon {
     protected int durability;
     protected int manaUsed;
     protected int attackSpeed;
+    protected double range;
     protected BufferedImage[] weaponSprites;
     public enum State {IDLE, ATTACK};
     private State currentState = State.IDLE;
@@ -101,6 +102,10 @@ public abstract class weapon {
 
     // Getters pour l'état, les sprites, la mana, la durabilité, les dégats, le nom et l'état de l'arme
 
+
+    public double getRange() {
+        return this.range;
+    }
     public State getState() {
         return currentState;
     }
