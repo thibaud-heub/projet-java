@@ -26,7 +26,7 @@ public class KeyPanel extends JPanel {
 
     private void loadImage() {
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/clavier.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheHaut.png");
             toucheHaut = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,13 +50,13 @@ public class KeyPanel extends JPanel {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheA.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheGauche.png");
             toucheA = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/escape.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheGauche.png");
             escape = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,24 +67,35 @@ public class KeyPanel extends JPanel {
         loadImage();
         super.paintComponent(g);
         if (toucheHaut != null) {
-            g.drawImage(toucheHaut, 5, 15, this); 
+            g.drawImage(toucheHaut, 72, 5, this); 
         }
-        if (toucheBas != null) {
-            g.drawImage(toucheBas, 5, 15, this); 
-        }
-        if (toucheGauche != null) {
-            g.drawImage(toucheGauche, 5, 15, this); 
-        }
-        if (toucheDroite != null) {
-            g.drawImage(toucheDroite, 5, 15, this); 
-        }
-        if (toucheA != null) {
-            g.drawImage(toucheA, 55, 15, this); 
-        }
-        if (escape != null) {
-            g.drawImage(escape, 105, 15, this); 
-        }
+        g.drawString("Aller en haut", 93, 17);
 
-        g.drawString("Avancer, Reculer, Aller à droite, Aller à gauche", 5, 15);
+        if (toucheBas != null) {
+            g.drawImage(toucheBas, 193, 5, this); 
+        }
+        g.drawString("Aller en bas", 213, 17);
+
+        if (toucheGauche != null) {
+            g.drawImage(toucheGauche, 312, 5, this); 
+        }
+        g.drawString("Aller à gauche", 333, 17);
+
+        if (toucheDroite != null) {
+            g.drawImage(toucheDroite, 442, 5, this); 
+        }
+        g.drawString("Aller à droite", 463, 17);
+
+        if (toucheA != null) {
+            g.drawImage(toucheA, 557, 5, this); 
+        }
+        g.drawString("Attaquer", 578, 17);
+
+        if (escape != null) {
+            g.drawImage(escape, 650, 5, this); 
+        }
+        g.drawString("Quitter", 670, 17);
+
+        //g.drawString("Avancer, Reculer, Aller à droite, Aller à gauche", 5, 15);
     }
 }
