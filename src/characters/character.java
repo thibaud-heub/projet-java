@@ -81,14 +81,11 @@
                     // Attaque le monstre
                     
                     for (Monster m : monster){
-                        System.out.println(this.name + " attaque " + m );
                         m.take_damage(weaponDamage);
                         // Logique pour vérifier si le monstre est morte
                         // Si le monstre est mort, récupération d'un certain XP en fonction du niveau du monstre
                         if (m.isDead() != 0){
-                            System.out.println(m + " est mort");
                             m.setState(Monster.State.DEATH);
-                            System.out.println(m.getState());
                             this.littleLevel += m.isDead();
                             increaseLittleLevel();
                         }
@@ -137,6 +134,7 @@
         public void increaseLittleLevel(){
             if (this.littleLevel >=100){
                 increaseLevel();
+                this.littleLevel = 0;
             }
         }
 
@@ -147,13 +145,13 @@
         public void increaseLevel() {
             this.level += 1.0;
             // Récupération des dégats et résistances du player
-            typeDamage damage = this.getDamage();
+            typeDamage damage = chosenWeapon.getDamage();
             typeDamage resistance = this.getResistance();
             // Augmentation de 1.2 les dégats et résistances
             damage.increaseDamage(1.2);
             resistance.increaseDamage(1.2);
             // Attribution des nouveaux dégats et résistances 
-            this.setDamage(damage);
+            chosenWeapon.setDamage(damage);
             this.setResistance(resistance);
         }
 
@@ -225,6 +223,9 @@
 
         // Getters pour les sprites, l'état, l'inventaire, le nom, le niveau, les coordonnées, l'arme et la mana
 
+        public double getLittleLevel(){
+            return this.littleLevel;
+        }
         public double getX()
         {
             return this.X;

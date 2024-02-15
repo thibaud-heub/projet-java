@@ -6,7 +6,8 @@ import java.io.InputStream;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.InputStream;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 
 
 
@@ -17,12 +18,25 @@ public class KeyPanel extends JPanel {
     private BufferedImage toucheGauche;
     private BufferedImage toucheA;
     private BufferedImage escape;
+    private Font customFont;
+    
     
 
     public KeyPanel() {
         setPreferredSize(new Dimension(800, 25)); 
     }
 
+    private void loadFont(){
+        try {
+            customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("../ressources/font/04B_03__.TTF"))
+                             .deriveFont(12f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(customFont);
+        } catch (Exception e) {
+            e.printStackTrace();
+            customFont = new Font("SansSerif", Font.PLAIN, 24); // Utilisez une police par défaut si la police personnalisée n'est pas chargée
+        }
+    }
 
     private void loadImage() {
         try {
@@ -50,13 +64,13 @@ public class KeyPanel extends JPanel {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheGauche.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheA.png");
             toucheA = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheGauche.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/escape.png");
             escape = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,7 +79,15 @@ public class KeyPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         loadImage();
+        loadFont();
         super.paintComponent(g);
+
+        // Mettre la police
+        if (customFont != null) {
+            g.setFont(customFont);
+        }
+
+        // Mettre les images
         if (toucheHaut != null) {
             g.drawImage(toucheHaut, 72, 5, this); 
         }
@@ -79,12 +101,12 @@ public class KeyPanel extends JPanel {
         if (toucheGauche != null) {
             g.drawImage(toucheGauche, 312, 5, this); 
         }
-        g.drawString("Aller à gauche", 333, 17);
+        g.drawString("Aller a gauche", 333, 17);
 
         if (toucheDroite != null) {
             g.drawImage(toucheDroite, 442, 5, this); 
         }
-        g.drawString("Aller à droite", 463, 17);
+        g.drawString("Aller a droite", 463, 17);
 
         if (toucheA != null) {
             g.drawImage(toucheA, 557, 5, this); 

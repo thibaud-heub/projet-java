@@ -99,6 +99,11 @@ public abstract class weapon {
         this.currentState = newState;
     }
 
+    public void setDamage(typeDamage newDamage){
+        this.damage = newDamage;
+    }
+
+
 
     // Getters pour l'état, les sprites, la mana, la durabilité, les dégats, le nom et l'état de l'arme
 

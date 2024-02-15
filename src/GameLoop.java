@@ -31,13 +31,17 @@ public class GameLoop {
         double rfire = resistance.getFire();
         double rphysic = resistance.getPhysic();
         double rmagic = resistance.getMagic();
-        int speed = gamePanel.getCurrentCharacter().getSpeed();
+        double littleLevel = gamePanel.getCurrentCharacter().getLittleLevel();
 
         // Mettre à jour le HUD
-        hudPanel.updateHUD(PV, mana, XP, rfire, rphysic, rmagic, dfire, dphysic, dmagic, speed);
+        hudPanel.updateHUD(PV, mana, XP, rfire, rphysic, rmagic, dfire, dphysic, dmagic, littleLevel);
 
         // Mettre à jour les entités
         gamePanel.updateGame();
+    }
+
+    public void stop() {
+        timer.stop();
     }
 
     public void handleKeyPress(int keyCode) {

@@ -59,10 +59,7 @@
                     sprites = currentMonster.getIdleSprites();
                     break;
             }
-
-            if(currentState == Monster.State.DEATH){
-                System.out.println("spriteIndex : " + spriteIndex);
-            }
+            
             int adjustedSpriteIndex = spriteIndex % sprites.length;
             Image sprite = sprites[adjustedSpriteIndex];
 
