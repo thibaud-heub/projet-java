@@ -8,7 +8,7 @@ import characters.abstractFactory.monsterType.Monster;
 public class EliteOgre extends Monster{
     public EliteOgre () 
     {
-       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Ogre")), 40);
+       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Ogre")), 40, 0.8);
 
     // Chemins des sprites
     String[] idlePaths = {
@@ -31,6 +31,7 @@ public class EliteOgre extends Monster{
         "../../../../../ressources/sprites/Monster/EliteOgre/Death_1.png",
         "../../../../../ressources/sprites/Monster/EliteOgre/Death_2.png",
         "../../../../../ressources/sprites/Monster/EliteOgre/Death_3.png",
+        "../../../../../ressources/sprites/Monster/EliteOgre/Death_4.png",
     };
     setDeathSprites(DeathPaths);
 
@@ -38,6 +39,9 @@ public class EliteOgre extends Monster{
         "../../../../../ressources/sprites/Monster/EliteOgre/Attack_1.png",
         "../../../../../ressources/sprites/Monster/EliteOgre/Attack_2.png",
         "../../../../../ressources/sprites/Monster/EliteOgre/Attack_3.png",
+        "../../../../../ressources/sprites/Monster/EliteOgre/Attack_4.png",
+        "../../../../../ressources/sprites/Monster/EliteOgre/Attack_5.png",
+        "../../../../../ressources/sprites/Monster/EliteOgre/Attack_6.png"
     };
     setAttackSprites(attackPaths);
     };

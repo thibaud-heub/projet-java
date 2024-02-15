@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import java.util.ArrayList;
 import java.util.List;
 import items.*;
 
@@ -53,9 +54,9 @@ public abstract class character extends entity {
     }
 
     protected String name;
-    protected int level = 1;
-    protected int littleLevel = 0;
-    protected int mana = 100;
+    protected double level = 1.0;
+    protected double littleLevel = 0;
+    protected double mana = 100.0;
     protected int speed;
 
     // Méthodes abstraites implémentées dans les classes filles
@@ -64,62 +65,70 @@ public abstract class character extends entity {
     /**
      * Décrémente la mana, la durabilité en fonction de l'arme utilisée 
      * Attaque le monstre s'il est dans la range
-     * @param Monster Le monstre attaqué
+     * @param monsters Le tableau de monstres 
      * @param weaponUsed  L'arme utilisée
      */
-    public void attack() {
+    public boolean attack(Monster[] monsters) {
 
-        // Vérifier si l'arme est cassée
-        if(!chosenWeapon.getIsWeaponBroken()){
-            if (this.mana >= chosenWeapon.getManaUsed()) {
-                // Déduit le mana utilisé pour l'attaque
-                this.mana -= chosenWeapon.getManaUsed(); 
-                // Intégrer les dégâts de l'arme
-                typeDamage weaponDamage = chosenWeapon.getDamage();
-
+        if (this.mana >= chosenWeapon.getManaUsed()) {
+            // Déduit le mana utilisé pour l'attaque
+            this.mana -= chosenWeapon.getManaUsed(); 
+            // Intégrer les dégâts de l'arme
+            typeDamage weaponDamage = chosenWeapon.getDamage();
+            // Vérifier s'il y a un Monster dans la range du joueur
+            if(monsterInRange(monsters) != null){
+                List<Monster> monster = monsterInRange(monsters);
+                // Attaque le monstre
                 
-                // // Vérifier s'il y a un Monster dans la range du joueur
-                // if(monsterInRange() != null){
-                //     Monster monster = monsterInRange();
-                //     // Attaque le monstre
-                //     Monster.take_damage(weaponDamage);
-                //     // Diminue la durabilité de l'arme après l'attaque
-                //     chosenWeapon.decreaseDurability(1); 
-                //     // Logique pour vérifier si le monstre est morte
-                //     // Si le monstre est mort, récupération d'un certain XP en fonction du niveau du monstre
-                //     if (Monster.isDead() != 0){
-                //         this.littleLevel += Monster.isDead();
-                //         increaseLittleLevel();
-                //     }
-                // }
-                // else{
-                //     System.out.println("Il n'y a pas de monstre dans la range");
-                // }
-
+                for (Monster m : monster){
+                    System.out.println(this.name + " attaque " + m );
+                    m.take_damage(weaponDamage);
+                    // Logique pour vérifier si le monstre est morte
+                    // Si le monstre est mort, récupération d'un certain XP en fonction du niveau du monstre
+                    if (m.isDead() != 0){
+                        System.out.println(m + " est mort");
+                        m.setState(Monster.State.DEATH);
+                        System.out.println(m.getState());
+                        this.littleLevel += m.isDead();
+                        increaseLittleLevel();
+                    }
+                }
                 
-            } else {
-                System.out.println(this.name + " n'a pas assez de mana pour attaquer avec " + chosenWeapon.getName());
-                // Logique pour plus de mana, il faut empêcher l'attaque
+                return true;
             }
+            else{
+                System.out.println("Il n'y a pas de monstre dans la range");
+                // Il n'y a pas de monstre mais on attaque quand même
+                return true;
+            }
+
+            
+        } else {
+            System.out.println(this.name + " n'a pas assez de mana pour attaquer avec " + chosenWeapon.getName());
+            // Logique pour plus de mana, il faut empêcher l'attaque, on retourne faux
+            return false;
         }
-        else{
-            System.out.println("L'arme est cassée");
-            // Logique pour l'arme cassée, il faut faire disparaître l'épée
-        }
-    }  
+    }
 
     /**
      * Vérification de la présence d'un monstre dans la range du joueur
      * @return Monster : Le monstre s'il y en a un, sinon null
      */
-    // private Monster monsterInRange(){
-    //     if(un monstre est dans la range du joueur){
-
-    //     }
-    //     else{
-    //       return null;
-    //     }
-    // }
+    private List<Monster> monsterInRange(Monster[] monsters) {
+        double attackRange = chosenWeapon.getRange();
+        List<Monster> targets = new ArrayList<>();
+    
+        for (Monster monster : monsters) {
+            if(monster != null){
+                double distance = Math.sqrt(Math.pow(monster.getX() - this.X, 2) + Math.pow(monster.getY() - this.Y, 2));
+                if (distance <= attackRange) {
+                    targets.add(monster);
+                }
+            }
+        }
+    
+        return targets; // Retourne les monstre dans la range, ou null si aucun
+    }
 
 
     /**
@@ -136,7 +145,7 @@ public abstract class character extends entity {
      * Augmente en même temps sa résistance et ses dégats, de 1.2
      */
     public void increaseLevel() {
-        this.level += 1;
+        this.level += 1.0;
         // Récupération des dégats et résistances du player
         typeDamage damage = this.getDamage();
         typeDamage resistance = this.getResistance();
@@ -156,6 +165,10 @@ public abstract class character extends entity {
         this.X = x;
         this.Y = y;
     }
+
+    public void setChosenWeapon(weapon weapon) {
+        this.chosenWeapon = weapon;
+    }   
 
 
    protected void setIdleSprites(String[] paths) {
@@ -203,9 +216,14 @@ public abstract class character extends entity {
         this.currentState = newState;
     }
 
+    public void setMana(double newMana){
+        if(this.mana < 100.0){
+            this.mana += newMana;
+        }
+    }
 
-    // Getters pour les sprites, l'état, l'inventaire, le nom, le niveau, les coordonnées
 
+    // Getters pour les sprites, l'état, l'inventaire, le nom, le niveau, les coordonnées, l'arme et la mana
 
     public double getX()
     {
@@ -237,7 +255,7 @@ public abstract class character extends entity {
         return name;
     }
 
-    public int getLevel() {
+    public double getLevel() {
         return level;
     }
 
@@ -247,6 +265,10 @@ public abstract class character extends entity {
 
     public weapon getWeapon(){
         return chosenWeapon;
+    }
+
+    public double getMana(){
+        return mana;
     }
 }
 

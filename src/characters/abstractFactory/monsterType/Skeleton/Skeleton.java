@@ -9,7 +9,7 @@ public class Skeleton extends Monster {
     
     public Skeleton () 
     {
-       super(monsterType.COMMON, monsterStats.getStats("Skeleton"), 8);
+       super(monsterType.COMMON, monsterStats.getStats("Skeleton"), 8, 1.1);
 
     // Chemins des sprites    
     String[] idlePaths = {

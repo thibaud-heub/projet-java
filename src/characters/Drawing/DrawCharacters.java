@@ -57,7 +57,8 @@ public class DrawCharacters {
                 break;
         }
 
-        Image sprite = sprites[spriteIndex];
+        int adjustedSpriteIndex = spriteIndex % sprites.length;
+        Image sprite = sprites[adjustedSpriteIndex];
 
         // Dessine le personnage
         int drawX = xPos;
