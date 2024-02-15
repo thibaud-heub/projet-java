@@ -5,7 +5,7 @@ public class Boss extends Monster{
     
     public Boss()
     {
-        super(monsterType.BOSS, monsterStats.getStats("Boss"), 100, 1);
+        super(monsterType.BOSS, monsterStats.getStats("Boss"), 100, 1, 16);
 
         // Chemins des sprites
         String[] idlePaths = {

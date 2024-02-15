@@ -43,13 +43,15 @@ public abstract class Monster extends entity {
     private Random random = new Random();
     private Direction direction = chooseRandomDirection();
     private boolean runningLeft;
+    private int adjustedWidth;
+    private double maxPV;
 
 /**
  * Constructeur de la classe monstre, permet de créer un monstre en définissant tous ses paramètres
  * @param monsterStats : Les stats du monstre que l'on souhaite créer, issu de la classe monsterStats
  * @param Type : Type du monstre : commun ou elite
  */
-    public Monster (monsterType Type, Map<String, Integer> monsterStats, int difficulty, double speed)
+    public Monster (monsterType Type, Map<String, Integer> monsterStats, int difficulty, double speed, int adjustedWidth)
     {
         super(
             monsterStats.get("PV"), 
@@ -62,8 +64,10 @@ public abstract class Monster extends entity {
         );
         this.monsterType = Type;
         this.attackSpeed = monsterStats.get("AttackSpeed");
+        this.maxPV = monsterStats.get("PV");
         this.difficulty = difficulty;
         this.speed = speed;
+        this.adjustedWidth = adjustedWidth;
     }
 
     /**
@@ -166,6 +170,12 @@ public abstract class Monster extends entity {
 
     // Getters pour obtenir les sprites, l'id, les coordonnées et l'état du monstre
 
+
+    public double getMaxPV()
+    {
+        return maxPV;
+
+    }
     public long getLastAttackTime() {
         return lastAttackTime;
     }
@@ -197,6 +207,10 @@ public abstract class Monster extends entity {
     public double getSpeed()
     {
         return this.speed;
+    }
+
+    public int getAdjustedWidth() {
+        return adjustedWidth;
     }
 
     public BufferedImage[] getIdleSprites() {
@@ -252,20 +266,18 @@ public abstract class Monster extends entity {
         double dy = playerY - monsterY;
 
         double distance = Math.sqrt(dx * dx + dy * dy);
-        if(distance > 9){
-            // Normaliser le vecteur de direction pour s'assurer que le monstre se déplace à une vitesse constante
-            double normalizedDx = dx / distance;
-            double normalizedDy = dy / distance;
-            
-            // Définir une vitesse de déplacement pour le monstre
-            double speed = monster.getSpeed(); 
-            
-            // Calculer les nouvelles positions basées sur la direction et la vitesse
-            double newX = monsterX + normalizedDx * speed ;
-            double newY = monsterY + normalizedDy * speed;
-            
-            monster.setXY(newX, newY);
-        }
+        // Normaliser le vecteur de direction pour s'assurer que le monstre se déplace à une vitesse constante
+        double normalizedDx = dx / distance;
+        double normalizedDy = dy / distance;
+        
+        // Définir une vitesse de déplacement pour le monstre
+        double speed = monster.getSpeed(); 
+        
+        // Calculer les nouvelles positions basées sur la direction et la vitesse
+        double newX = monsterX + normalizedDx * speed ;
+        double newY = monsterY + normalizedDy * speed;
+        
+        monster.setXY(newX, newY);
     }
     
 

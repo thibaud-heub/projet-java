@@ -11,6 +11,7 @@ import weapons.Drawing.*;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Random;
+import java.awt.Color;
 
 
 public class GamePanel extends JPanel implements KeyListener {
@@ -86,9 +87,28 @@ public class GamePanel extends JPanel implements KeyListener {
         // draw the monsters
         for (int i = 0; i < monsters.length; i++) {
             if(monsters[i]!=null){
-                monsters[i].IA(monsters[i], currentCharacter);
                 monsterXPositions[i] = (int) monsters[i].getX();
                 monsterYPositions[i] = (int) monsters[i].getY();
+
+                // Dessiner la barre de vie
+                int healthWidth = 30; // Largeur de la barre de vie
+                int healthHeight = 5; // Hauteur de la barre de vie
+                int healthX =  monsterXPositions[i] - (healthWidth / 2) + monsters[i].getAdjustedWidth(); 
+                int healthY = monsterYPositions[i] - 5; //Barre un peu au-dessus du monstre
+
+                double healthPercentage = monsters[i].getPV() / monsters[i].getMaxPV();
+                int currentHealthWidth = (int) (healthWidth * healthPercentage);
+
+                // Dessiner le fond de la barre de vie
+                g.setColor(Color.RED);
+                g.fillRect(healthX, healthY, healthWidth, healthHeight);
+
+                // Dessiner la barre de vie actuelle
+                g.setColor(Color.GREEN);
+                g.fillRect(healthX, healthY, currentHealthWidth, healthHeight);
+
+                monsters[i].IA(monsters[i], currentCharacter);
+                
                 DrawMonsters monsterDrawer = new DrawMonsters(monsters[i], monsterXPositions[i], monsterYPositions[i], monsterSpriteIndex[i], monsters[i].getRunningLeft(), this);
                 monsterDrawer.draw(g);
             }

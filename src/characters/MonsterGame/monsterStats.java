@@ -11,7 +11,7 @@ import java.util.Random;
 
 public final class monsterStats {
     // Pourcentage de supériorité des monstres élites, les monstres élites ont des stats n fois supérieur à celle des monstres communs
-    static double elite = 4.0;
+    static double elite = 2.0;
 
     static double probaElite =0.2;
     static double upProbaElite = 0.05;
@@ -27,7 +27,7 @@ public final class monsterStats {
     private static Map<String, Double> upgrade = new HashMap<>();
 
     static{
-        upgrade.put("PV", 4.0);
+        upgrade.put("PV", 0.0);
         upgrade.put("AttackSpeed", 0.0);
 
         upgrade.put("FireResistance", 1.2);
@@ -240,7 +240,7 @@ public final class monsterStats {
         Map<String, Integer> eliteMonster = new HashMap<>();
         for (String cle : monster.keySet())
         {
-            if(!cle.equals("AttackSpeed")){
+            if(!cle.equals("AttackSpeed") && !cle.equals("PV")){
                 int up = (int) Math.round(monster.get(cle)*elite);
                 eliteMonster.put(cle, up);
             }

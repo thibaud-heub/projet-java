@@ -12,7 +12,7 @@ public class Gobelin extends Monster{
  */    
     public Gobelin () 
     {
-       super(monsterType.COMMON, monsterStats.getStats("Gobelin"), 10, 1.2);
+       super(monsterType.COMMON, monsterStats.getStats("Gobelin"), 10, 1.2,8);
 
        String[] idlePaths = {
         "../../../../../ressources/sprites/Monster/Goblin/Idle_1.png",
