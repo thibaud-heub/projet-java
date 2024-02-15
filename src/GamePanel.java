@@ -40,6 +40,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private boolean deathAnimationPlayed = false;
     private int AnimationDelay = 0;
     private int AnimationMonsterDelay = 0;
+    private int AnimationMonsterDeathDelay = 0;
     private boolean isAttacking = false;
     private final int DEATH_ANIMATION_SPEED = 8; // plus c'est grand plus c'est lent
     private final int ANIMATION_SPEED = 3;
@@ -85,8 +86,6 @@ public class GamePanel extends JPanel implements KeyListener {
         // draw the monsters
         for (int i = 0; i < monsters.length; i++) {
             if(monsters[i]!=null){
-                // System.out.println(monsters[0]);
-                // System.out.println(monsters[i].getState());
                 monsters[i].IA(monsters[i], currentCharacter);
                 monsterXPositions[i] = (int) monsters[i].getX();
                 monsterYPositions[i] = (int) monsters[i].getY();
@@ -259,7 +258,6 @@ public class GamePanel extends JPanel implements KeyListener {
             
             for (int i = 0; i < monsters.length; i++){
                 if(monsters[i] != null){
-                    System.out.println(monsters[i].getState());
                     switch(monsters[i].getState()) {
                         default:
                         case WALK:
@@ -273,13 +271,11 @@ public class GamePanel extends JPanel implements KeyListener {
                             break;
 
                         case DEATH:
-                            System.out.println("état : mort");
-                            System.out.println(monsterSpriteIndex[i]);
                             if(monsterSpriteIndex[i] < monsters[i].getDeathSprites().length - 1){
-                                // if(AnimationMonsterDelay++ >= DEATH_ANIMATION_SPEED){
-                                //     AnimationMonsterDelay = 0;
+                                if(AnimationMonsterDeathDelay++ >= DEATH_ANIMATION_SPEED){
+                                    AnimationMonsterDeathDelay = 0;
                                     monsterSpriteIndex[i] = monsterSpriteIndex[i] + 1;
-                                //}
+                                }
                             }else{
                                 // Logique pour remove le monstre du tableau de monstres et du tableau des index
                                 Monster[] arr_new = new Monster[monsters.length-1];
