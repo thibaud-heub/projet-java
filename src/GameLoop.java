@@ -1,4 +1,5 @@
 import javax.swing.Timer;
+import characters.*;
 
 public class GameLoop {
     private Timer timer;
@@ -19,8 +20,21 @@ public class GameLoop {
 
     private void update() {
     
+        double PV = gamePanel.getCurrentCharacter().getPV();
+        double mana = gamePanel.getCurrentCharacter().getMana();
+        double XP = gamePanel.getCurrentCharacter().getLevel();
+        typeDamage degats = gamePanel.getCurrentWeapon().getDamage();
+        typeDamage resistance = gamePanel.getCurrentCharacter().getResistance();
+        double dfire = degats.getFire();
+        double dphysic = degats.getPhysic();
+        double dmagic = degats.getMagic();
+        double rfire = resistance.getFire();
+        double rphysic = resistance.getPhysic();
+        double rmagic = resistance.getMagic();
+        int speed = gamePanel.getCurrentCharacter().getSpeed();
+
         // Mettre à jour le HUD
-        hudPanel.updateHUD(gamePanel.getCurrentCharacter().getPV(), gamePanel.getCurrentCharacter().getMana(), gamePanel.getCurrentCharacter().getLevel());
+        hudPanel.updateHUD(PV, mana, XP, rfire, rphysic, rmagic, dfire, dphysic, dmagic, speed);
 
         // Mettre à jour les entités
         gamePanel.updateGame();

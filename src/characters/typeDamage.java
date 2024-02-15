@@ -16,7 +16,7 @@ public class typeDamage {
      * @param physic : Dégâts physiques
      * @param magic : Dégâts magiques
      */
-    public typeDamage (int fire, int physic, int magic)
+    public typeDamage (double fire, double physic, double magic)
     {
         this.fire = fire;
         this.physic = physic;

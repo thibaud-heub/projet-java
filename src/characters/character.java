@@ -45,7 +45,7 @@
          * @param mana Mana du personnage
          * @param speed Vitesse du personnage
          */
-        public character(int PV, int Rfire, int Rphysic, int Rmagic, int Dfire, int Dphysic, int Dmagic, String name, int speed) {
+        public character(double PV, int Rfire, int Rphysic, int Rmagic, int Dfire, int Dphysic, int Dmagic, String name, int speed) {
             // Appel du constructeur de la classe Entity avec les paramètres nécessaires
             super(PV, Rfire, Rphysic, Rmagic, Dfire, Dphysic, Dmagic);
 
