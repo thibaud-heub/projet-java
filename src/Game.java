@@ -17,7 +17,7 @@ public class Game extends JFrame {
         GamePanel gamePanel = new GamePanel(hudPanel, chosenCharacter, chosenWeapon);
 
         add(gamePanel, BorderLayout.CENTER);
-        add(hudPanel, BorderLayout.NORTH);
+        add(hudPanel, BorderLayout.WEST);
 
         setVisible(true);
         gamePanel.initializeMonsterPositions();
