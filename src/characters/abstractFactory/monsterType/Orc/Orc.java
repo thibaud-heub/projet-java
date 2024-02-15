@@ -8,7 +8,7 @@ import characters.abstractFactory.monsterType.Monster;
 public class Orc extends Monster {
     public Orc () 
     {
-       super(monsterType.COMMON, monsterStats.getStats("Orc"), 10, 0.9);
+       super(monsterType.COMMON, monsterStats.getStats("Orc"), 10, 0.9,8);
 
     // Chemins des sprites    
     String[] idlePaths = {

@@ -9,7 +9,7 @@ public class EliteGobelin extends Monster{
 
     public EliteGobelin () 
     {
-       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Gobelin")), 20, 1.2);
+       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Gobelin")), 20, 1.2,8);
 
        String[] idlePaths = {
         "../../../../../ressources/sprites/Monster/EliteGoblin/Idle_1.png",

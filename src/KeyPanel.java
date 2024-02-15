@@ -96,6 +96,5 @@ public class KeyPanel extends JPanel {
         }
         g.drawString("Quitter", 670, 17);
 
-        //g.drawString("Avancer, Reculer, Aller à droite, Aller à gauche", 5, 15);
     }
 }
