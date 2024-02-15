@@ -2,9 +2,6 @@
     import java.awt.Graphics;
     import java.awt.Dimension;
 
-    import java.awt.Color;
-
-
     public class HUDPanel extends JPanel {
         private int health;
         private int mana;
@@ -41,8 +38,6 @@
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-            // g.setColor(Color.RED);
-            // g.fillRect(0, 0, getWidth(), getHeight());
             g.drawString("Santé: " + health, 5, 10);
             g.drawString("Mana: " + mana, 5, 25);
             g.drawString("XP: " + XP, 5, 40);

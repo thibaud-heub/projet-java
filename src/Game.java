@@ -14,10 +14,12 @@ public class Game extends JFrame {
         weapon chosenWeapon = new katana();
 
         HUDPanel hudPanel = new HUDPanel();
+        KeyPanel keyPanel = new KeyPanel();
         GamePanel gamePanel = new GamePanel(hudPanel, chosenCharacter, chosenWeapon);
 
         add(gamePanel, BorderLayout.CENTER);
         add(hudPanel, BorderLayout.WEST);
+        add(keyPanel, BorderLayout.SOUTH);
 
         setVisible(true);
         gamePanel.initializeMonsterPositions();
