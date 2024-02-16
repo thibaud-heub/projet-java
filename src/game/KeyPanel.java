@@ -1,3 +1,4 @@
+package game;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -28,7 +29,7 @@ public class KeyPanel extends JPanel {
 
     private void loadFont(){
         try {
-            customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("../ressources/font/04B_03__.TTF"))
+            customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/ressources/font/04B_03__.TTF"))
                              .deriveFont(12f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
@@ -40,37 +41,37 @@ public class KeyPanel extends JPanel {
 
     private void loadImage() {
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheHautWhite.png");
+            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/toucheHautWhite.png");
             toucheHaut = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheBasWhite.png");
+            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/toucheBasWhite.png");
             toucheBas = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheDroiteWhite.png");
+            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/toucheDroiteWhite.png");
             toucheDroite = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheGaucheWhite.png");
+            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/toucheGaucheWhite.png");
             toucheGauche = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheAWhite.png");
+            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/toucheAWhite.png");
             toucheA = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/escapeWhite.png");
+            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/escapeWhite.png");
             escape = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();

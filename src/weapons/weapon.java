@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import characters.*;
+import entity.*;
 
 /**
  * Classe abstraite pour les armes

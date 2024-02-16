@@ -20,18 +20,25 @@ public class TileManager {
         try {
             tiles[0] = new Tile(ImageIO.read(getClass().getResourceAsStream("/ressources/dungeon/floor.png")), false);
             for (int i = 1; i < 10; i++) {
-                tiles[i] = new Tile(ImageIO.read(getClass().getResourceAsStream("/ressources/dungeon/wall_" + i + ".png")), false);
+                tiles[i] = new Tile(
+                        ImageIO.read(getClass().getResourceAsStream("/ressources/dungeon/wall_" + i + ".png")), false);
             }
-            tiles[10] = new Tile(ImageIO.read(getClass().getResourceAsStream("/ressources/dungeon/floor_ladder.png")), false);
+            tiles[10] = new Tile(ImageIO.read(getClass().getResourceAsStream("/ressources/dungeon/floor_ladder.png")),
+                    false);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void draw(Graphics g) {
-        g.drawImage(tiles[0].getImage(), 0, 0, 32, 32, null);
-        g.drawImage(tiles[1].getImage(), 32, 0, 32, 32, null);
-        g.drawImage(tiles[10].getImage(), 64, 0, 32, 32, null);
+        for (int i = 0; i < 28; i++) {
+            for (int j = 0; j < 20; j++) {
+                int tileNum = gp.getDungeon().getCurrentRoom().getMapTileNum(i, j);
+                if (tileNum >= 0) {
+                    g.drawImage(tiles[tileNum].getImage(), i * 32, j * 32, 32, 32, null);
+                }
+            }
+        }
     }
 
     public GamePanel getGp() {

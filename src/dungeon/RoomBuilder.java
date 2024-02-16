@@ -2,7 +2,7 @@ package dungeon;
 
 import java.util.Random;
 
-import characters.abstractFactory.monsterType.Monster;
+import entity.abstractFactory.monsterType.Monster;
 
 public class RoomBuilder {
     private Room result;
@@ -147,15 +147,20 @@ public class RoomBuilder {
     }
 
     public void buildMonsters(Monster[] monsters, boolean boss) {
-        for (int i = 0; i < monsters.length; i++) {
-            int x, y;
-            do {
-                x = new Random().nextInt(896);
-                y = new Random().nextInt(640);
-            } while (result.getMapTileNum(x / 32, y / 32) != 0);
-            monsters[i].setXY(x, y);
+        if (boss) {
+            monsters[0].setXY(672, 480);
+            result.setMonsters(new Monster[] {monsters[0]});
+        } else {
+            for (int i = 0; i < monsters.length; i++) {
+                int x, y;
+                do {
+                    x = new Random().nextInt(896);
+                    y = new Random().nextInt(640);
+                } while (result.getMapTileNum(x / 32, y / 32) != 0);
+                monsters[i].setXY(x, y);
+            }
+            result.setMonsters(monsters);
         }
-        result.setMonsters(monsters);
     }
 
     public void buildPlayerSpawn() {
@@ -166,7 +171,7 @@ public class RoomBuilder {
             x = new Random().nextInt(448);
             y = new Random().nextInt(640);
             for (Monster monster : result.getMonsters()) {
-                if (x/32 == monster.getX()/32 || y/32 == monster.getY()/32) {
+                if (x / 32 == monster.getX() / 32 || y / 32 == monster.getY() / 32) {
                     onMonster = true;
                 }
             }
@@ -176,8 +181,8 @@ public class RoomBuilder {
     }
 
     public void buildPlayerSpawn(int x, int y) {
-        result.setPlayerSpawnX(x);
-        result.setPlayerSpawnY(y);
+        result.setPlayerSpawnX(x*32);
+        result.setPlayerSpawnY(y*32);
     }
 
     public Room getResult() {
