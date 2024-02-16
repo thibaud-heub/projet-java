@@ -1,3 +1,4 @@
+package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -14,6 +15,7 @@ import characters.Drawing.DrawCharacters;
 import characters.Drawing.DrawMonsters;
 import characters.MonsterGame.monsterManager;
 import characters.abstractFactory.monsterType.Monster;
+import tile.TileManager;
 import weapons.weapon;
 import weapons.Drawing.DrawWeapons;
 
@@ -24,6 +26,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private character currentCharacter;
     private weapon currentWeapon;
     private Monster[] monsters;
+    private TileManager tileM = new TileManager(this);
 
     private int xPos = 100;
     private int yPos = 100;
@@ -83,6 +86,7 @@ public class GamePanel extends JPanel implements KeyListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        tileM.draw(g);
 
         if (monsterXPositions == null || monsterYPositions == null) {
             initializeMonsterPositions();
