@@ -1,32 +1,33 @@
 package game;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import characters.character;
-import characters.Drawing.DrawCharacters;
-import characters.Drawing.DrawMonsters;
-import characters.MonsterGame.monsterManager;
-import characters.abstractFactory.monsterType.Monster;
+import dungeon.Dungeon;
+import dungeon.Room;
+import entity.character;
+import entity.Drawing.DrawCharacters;
+import entity.Drawing.DrawMonsters;
+import entity.abstractFactory.monsterType.Monster;
 import tile.TileManager;
 import weapons.weapon;
 import weapons.Drawing.DrawWeapons;
-
 
 public class GamePanel extends JPanel implements KeyListener {
     private GameLoop gameLoop;
     // private HUDPanel hudPanel;
     private character currentCharacter;
     private weapon currentWeapon;
+    private Dungeon dungeon;
     private Monster[] monsters;
-    private TileManager tileM = new TileManager(this);
+    private TileManager tileM;
 
     private int xPos = 100;
     private int yPos = 100;
@@ -34,11 +35,9 @@ public class GamePanel extends JPanel implements KeyListener {
     private int[] monsterXPositions;
     private int[] monsterYPositions;
 
-
     private int spriteIndex = 0;
     private int weaponSpriteIndex = 0;
     private int monsterSpriteIndex[];
-
 
     private boolean runningLeft = false;
     private int weaponYAdjustment = 0;
@@ -58,25 +57,21 @@ public class GamePanel extends JPanel implements KeyListener {
     private int speed;
     private Set<Integer> pressedKeys = new HashSet<>();
 
-
-
     public GamePanel(HUDPanel hudPanel, character currentCharacter, weapon currentWeapon) {
         this.currentCharacter = currentCharacter;
         this.currentWeapon = currentWeapon;
         // this.hudPanel = hudPanel;
-        
+
+        setBackground(Color.BLACK);
+        dungeon = new Dungeon(7);
+        tileM = new TileManager(this);
         currentState = currentCharacter.getState();
         speed = currentCharacter.getSpeed();
         attackSpeed = currentWeapon.getSpeedAttack();
         currentWeaponState = currentWeapon.getState();
         currentCharacter.setChosenWeapon(currentWeapon);
-        monsterManager manager = new monsterManager();
-        monsters = manager.monstersLevel(false);
-        monsterSpriteIndex = new int[monsters.length];
-        for (int i = 0; i < monsters.length; i++) {
-            monsterSpriteIndex[i] = 0;
-        }
-        
+        setMonsters(dungeon.getCurrentRoom());
+
         setFocusable(true);
         addKeyListener(this);
         gameLoop = new GameLoop(this, hudPanel);
@@ -88,21 +83,17 @@ public class GamePanel extends JPanel implements KeyListener {
 
         tileM.draw(g);
 
-        if (monsterXPositions == null || monsterYPositions == null) {
-            initializeMonsterPositions();
-        }
-
         // draw the monsters
         for (int i = 0; i < monsters.length; i++) {
-            if(monsters[i]!=null){
+            if (monsters[i] != null) {
                 monsterXPositions[i] = (int) monsters[i].getX();
                 monsterYPositions[i] = (int) monsters[i].getY();
 
                 // Dessiner la barre de vie
                 int healthWidth = 30; // Largeur de la barre de vie
                 int healthHeight = 5; // Hauteur de la barre de vie
-                int healthX =  monsterXPositions[i] - (healthWidth / 2) + monsters[i].getAdjustedWidth(); 
-                int healthY = monsterYPositions[i] - 5; //Barre un peu au-dessus du monstre
+                int healthX = monsterXPositions[i] - (healthWidth / 2) + monsters[i].getAdjustedWidth();
+                int healthY = monsterYPositions[i] - 5; // Barre un peu au-dessus du monstre
 
                 double healthPercentage = monsters[i].getPV() / monsters[i].getMaxPV();
                 int currentHealthWidth = (int) (healthWidth * healthPercentage);
@@ -116,43 +107,47 @@ public class GamePanel extends JPanel implements KeyListener {
                 g.fillRect(healthX, healthY, currentHealthWidth, healthHeight);
 
                 monsters[i].IA(monsters[i], currentCharacter);
-                
-                DrawMonsters monsterDrawer = new DrawMonsters(monsters[i], monsterXPositions[i], monsterYPositions[i], monsterSpriteIndex[i], monsters[i].getRunningLeft(), this);
+
+                DrawMonsters monsterDrawer = new DrawMonsters(monsters[i], monsterXPositions[i], monsterYPositions[i],
+                        monsterSpriteIndex[i], monsters[i].getRunningLeft(), this);
                 monsterDrawer.draw(g);
             }
         }
-
 
         // draw the character
         currentCharacter.setXY(xPos, yPos);
         DrawCharacters drawer = new DrawCharacters(currentCharacter, xPos, yPos, spriteIndex, runningLeft, this);
         drawer.draw(g);
 
-
         // draw the weapon
-        if (!deathAnimationPlayed){
-            DrawWeapons weaponDrawer = new DrawWeapons(currentWeapon, currentCharacter, xPos, yPos, weaponSpriteIndex, runningLeft, weaponYAdjustment, this);
+        if (!deathAnimationPlayed) {
+            DrawWeapons weaponDrawer = new DrawWeapons(currentWeapon, currentCharacter, xPos, yPos, weaponSpriteIndex,
+                    runningLeft, weaponYAdjustment, this);
             weaponDrawer.draw(g);
-        }   
-
-        
+        }
 
     }
 
-    public void initializeMonsterPositions() {
-        Random random = new Random();
-        monsterXPositions = new int[monsters.length];
-        monsterYPositions = new int[monsters.length];
-        
-        for (int i = 0; i < monsters.length; i++) {
-            monsters[i].setXY(random.nextInt(getWidth() - 32), random.nextInt(getHeight() - 32));
+    public Dungeon getDungeon() {
+        return dungeon;
+    }
+
+    public void setMonsters(Room currentRoom) {
+        if (currentRoom != null) {
+            monsters = currentRoom.getMonsters();
+            monsterSpriteIndex = new int[monsters.length];
+            monsterXPositions = new int[monsters.length];
+            monsterYPositions = new int[monsters.length];
+            for (int i = 0; i < monsters.length; i++) {
+                monsterSpriteIndex[i] = 0;
+            }
         }
     }
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
         pressedKeys.add(e.getKeyCode());
-        updateState();   
+        updateState();
     }
 
     @Override
@@ -166,7 +161,16 @@ public class GamePanel extends JPanel implements KeyListener {
     }
 
     public void updateState() {
-        boolean isMoving = pressedKeys.stream().anyMatch(key -> key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_LEFT || key == KeyEvent.VK_UP || key == KeyEvent.VK_DOWN || key == KeyEvent.VK_A);
+        boolean isMoving = pressedKeys.stream().anyMatch(key -> key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_LEFT
+                || key == KeyEvent.VK_UP || key == KeyEvent.VK_DOWN || key == KeyEvent.VK_A);
+        if (pressedKeys.contains(KeyEvent.VK_ESCAPE)) {
+            System.exit(0);
+        }
+
+        if (pressedKeys.contains(KeyEvent.VK_N)) {
+            setMonsters(dungeon.nextRoom());
+        }
+
         if (pressedKeys.contains(KeyEvent.VK_A) && !isAttacking && currentCharacter.attack(monsters)) {
             // Commencer l'attaque
             isAttacking = true;
@@ -174,7 +178,7 @@ public class GamePanel extends JPanel implements KeyListener {
             currentWeapon.setState(weapon.State.ATTACK);
             weaponSpriteIndex = 0;
         }
-        
+
         if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
             // Déplacer vers la droite
             currentState = character.State.RUNNING;
@@ -216,120 +220,119 @@ public class GamePanel extends JPanel implements KeyListener {
     public void updateGame() {
         switch (currentState) {
             case RUNNING:
-            // running animation
-            if (AnimationDelay++ >= ANIMATION_SPEED) {
-                AnimationDelay = 0; 
-                spriteIndex = (spriteIndex + 1) % currentCharacter.getRunSprites().length;
-                // pour que l'arme bouge avec le personnage
-                if (spriteIndex % 2 == 0) { 
-                    if (weaponYAdjustment == 0) {
-                        weaponYAdjustment = 1; 
-                    } else {
-                        weaponYAdjustment = 0; 
-                    }
-                }
-            }
-            break;
-            case IDLE:
-            // idle animation
-            if (AnimationDelay++ >= ANIMATION_SPEED) {
-                AnimationDelay = 0; 
-                spriteIndex = (spriteIndex + 1) % currentCharacter.getIdleSprites().length;
-                // pour que l'arme bouge avec le personnage
-                if (spriteIndex % 2 == 0) { 
-                    if (weaponYAdjustment == 0) {
-                        weaponYAdjustment = 1;
-                    } else {
-                        weaponYAdjustment = 0; 
-                    }
-                }
-            }
-            break;     
-            case DEATH:
-            // implémentation d'un autre délai pour que ça aille plus lentement
-            if (AnimationDelay++ >= DEATH_ANIMATION_SPEED) {
-                AnimationDelay = 0; 
-                if (spriteIndex < currentCharacter.getDeathSprites().length - 1) {
-                    spriteIndex++; 
-                    deathAnimationPlayed = true;
-                }
-            }
-            
-            break;
-        }
-    
-            switch(currentWeaponState){
-                case ATTACK:
-                // attack weapon
-                    if (weaponSpriteIndex < currentWeapon.getWeaponSprites().length - 1) {
-                        weaponSpriteIndex++;
-                    } 
-                    else {
-                        if (attackDelay++ >= attackSpeed) {
-                            // Réinitialise l'état d'attaque et les paramètres associés
-                            isAttacking = false;
-                            attackDelay = 0;
-                            weaponSpriteIndex = 0; 
-                            currentWeaponState = weapon.State.IDLE;
-                            currentWeapon.setState(weapon.State.IDLE);
+                // running animation
+                if (AnimationDelay++ >= ANIMATION_SPEED) {
+                    AnimationDelay = 0;
+                    spriteIndex = (spriteIndex + 1) % currentCharacter.getRunSprites().length;
+                    // pour que l'arme bouge avec le personnage
+                    if (spriteIndex % 2 == 0) {
+                        if (weaponYAdjustment == 0) {
+                            weaponYAdjustment = 1;
+                        } else {
+                            weaponYAdjustment = 0;
                         }
                     }
-                break;  
-    
-                case IDLE:
-                // idle weapon
-                    if(!isAttacking){
-                        weaponSpriteIndex = 0;
+                }
+                break;
+            case IDLE:
+                // idle animation
+                if (AnimationDelay++ >= ANIMATION_SPEED) {
+                    AnimationDelay = 0;
+                    spriteIndex = (spriteIndex + 1) % currentCharacter.getIdleSprites().length;
+                    // pour que l'arme bouge avec le personnage
+                    if (spriteIndex % 2 == 0) {
+                        if (weaponYAdjustment == 0) {
+                            weaponYAdjustment = 1;
+                        } else {
+                            weaponYAdjustment = 0;
+                        }
                     }
-                    break;
-            }
-            
-            for (int i = 0; i < monsters.length; i++){
-                if(monsters[i] != null){
-                    switch(monsters[i].getState()) {
-                        default:
-                        case WALK:
-                            if (AnimationMonsterDelay++ >= ANIMATION_MONSTER_SPEED) {
-                                AnimationMonsterDelay = 0; 
-                                monsterSpriteIndex[i] = (monsterSpriteIndex[i] + 1) % monsters[i].getWalkSprites().length;
-                            }
-                            break;
-                        case ATTACK:
-                            monsterSpriteIndex[i] = (monsterSpriteIndex[i] + 1) % monsters[i].getAttackSprites().length;
-                            break;
+                }
+                break;
+            case DEATH:
+                // implémentation d'un autre délai pour que ça aille plus lentement
+                if (AnimationDelay++ >= DEATH_ANIMATION_SPEED) {
+                    AnimationDelay = 0;
+                    if (spriteIndex < currentCharacter.getDeathSprites().length - 1) {
+                        spriteIndex++;
+                        deathAnimationPlayed = true;
+                    }
+                }
 
-                        case DEATH:
-                            if(monsterSpriteIndex[i] < monsters[i].getDeathSprites().length - 1){
-                                if(AnimationMonsterDeathDelay++ >= DEATH_ANIMATION_SPEED){
-                                    AnimationMonsterDeathDelay = 0;
-                                    monsterSpriteIndex[i] = monsterSpriteIndex[i] + 1;
-                                }
-                            }else{
-                                // Logique pour remove le monstre du tableau de monstres et du tableau des index
-                                Monster[] arr_new = new Monster[monsters.length-1];
-                                int[] newMonsterSpriteIndex = new int[monsterSpriteIndex.length - 1];
-                                for(int j=0, k=0;j<monsters.length;j++){
-                                    if(j!=i){
-                                        arr_new[k]=monsters[j];
-                                        newMonsterSpriteIndex[k] = monsterSpriteIndex[j];
-                                        k++;
-                                    }
-                                }   
-                                monsters = arr_new;
-                                monsterSpriteIndex = newMonsterSpriteIndex;
-                            }                        
-                            break;
-                        case IDLE:
+                break;
+        }
+
+        switch (currentWeaponState) {
+            case ATTACK:
+                // attack weapon
+                if (weaponSpriteIndex < currentWeapon.getWeaponSprites().length - 1) {
+                    weaponSpriteIndex++;
+                } else {
+                    if (attackDelay++ >= attackSpeed) {
+                        // Réinitialise l'état d'attaque et les paramètres associés
+                        isAttacking = false;
+                        attackDelay = 0;
+                        weaponSpriteIndex = 0;
+                        currentWeaponState = weapon.State.IDLE;
+                        currentWeapon.setState(weapon.State.IDLE);
+                    }
+                }
+                break;
+
+            case IDLE:
+                // idle weapon
+                if (!isAttacking) {
+                    weaponSpriteIndex = 0;
+                }
+                break;
+        }
+
+        for (int i = 0; i < monsters.length; i++) {
+            if (monsters[i] != null) {
+                switch (monsters[i].getState()) {
+                    default:
+                    case WALK:
                         if (AnimationMonsterDelay++ >= ANIMATION_MONSTER_SPEED) {
-                            AnimationMonsterDelay = 0; 
+                            AnimationMonsterDelay = 0;
+                            monsterSpriteIndex[i] = (monsterSpriteIndex[i] + 1) % monsters[i].getWalkSprites().length;
+                        }
+                        break;
+                    case ATTACK:
+                        monsterSpriteIndex[i] = (monsterSpriteIndex[i] + 1) % monsters[i].getAttackSprites().length;
+                        break;
+
+                    case DEATH:
+                        if (monsterSpriteIndex[i] < monsters[i].getDeathSprites().length - 1) {
+                            if (AnimationMonsterDeathDelay++ >= DEATH_ANIMATION_SPEED) {
+                                AnimationMonsterDeathDelay = 0;
+                                monsterSpriteIndex[i] = monsterSpriteIndex[i] + 1;
+                            }
+                        } else {
+                            // Logique pour remove le monstre du tableau de monstres et du tableau des index
+                            Monster[] arr_new = new Monster[monsters.length - 1];
+                            int[] newMonsterSpriteIndex = new int[monsterSpriteIndex.length - 1];
+                            for (int j = 0, k = 0; j < monsters.length; j++) {
+                                if (j != i) {
+                                    arr_new[k] = monsters[j];
+                                    newMonsterSpriteIndex[k] = monsterSpriteIndex[j];
+                                    k++;
+                                }
+                            }
+                            monsters = arr_new;
+                            monsterSpriteIndex = newMonsterSpriteIndex;
+                        }
+                        break;
+                    case IDLE:
+                        if (AnimationMonsterDelay++ >= ANIMATION_MONSTER_SPEED) {
+                            AnimationMonsterDelay = 0;
                             monsterSpriteIndex[i] = (monsterSpriteIndex[i] + 1) % monsters[i].getIdleSprites().length;
                             break;
                         }
-                    }
                 }
             }
+        }
 
-        if(!currentCharacter.getAlive()){
+        if (!currentCharacter.getAlive()) {
             gameLoop.stop();
             SwingUtilities.getWindowAncestor(this).dispose();
         }
@@ -341,7 +344,8 @@ public class GamePanel extends JPanel implements KeyListener {
     public character getCurrentCharacter() {
         return currentCharacter;
     }
-    public weapon getCurrentWeapon(){
+
+    public weapon getCurrentWeapon() {
         return currentWeapon;
     }
 

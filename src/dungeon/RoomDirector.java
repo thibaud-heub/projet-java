@@ -1,6 +1,6 @@
 package dungeon;
 
-import characters.abstractFactory.monsterType.Monster;
+import entity.abstractFactory.monsterType.Monster;
 
 public class RoomDirector {
     private RoomBuilder builder;
@@ -22,6 +22,7 @@ public class RoomDirector {
         builder.setSize(7, 5);
         builder.buildWalls(false);
         builder.buildLadder(8, 4);
+        builder.centerRoom(28, 20);
         builder.buildPlayerSpawn(4, 4);
         return builder.getResult();
     }
@@ -41,7 +42,7 @@ public class RoomDirector {
         builder.setSize(14, 10);
         builder.buildWalls(false);
         builder.buildMonsters(monsters, true);
-        builder.buildPlayerSpawn();
+        builder.buildPlayerSpawn(7, 5);
         return builder.getResult();
     }
 }

@@ -4,8 +4,10 @@ import weapons.weapon;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.ImageObserver;
+
+import entity.character;
+
 import java.awt.image.BufferedImage;
-import characters.character;
 
 public class DrawWeapons {
     private weapon currentWeapon;

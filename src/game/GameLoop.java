@@ -1,6 +1,7 @@
 package game;
 import javax.swing.Timer;
-import characters.*;
+
+import entity.*;
 
 public class GameLoop {
     private Timer timer;

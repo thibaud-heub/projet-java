@@ -4,23 +4,13 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import characters.character;
-import characters.hunter;
-import characters.MonsterGame.monsterManager;
-import characters.abstractFactory.monsterType.Monster;
-import dungeon.RoomBuilder;
-import dungeon.RoomDirector;
+import entity.character;
+import entity.hunter;
 import weapons.katana;
 import weapons.weapon;
 
 public class Game extends JFrame {
     public Game() {
-        monsterManager manager = new monsterManager();
-        Monster[] monsters = manager.monstersLevel(false);
-        RoomBuilder r = new RoomBuilder();
-        RoomDirector d = new RoomDirector(r);
-        System.out.println(d.makeFightRoom(monsters));
-        r.setSize(ALLBITS, ABORT);
         setTitle("DnD");
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -38,7 +28,6 @@ public class Game extends JFrame {
         add(keyPanel, BorderLayout.SOUTH);
 
         setVisible(true);
-        gamePanel.initializeMonsterPositions();
     }
 
     public static void main(String[] args) {

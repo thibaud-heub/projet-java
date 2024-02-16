@@ -1,6 +1,6 @@
 package dungeon;
 
-import characters.abstractFactory.monsterType.Monster;
+import entity.abstractFactory.monsterType.Monster;
 
 public class Room {
     private int cols;
