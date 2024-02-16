@@ -1,7 +1,13 @@
-import javax.swing.JFrame;
+package game;
 import java.awt.BorderLayout;
-import characters.*;
-import weapons.*;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+import characters.character;
+import characters.hunter;
+import weapons.katana;
+import weapons.weapon;
 
 public class Game extends JFrame {
     public Game() {
@@ -26,6 +32,11 @@ public class Game extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Game();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Game();
+            }
+        });
     }
 }

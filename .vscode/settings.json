@@ -1,3 +1,6 @@
 {
-    "java.project.outputPath": "class"
+    "java.project.outputPath": "class",
+    "java.project.sourcePaths": [
+        "src"
+    ]
 }
