@@ -1,14 +1,13 @@
-package game;
-
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
-import java.awt.image.BufferedImage;
-import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import java.awt.Graphics;
+import java.io.InputStream;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 
 
 
@@ -29,49 +28,49 @@ public class KeyPanel extends JPanel {
 
     private void loadFont(){
         try {
-            customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/ressources/font/04B_03__.TTF"))
+            customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("../ressources/font/04B_03__.TTF"))
                              .deriveFont(12f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
         } catch (Exception e) {
             e.printStackTrace();
-            customFont = new Font("SansSerif", Font.PLAIN, 24); // Utilisez une police par défaut si la police personnalisée n'est pas chargée
+            customFont = new Font("SansSerif", Font.PLAIN, 12); 
         }
     }
 
     private void loadImage() {
         try {
-            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/toucheHaut.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheHautWhite.png");
             toucheHaut = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/toucheBas.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheBasWhite.png");
             toucheBas = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/toucheDroite.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheDroiteWhite.png");
             toucheDroite = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/toucheGauche.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheGaucheWhite.png");
             toucheGauche = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/toucheA.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/toucheAWhite.png");
             toucheA = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/escape.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/escapeWhite.png");
             escape = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,11 +82,14 @@ public class KeyPanel extends JPanel {
         loadFont();
         super.paintComponent(g);
 
+        setBackground(Color.BLACK);
+
         // Mettre la police
         if (customFont != null) {
             g.setFont(customFont);
         }
 
+        g.setColor(Color.WHITE);
         // Mettre les images
         if (toucheHaut != null) {
             g.drawImage(toucheHaut, 72, 5, this); 
