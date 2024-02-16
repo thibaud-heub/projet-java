@@ -6,11 +6,21 @@ import javax.swing.SwingUtilities;
 
 import characters.character;
 import characters.hunter;
+import characters.MonsterGame.monsterManager;
+import characters.abstractFactory.monsterType.Monster;
+import dungeon.RoomBuilder;
+import dungeon.RoomDirector;
 import weapons.katana;
 import weapons.weapon;
 
 public class Game extends JFrame {
     public Game() {
+        monsterManager manager = new monsterManager();
+        Monster[] monsters = manager.monstersLevel(false);
+        RoomBuilder r = new RoomBuilder();
+        RoomDirector d = new RoomDirector(r);
+        System.out.println(d.makeFightRoom(monsters));
+        r.setSize(ALLBITS, ABORT);
         setTitle("DnD");
         setSize(800, 600);
         setLocationRelativeTo(null);
