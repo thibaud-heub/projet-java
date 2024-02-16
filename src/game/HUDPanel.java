@@ -1,4 +1,3 @@
-package game;
     import javax.imageio.ImageIO;
     import javax.swing.JPanel;
     import java.awt.Graphics;
@@ -30,7 +29,7 @@ package game;
 
         private void loadFont(){
             try {
-                customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/ressources/font/04B_03__.TTF"))
+                customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("../ressources/font/04B_03__.TTF"))
                                  .deriveFont(12f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(customFont);
@@ -43,31 +42,31 @@ package game;
 
         private void loadImage() {
         try {
-            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/heart.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/heart.png");
             heart = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/lightning.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/lightning.png");
             lightning = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/fire.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/fire.png");
             fire = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/magic.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/magic.png");
             magic = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/physic.png");
+            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/physic.png");
             physic = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,6 +98,9 @@ package game;
             loadImage();
             loadFont();
             super.paintComponent(g);
+
+            setBackground(Color.BLACK);
+
 
             // Mettre la police
             if (customFont != null) {
@@ -151,8 +153,9 @@ package game;
             int currentXP = (int) (width * XPPercentage);
 
             // XP en jaune
+            g.setColor(Color.WHITE);
             g.drawString("Niveau " + XP, xpX, xpY - 5);
-            g.setColor(Color.BLACK);
+            g.setColor(Color.GRAY);
             g.fillRect(xpX, xpY, width, heightXP);
             g.setColor(Color.YELLOW);
             g.fillRect(xpX, xpY, currentXP, heightXP);
@@ -168,7 +171,7 @@ package game;
             g.fillRect(DphysicX, DphysicY, currentDphysic, height);
             g.fillRect(DmagicX, DmagicY, currentDmagic, height);   
 
-            g.setColor(Color.BLACK);
+            g.setColor(Color.WHITE);
             for (int i = 0; i < 2; i++) {
                 g.drawRect(RfireX - i, RfireY - i, width + (2 * i), height + (2 * i));
                 g.drawRect(RphysicX - i, RphysicY - i, width + (2 * i), height + (2 * i));
