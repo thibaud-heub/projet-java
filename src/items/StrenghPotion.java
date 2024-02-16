@@ -1,10 +1,6 @@
 package items;
 
-import weapons.*;
-
 import java.util.Random;
-
-import characters.*;
 
 public class StrenghPotion extends Item{
     private int value;

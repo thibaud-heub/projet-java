@@ -14,10 +14,10 @@ public class magicWand extends weapon {
 
         // Chargement des sprites
         String[] weaponPaths = {
-            "../../ressources/sprites/Weapons/Witcher/magicWand/magicWand_1.png",
-            "../../ressources/sprites/Weapons/Witcher/magicWand/magicWand_2.png",
-            "../../ressources/sprites/Weapons/Witcher/magicWand/magicWand_3.png",
-            "../../ressources/sprites/Weapons/Witcher/magicWand/magicWand_4.png",
+            "/ressources/sprites/Weapons/Witcher/magicWand/magicWand_1.png",
+            "/ressources/sprites/Weapons/Witcher/magicWand/magicWand_2.png",
+            "/ressources/sprites/Weapons/Witcher/magicWand/magicWand_3.png",
+            "/ressources/sprites/Weapons/Witcher/magicWand/magicWand_4.png",
         };
         setWeaponSprites(weaponPaths);
     }

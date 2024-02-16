@@ -14,10 +14,10 @@ public class bigMagicWand extends weapon {
 
         // Chargement des sprites
         String[] weaponPaths = {
-            "../../ressources/sprites/Weapons/Witcher/bigMagicWand/bigMagicWand_1.png",
-            "../../ressources/sprites/Weapons/Witcher/bigMagicWand/bigMagicWand_2.png",
-            "../../ressources/sprites/Weapons/Witcher/bigMagicWand/bigMagicWand_3.png",
-            "../../ressources/sprites/Weapons/Witcher/bigMagicWand/bigMagicWand_4.png",
+            "/ressources/sprites/Weapons/Witcher/bigMagicWand/bigMagicWand_1.png",
+            "/ressources/sprites/Weapons/Witcher/bigMagicWand/bigMagicWand_2.png",
+            "/ressources/sprites/Weapons/Witcher/bigMagicWand/bigMagicWand_3.png",
+            "/ressources/sprites/Weapons/Witcher/bigMagicWand/bigMagicWand_4.png",
         };
         setWeaponSprites(weaponPaths);
     }

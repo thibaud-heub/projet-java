@@ -14,10 +14,10 @@ public class spike extends weapon {
 
         // Chargement des sprites
         String[] weaponPaths = {
-            "../../ressources/sprites/Weapons/Rogue/spike/spike_1.png",
-            "../../ressources/sprites/Weapons/Rogue/spike/spike_2.png",
-            "../../ressources/sprites/Weapons/Rogue/spike/spike_3.png",
-            "../../ressources/sprites/Weapons/Rogue/spike/spike_4.png",
+            "/ressources/sprites/Weapons/Rogue/spike/spike_1.png",
+            "/ressources/sprites/Weapons/Rogue/spike/spike_2.png",
+            "/ressources/sprites/Weapons/Rogue/spike/spike_3.png",
+            "/ressources/sprites/Weapons/Rogue/spike/spike_4.png",
         };
         setWeaponSprites(weaponPaths);
     }
