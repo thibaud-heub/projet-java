@@ -14,10 +14,10 @@ public class katana extends weapon {
 
         // Chargement des sprites
         String[] weaponPaths = {
-            "../../ressources/sprites/Weapons/Rogue/katana/katana_1.png",
-            "../../ressources/sprites/Weapons/Rogue/katana/katana_2.png",
-            "../../ressources/sprites/Weapons/Rogue/katana/katana_3.png",
-            "../../ressources/sprites/Weapons/Rogue/katana/katana_4.png",
+            "/ressources/sprites/Weapons/Rogue/katana/katana_1.png",
+            "/ressources/sprites/Weapons/Rogue/katana/katana_2.png",
+            "/ressources/sprites/Weapons/Rogue/katana/katana_3.png",
+            "/ressources/sprites/Weapons/Rogue/katana/katana_4.png",
         };
         setWeaponSprites(weaponPaths);
     }

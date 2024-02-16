@@ -11,22 +11,22 @@ public class hunter extends character {
 
         // Initialisation des sprites
         String[] idlePaths = {
-            "../../ressources/sprites/Heroes/Rogue/Idle_1.png",
-            "../../ressources/sprites/Heroes/Rogue/Idle_2.png",
-            "../../ressources/sprites/Heroes/Rogue/Idle_3.png",
-            "../../ressources/sprites/Heroes/Rogue/Idle_4.png",
+            "/ressources/sprites/Heroes/Rogue/Idle_1.png",
+            "/ressources/sprites/Heroes/Rogue/Idle_2.png",
+            "/ressources/sprites/Heroes/Rogue/Idle_3.png",
+            "/ressources/sprites/Heroes/Rogue/Idle_4.png",
         };
         setIdleSprites(idlePaths);
         String[] runPaths = {
-            "../../ressources/sprites/Heroes/Rogue/Run_1.png",
-            "../../ressources/sprites/Heroes/Rogue/Run_2.png",
-            "../../ressources/sprites/Heroes/Rogue/Run_3.png",
-            "../../ressources/sprites/Heroes/Rogue/Run_4.png",
+            "/ressources/sprites/Heroes/Rogue/Run_1.png",
+            "/ressources/sprites/Heroes/Rogue/Run_2.png",
+            "/ressources/sprites/Heroes/Rogue/Run_3.png",
+            "/ressources/sprites/Heroes/Rogue/Run_4.png",
         };
         setRunSprites(runPaths);
 
         String[] DeathPaths = {
-            "../../ressources/sprites/Heroes/Rogue/Death_1.png",
+            "/ressources/sprites/Heroes/Rogue/Death_1.png",
         };
         setDeathSprites(DeathPaths);
      }

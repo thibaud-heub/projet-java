@@ -29,7 +29,7 @@
 
         private void loadFont(){
             try {
-                customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("../ressources/font/04B_03__.TTF"))
+                customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/ressources/font/04B_03__.TTF"))
                                  .deriveFont(12f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(customFont);
@@ -42,31 +42,31 @@
 
         private void loadImage() {
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/heart.png");
+            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/heart.png");
             heart = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/lightning.png");
+            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/lightning.png");
             lightning = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/fire.png");
+            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/fire.png");
             fire = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/magic.png");
+            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/magic.png");
             magic = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            InputStream is = getClass().getResourceAsStream("../ressources/keyboard/physic.png");
+            InputStream is = getClass().getResourceAsStream("/ressources/keyboard/physic.png");
             physic = ImageIO.read(is);
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,24 +1,26 @@
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import characters.*;
-import weapons.*;
-import characters.Drawing.*;
-import characters.MonsterGame.monsterManager;
-import characters.abstractFactory.monsterType.*;
-import weapons.Drawing.*;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Random;
-import java.awt.Color;
+import java.util.Set;
+
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import characters.character;
+import characters.Drawing.DrawCharacters;
+import characters.Drawing.DrawMonsters;
+import characters.MonsterGame.monsterManager;
+import characters.abstractFactory.monsterType.Monster;
+import weapons.weapon;
+import weapons.Drawing.DrawWeapons;
 
 
 public class GamePanel extends JPanel implements KeyListener {
     private GameLoop gameLoop;
-    private HUDPanel hudPanel;
+    // private HUDPanel hudPanel;
     private character currentCharacter;
     private weapon currentWeapon;
     private Monster[] monsters;
@@ -58,7 +60,7 @@ public class GamePanel extends JPanel implements KeyListener {
     public GamePanel(HUDPanel hudPanel, character currentCharacter, weapon currentWeapon) {
         this.currentCharacter = currentCharacter;
         this.currentWeapon = currentWeapon;
-        this.hudPanel = hudPanel;
+        // this.hudPanel = hudPanel;
         
         currentState = currentCharacter.getState();
         speed = currentCharacter.getSpeed();

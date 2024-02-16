@@ -15,10 +15,10 @@ public class sword extends weapon {
 
         // Chargement des sprites
         String[] weaponPaths = {
-            "../../ressources/sprites/Weapons/Warrior/sword/sword_1.png",
-            "../../ressources/sprites/Weapons/Warrior/sword/sword_2.png",
-            "../../ressources/sprites/Weapons/Warrior/sword/sword_3.png",
-            "../../ressources/sprites/Weapons/Warrior/sword/sword_4.png",
+            "/ressources/sprites/Weapons/Warrior/sword/sword_1.png",
+            "/ressources/sprites/Weapons/Warrior/sword/sword_2.png",
+            "/ressources/sprites/Weapons/Warrior/sword/sword_3.png",
+            "/ressources/sprites/Weapons/Warrior/sword/sword_4.png",
         };
         setWeaponSprites(weaponPaths);
     }

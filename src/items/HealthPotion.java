@@ -1,7 +1,5 @@
 package items;
 
-import weapons.*;
-import characters.*;
 import java.util.Random;
 
 public class HealthPotion extends Item {

@@ -14,10 +14,10 @@ public class bigSword extends weapon {
 
         // Chargement des sprites
         String[] weaponPaths = {
-            "../../ressources/sprites/Weapons/Warrior/bigSword/bigSword_1.png",
-            "../../ressources/sprites/Weapons/Warrior/bigSword/bigSword_2.png",
-            "../../ressources/sprites/Weapons/Warrior/bigSword/bigSword_3.png",
-            "../../ressources/sprites/Weapons/Warrior/bigSword/bigSword_4.png",
+            "/ressources/sprites/Weapons/Warrior/bigSword/bigSword_1.png",
+            "/ressources/sprites/Weapons/Warrior/bigSword/bigSword_2.png",
+            "/ressources/sprites/Weapons/Warrior/bigSword/bigSword_3.png",
+            "/ressources/sprites/Weapons/Warrior/bigSword/bigSword_4.png",
             
         };
         setWeaponSprites(weaponPaths);
