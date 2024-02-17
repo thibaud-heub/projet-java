@@ -12,10 +12,9 @@ public class GameLoop {
     public GameLoop(GamePanel gamePanel, HUDPanel hudPanel) {
         this.gamePanel = gamePanel;
         this.hudPanel = hudPanel;
-        init();
     }
 
-    private void init() {
+    public void init() {
         timer = new Timer(1000 / 30, e -> update());
         timer.start();
     }

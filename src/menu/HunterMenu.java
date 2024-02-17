@@ -28,8 +28,6 @@ public class HunterMenu extends JPanel {
         JTextArea knifeStats = new JTextArea("Damage :\t\t+\nAttack speed :\t+++++");
         JTextArea katanaStats = new JTextArea("Damage :\t\t++\nAttack speed :\t+++");
 
-        
-
         setBackground(Color.BLACK);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -45,7 +43,7 @@ public class HunterMenu extends JPanel {
         knife.setBackground(Color.BLACK);
         knife.setForeground(Color.WHITE);
         knife.setFocusable(false);
-        knife.setActionCommand("room");
+        knife.setActionCommand("knife");
         knife.addActionListener(Main.getInstance());
         knifeBox.add(knife);
         knifeBox.add(Box.createRigidArea(new Dimension(32, 0)));
@@ -58,13 +56,13 @@ public class HunterMenu extends JPanel {
         knifeStats.setMaximumSize(new Dimension(336, 48));
         knifeBox.add(knifeStats);
         add(knifeBox);
-        
+
         add(Box.createRigidArea(new Dimension(0, 32)));
 
         katana.setBackground(Color.BLACK);
         katana.setForeground(Color.WHITE);
         katana.setFocusable(false);
-        katana.setActionCommand("room");
+        katana.setActionCommand("katana");
         katana.addActionListener(Main.getInstance());
         katanaBox.add(katana);
         katanaBox.add(Box.createRigidArea(new Dimension(32, 0)));

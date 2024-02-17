@@ -13,6 +13,11 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import entity.hunter;
+import entity.warrior;
+import entity.witcher;
+import game.Game;
+import game.GamePanel;
 import menu.CharacterMenu;
 import menu.DiedMenu;
 import menu.HunterMenu;
@@ -20,11 +25,18 @@ import menu.MainMenu;
 import menu.WarriorMenu;
 import menu.WinMenu;
 import menu.WitcherMenu;
+import weapons.bigMagicWand;
+import weapons.bigSword;
+import weapons.katana;
+import weapons.magicWand;
+import weapons.spike;
+import weapons.sword;
 
 public class Main implements Runnable, ActionListener {
 
     private static Main instance;
     private Container contentPane;
+    private Game game;
 
     public static Font font;
     public static BufferedImage hunterImage;
@@ -43,26 +55,59 @@ public class Main implements Runnable, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+        GamePanel gamePanel = game.getGamePanel();
         switch (e.getActionCommand()) {
             case "play":
                 cardLayout.show(contentPane, "CharacterMenu");
                 break;
             case "hunter":
+                gamePanel.setCurrentCharacter(new hunter());
                 cardLayout.show(contentPane, "HunterMenu");
                 break;
             case "warrior":
+            gamePanel.setCurrentCharacter(new warrior());
                 cardLayout.show(contentPane, "WarriorMenu");
                 break;
             case "witcher":
+            gamePanel.setCurrentCharacter(new witcher());
                 cardLayout.show(contentPane, "WitcherMenu");
                 break;
-            case "room":
-                cardLayout.show(contentPane, "Room");
+            case "knife":
+                gamePanel.setCurrentWeapon(new spike());
+                launchGame();
+                break;
+            case "katana":
+                gamePanel.setCurrentWeapon(new katana());
+                launchGame();
+                break;
+            case "sword":
+                gamePanel.setCurrentWeapon(new sword());
+                launchGame();
+                break;
+            case "greatSword":
+                gamePanel.setCurrentWeapon(new bigSword());
+                launchGame();
+                break;
+            case "staff":
+                gamePanel.setCurrentWeapon(new magicWand());
+                launchGame();
+                break;
+            case "greatStaff":
+                gamePanel.setCurrentWeapon(new bigMagicWand());
+                launchGame();
                 break;
             case "quit":
                 System.exit(0);
                 break;
         }
+    }
+
+    public void launchGame() {
+        CardLayout cardLayout = (CardLayout) contentPane.getLayout();
+        GamePanel gamePanel = game.getGamePanel();
+        gamePanel.getGameLoop().init();
+        cardLayout.show(contentPane, "Game");
+        gamePanel.requestFocus();
     }
 
     public void win() {
@@ -86,6 +131,7 @@ public class Main implements Runnable, ActionListener {
     public void run() {
         JFrame window = new JFrame("Duke's Adventures");
         contentPane = window.getContentPane();
+        game = new Game();
 
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/ressources/font/04B_03__.TTF"))
@@ -116,6 +162,7 @@ public class Main implements Runnable, ActionListener {
         contentPane.add(new HunterMenu(), "HunterMenu");
         contentPane.add(new WarriorMenu(), "WarriorMenu");
         contentPane.add(new WitcherMenu(), "WitcherMenu");
+        contentPane.add(game, "Game");
         contentPane.add(new DiedMenu(), "DiedMenu");
         contentPane.add(new WinMenu(), "WinMenu");
 

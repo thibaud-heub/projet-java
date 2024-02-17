@@ -10,8 +10,6 @@ import java.awt.image.BufferedImage;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 
-
-
 public class KeyPanel extends JPanel {
     private BufferedImage toucheHaut;
     private BufferedImage toucheBas;
@@ -20,22 +18,22 @@ public class KeyPanel extends JPanel {
     private BufferedImage toucheA;
     private BufferedImage escape;
     private Font customFont;
-    
-    
 
     public KeyPanel() {
-        setPreferredSize(new Dimension(800, 25)); 
+        setPreferredSize(new Dimension(800, 25));
+        setBackground(Color.BLACK);
     }
 
-    private void loadFont(){
+    private void loadFont() {
         try {
-            customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/ressources/font/04B_03__.TTF"))
-                             .deriveFont(12f);
+            customFont = Font
+                    .createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/ressources/font/04B_03__.TTF"))
+                    .deriveFont(12f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
         } catch (Exception e) {
             e.printStackTrace();
-            customFont = new Font("SansSerif", Font.PLAIN, 12); 
+            customFont = new Font("SansSerif", Font.PLAIN, 12);
         }
     }
 
@@ -77,13 +75,12 @@ public class KeyPanel extends JPanel {
             e.printStackTrace();
         }
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         loadImage();
         loadFont();
         super.paintComponent(g);
-
-        setBackground(Color.BLACK);
 
         // Mettre la police
         if (customFont != null) {
@@ -93,32 +90,32 @@ public class KeyPanel extends JPanel {
         g.setColor(Color.WHITE);
         // Mettre les images
         if (toucheHaut != null) {
-            g.drawImage(toucheHaut, 72, 5, this); 
+            g.drawImage(toucheHaut, 72, 5, this);
         }
         g.drawString("Aller en haut", 93, 17);
 
         if (toucheBas != null) {
-            g.drawImage(toucheBas, 193, 5, this); 
+            g.drawImage(toucheBas, 193, 5, this);
         }
         g.drawString("Aller en bas", 213, 17);
 
         if (toucheGauche != null) {
-            g.drawImage(toucheGauche, 312, 5, this); 
+            g.drawImage(toucheGauche, 312, 5, this);
         }
         g.drawString("Aller a gauche", 333, 17);
 
         if (toucheDroite != null) {
-            g.drawImage(toucheDroite, 442, 5, this); 
+            g.drawImage(toucheDroite, 442, 5, this);
         }
         g.drawString("Aller a droite", 463, 17);
 
         if (toucheA != null) {
-            g.drawImage(toucheA, 557, 5, this); 
+            g.drawImage(toucheA, 557, 5, this);
         }
         g.drawString("Attaquer", 578, 17);
 
         if (escape != null) {
-            g.drawImage(escape, 650, 5, this); 
+            g.drawImage(escape, 650, 5, this);
         }
         g.drawString("Quitter", 670, 17);
 

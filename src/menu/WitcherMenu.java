@@ -44,7 +44,7 @@ public class WitcherMenu extends JPanel {
         staff.setBackground(Color.BLACK);
         staff.setForeground(Color.WHITE);
         staff.setFocusable(false);
-        staff.setActionCommand("room");
+        staff.setActionCommand("staff");
         staff.addActionListener(Main.getInstance());
         staffBox.add(staff);
         staffBox.add(Box.createRigidArea(new Dimension(32, 0)));
@@ -63,7 +63,7 @@ public class WitcherMenu extends JPanel {
         greatStaff.setBackground(Color.BLACK);
         greatStaff.setForeground(Color.WHITE);
         greatStaff.setFocusable(false);
-        greatStaff.setActionCommand("room");
+        greatStaff.setActionCommand("greatStaff");
         greatStaff.addActionListener(Main.getInstance());
         greatStaffBox.add(greatStaff);
         greatStaffBox.add(Box.createRigidArea(new Dimension(32, 0)));
