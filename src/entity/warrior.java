@@ -36,9 +36,8 @@ public class warrior extends character {
         };
         setDeathSprites(DeathPaths);      
     }
-
-
-    // Getters pour l'arme, la vitesse
+    
+    // Getters pour la vitesse
 
     public int getSpeed(){
         return speed;

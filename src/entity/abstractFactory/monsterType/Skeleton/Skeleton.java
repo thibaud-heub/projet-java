@@ -9,7 +9,7 @@ public class Skeleton extends Monster {
     
     public Skeleton () 
     {
-       super(monsterType.COMMON, monsterStats.getStats("Skeleton"), 8, 1.1, 8);
+       super(monsterType.COMMON, monsterStats.getStats("Skeleton"), 8, 1, 8);
 
     // Chemins des sprites    
     String[] idlePaths = {
@@ -50,5 +50,11 @@ public class Skeleton extends Monster {
     {
         System.out.println("\nJe suis un squellete");
         super.print();
+    }
+    
+    // Getters pour la vitesse
+
+    public int getSpeed(){
+        return speed;
     }
 }

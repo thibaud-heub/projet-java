@@ -8,7 +8,7 @@ import entity.abstractFactory.monsterType.Monster;
 public class Orc extends Monster {
     public Orc () 
     {
-       super(monsterType.COMMON, monsterStats.getStats("Orc"), 10, 0.9,8);
+       super(monsterType.COMMON, monsterStats.getStats("Orc"), 10, 1,8);
 
     // Chemins des sprites    
     String[] idlePaths = {
@@ -44,16 +44,9 @@ public class Orc extends Monster {
     
     };
 
-    public void attack (Monster other_monster) 
-    {
-        System.out.println("Orc attack");
-        this.attack(other_monster);
-    }
-    
-    @Override
-    public void print() 
-    {
-        System.out.println("\nJe suis un Orc");
-        super.print();
+    // Getters pour la vitesse
+
+    public int getSpeed(){
+        return speed;
     }
 }

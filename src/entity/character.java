@@ -5,9 +5,9 @@
 
     import javax.imageio.ImageIO;
 
-import entity.abstractFactory.monsterType.*;
+    import entity.abstractFactory.monsterType.*;
 
-import java.util.ArrayList;
+    import java.util.ArrayList;
     import java.util.List;
     import items.*;
 
@@ -26,8 +26,6 @@ import java.util.ArrayList;
         protected weapon chosenWeapon;
         public enum State {IDLE, RUNNING, DEATH}; 
         private State currentState = State.IDLE;
-        private double X;
-        private double Y;
         private List<Item> inventory;
 
 
@@ -59,9 +57,6 @@ import java.util.ArrayList;
         protected double mana = 100.0;
         protected int speed;
 
-        // Méthodes abstraites implémentées dans les classes filles
-        public abstract int getSpeed();
-
         /**
          * Décrémente la mana, la durabilité en fonction de l'arme utilisée 
          * Attaque le monstre s'il est dans la range
@@ -75,12 +70,11 @@ import java.util.ArrayList;
                 this.mana -= chosenWeapon.getManaUsed(); 
                 // Intégrer les dégâts de l'arme
                 typeDamage weaponDamage = chosenWeapon.getDamage();
+                List<Monster> monstersInRange = monsterInRange(monsters);
                 // Vérifier s'il y a un Monster dans la range du joueur
-                if(monsterInRange(monsters) != null){
-                    List<Monster> monster = monsterInRange(monsters);
+                if(!monstersInRange.isEmpty()){
                     // Attaque le monstre
-                    
-                    for (Monster m : monster){
+                    for (Monster m : monstersInRange){
                         m.take_damage(weaponDamage);
                         // Logique pour vérifier si le monstre est morte
                         // Si le monstre est mort, récupération d'un certain XP en fonction du niveau du monstre
@@ -117,7 +111,7 @@ import java.util.ArrayList;
         
             for (Monster monster : monsters) {
                 if(monster != null){
-                    double distance = Math.sqrt(Math.pow(monster.getX() - this.X, 2) + Math.pow(monster.getY() - this.Y, 2));
+                    double distance = Math.sqrt(Math.pow(monster.getX() - this.getX(), 2) + Math.pow(monster.getY() - this.getY(), 2));
                     if (distance <= attackRange) {
                         targets.add(monster);
                     }
@@ -158,11 +152,6 @@ import java.util.ArrayList;
 
         // Setters pour les sprites, l'état, l'inventaire et les coordonnées
 
-        public void setXY (double x, double y)
-        {
-            this.X = x;
-            this.Y = y;
-        }
 
         public void setChosenWeapon(weapon weapon) {
             this.chosenWeapon = weapon;
@@ -226,16 +215,7 @@ import java.util.ArrayList;
         public double getLittleLevel(){
             return this.littleLevel;
         }
-        public double getX()
-        {
-            return this.X;
-        }
-
-        public double getY()
-        {
-            return this.Y;
-        }
-
+        
         public BufferedImage[] getIdleSprites() {
             return idleSprites;
         }

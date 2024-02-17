@@ -42,4 +42,10 @@ public class Boss extends Monster{
         };
         setAttackSprites(attackPaths);
     }
+
+    // Getters pour la vitesse
+
+    public int getSpeed(){
+        return speed;
+    }
 }

@@ -9,7 +9,7 @@ public class EliteGobelin extends Monster{
 
     public EliteGobelin () 
     {
-       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Gobelin")), 20, 1.2,8);
+       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Gobelin")), 20, 2,8);
 
        String[] idlePaths = {
         "/ressources/sprites/Monster/EliteGoblin/Idle_1.png",
@@ -43,10 +43,9 @@ public class EliteGobelin extends Monster{
     setAttackSprites(attackPaths);
     }
 
-    @Override
-    public void print() 
-    {
-        System.out.println("\nJe suis un Gobelin elite");
-        super.print();
+    // Getters pour la vitesse
+
+    public int getSpeed(){
+        return speed;
     }
 }

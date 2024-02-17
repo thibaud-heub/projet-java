@@ -10,7 +10,7 @@ public class EliteSkeleton extends Monster {
     
     public EliteSkeleton () 
     {
-       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Skeleton")), 16, 1.1,8);
+       super(monsterType.ELITE, monsterStats.elite(monsterStats.getStats("Skeleton")), 16, 1,8);
 
     // Chemins des sprites
     String[] idlePaths = {
@@ -45,13 +45,9 @@ public class EliteSkeleton extends Monster {
     setAttackSprites(attackPaths);
     };
 
-    
-    
-    
-    @Override
-    public void print() 
-    {
-        System.out.println("\nJe suis un squellete elite");
-        super.print();
+    // Getters pour la vitesse
+
+    public int getSpeed(){
+        return speed;
     }
 }
