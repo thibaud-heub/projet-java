@@ -185,11 +185,11 @@ public class GamePanel extends JPanel implements KeyListener {
             System.exit(0);
         }
 
-        if (pressedKeys.contains(KeyEvent.VK_N)) {
-            setMonsters(dungeon.nextRoom());
-            currentCharacter.setXY(dungeon.getCurrentRoom().getPlayerSpawnX(),
-                    dungeon.getCurrentRoom().getPlayerSpawnY());
-        }
+        // if (pressedKeys.contains(KeyEvent.VK_N)) {
+        //     setMonsters(dungeon.nextRoom());
+        //     currentCharacter.setXY(dungeon.getCurrentRoom().getPlayerSpawnX(),
+        //             dungeon.getCurrentRoom().getPlayerSpawnY());
+        // }
 
         if (pressedKeys.contains(KeyEvent.VK_A) && !isAttacking && currentCharacter.attack(monsters)) {
             // Commencer l'attaque
