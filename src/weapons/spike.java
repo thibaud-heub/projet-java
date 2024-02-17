@@ -9,8 +9,8 @@ public class spike extends weapon {
         this.attackSpeed = 5;
         this.range = 7.0;
         damage.setPhysic(7);
-        damage.setFire(0);
-        damage.setMagic(0);
+        damage.setFire(1);
+        damage.setMagic(1);
 
         // Chargement des sprites
         String[] weaponPaths = {

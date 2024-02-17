@@ -5,7 +5,7 @@ public class hunter extends character {
     public hunter() {
         
         // Appel du constructeur de la classe Entity avec les paramètres nécessaires
-        super(100, 0, 5, 3, 0, 10, 3, "Chasseur", 5);
+        super(100, 1, 5, 3, 1, 10, 3, "Chasseur", 5);
        
 
 

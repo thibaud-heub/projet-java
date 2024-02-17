@@ -9,8 +9,8 @@ public class bigSword extends weapon {
         this.attackSpeed = 20;
         this.range = 14.0;
         damage.setPhysic(25);
-        damage.setFire(0);
-        damage.setMagic(0);
+        damage.setFire(1);
+        damage.setMagic(1);
 
         // Chargement des sprites
         String[] weaponPaths = {

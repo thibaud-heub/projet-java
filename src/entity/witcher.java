@@ -7,7 +7,7 @@ public class witcher extends character {
     
     public witcher() {
         // Appel du constructeur de la classe Entity avec les paramètres nécessaires
-        super(100, 0, 0, 10, 0, 0, 10, "Magicien", 3); 
+        super(100, 1, 1, 10, 1, 1, 10, "Magicien", 3); 
         
 
         // Initialisation des sprites

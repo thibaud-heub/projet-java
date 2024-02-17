@@ -8,8 +8,8 @@ public class magicWand extends weapon {
         this.durability = 100;
         this.attackSpeed = 10;
         this.range = 12.0;
-        damage.setPhysic(0);
-        damage.setFire(0);
+        damage.setPhysic(1);
+        damage.setFire(1);
         damage.setMagic(15);
 
         // Chargement des sprites
