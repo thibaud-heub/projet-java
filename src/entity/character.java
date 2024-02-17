@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -167,6 +168,7 @@ public abstract class character extends entity {
                 e.printStackTrace();
             }
         }
+        setSolidArea(new Rectangle(idleSprites[0].getWidth(), idleSprites[0].getHeight()));
     }
 
     protected void setRunSprites(String[] paths) {

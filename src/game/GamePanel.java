@@ -9,13 +9,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
+import app.Main;
 import dungeon.Dungeon;
 import dungeon.Room;
-import entity.*;
+import entity.Direction;
+import entity.character;
 import entity.Drawing.DrawCharacters;
 import entity.Drawing.DrawMonsters;
+import entity.abstractFactory.monsterType.Boss;
 import entity.abstractFactory.monsterType.Monster;
 import tile.TileManager;
 import weapons.weapon;
@@ -29,6 +31,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private Dungeon dungeon;
     private Monster[] monsters;
     private TileManager tileM;
+    private CollisionChecker cChecker;
 
     private int[] monsterXPositions;
     private int[] monsterYPositions;
@@ -59,6 +62,7 @@ public class GamePanel extends JPanel implements KeyListener {
         setPreferredSize(new Dimension(896, 640));
         dungeon = new Dungeon(7);
         tileM = new TileManager(this);
+        cChecker = new CollisionChecker(this);
         setMonsters(dungeon.getCurrentRoom());
 
         setFocusable(true);
@@ -138,6 +142,14 @@ public class GamePanel extends JPanel implements KeyListener {
         return dungeon;
     }
 
+    public TileManager getTileM() {
+        return tileM;
+    }
+
+    public CollisionChecker getcChecker() {
+        return cChecker;
+    }
+
     public void setMonsters(Room currentRoom) {
         if (currentRoom != null) {
             monsters = currentRoom.getMonsters();
@@ -192,26 +204,26 @@ public class GamePanel extends JPanel implements KeyListener {
             currentState = character.State.RUNNING;
             currentCharacter.setState(character.State.RUNNING);
             runningLeft = false;
-            currentCharacter.moveAndCheck(Direction.EAST, currentCharacter);
+            currentCharacter.moveAndCheck(Direction.EAST);
         }
         if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
             // Déplacer vers la gauche
             currentState = character.State.RUNNING;
             currentCharacter.setState(character.State.RUNNING);
             runningLeft = true;
-            currentCharacter.moveAndCheck(Direction.WEST, currentCharacter);
+            currentCharacter.moveAndCheck(Direction.WEST);
         }
         if (pressedKeys.contains(KeyEvent.VK_UP)) {
             // Déplacer vers le haut
             currentState = character.State.RUNNING;
             currentCharacter.setState(character.State.RUNNING);
-            currentCharacter.moveAndCheck(Direction.NORTH, currentCharacter);
+            currentCharacter.moveAndCheck(Direction.NORTH);
         }
         if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
             // Déplacer vers le bas
             currentState = character.State.RUNNING;
             currentCharacter.setState(character.State.RUNNING);
-            currentCharacter.moveAndCheck(Direction.SOUTH, currentCharacter);
+            currentCharacter.moveAndCheck(Direction.SOUTH);
         }
         if (pressedKeys.contains(KeyEvent.VK_U)) {
             // Mourir
@@ -342,7 +354,11 @@ public class GamePanel extends JPanel implements KeyListener {
 
         if (!currentCharacter.getAlive()) {
             gameLoop.stop();
-            SwingUtilities.getWindowAncestor(this).dispose();
+            Main.getInstance().died();
+        }
+        if (monsters.length != 0 && monsters[0] instanceof Boss && !monsters[0].getAlive()) {
+            gameLoop.stop();
+            Main.getInstance().win();
         }
         currentCharacter.setMana(0.2);
         currentCharacter.setPV(0.02);
