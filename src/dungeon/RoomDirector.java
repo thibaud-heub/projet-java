@@ -23,7 +23,7 @@ public class RoomDirector {
         builder.buildWalls(false);
         builder.buildLadder(8, 4);
         builder.centerRoom(28, 20);
-        builder.buildPlayerSpawn(4, 4);
+        builder.buildPlayerSpawn(11, 9);
         return builder.getResult();
     }
 
@@ -42,7 +42,7 @@ public class RoomDirector {
         builder.setSize(14, 10);
         builder.buildWalls(false);
         builder.buildMonsters(monsters, true);
-        builder.buildPlayerSpawn(7, 5);
+        builder.buildPlayerSpawn(7, 10);
         return builder.getResult();
     }
 }

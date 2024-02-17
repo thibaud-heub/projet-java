@@ -27,7 +27,7 @@ public class Dungeon {
 
     public Room nextRoom() {
         if (currentRoomIndex == rooms.length - 1) {
-            return null;
+            return rooms[currentRoomIndex];
         } else {
             return rooms[++currentRoomIndex];
         }
