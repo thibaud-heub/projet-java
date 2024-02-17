@@ -21,10 +21,10 @@ public class TileManager {
             tiles[0] = new Tile(ImageIO.read(getClass().getResourceAsStream("/ressources/dungeon/floor.png")), false);
             for (int i = 1; i < 10; i++) {
                 tiles[i] = new Tile(
-                        ImageIO.read(getClass().getResourceAsStream("/ressources/dungeon/wall_" + i + ".png")), false);
+                        ImageIO.read(getClass().getResourceAsStream("/ressources/dungeon/wall_" + i + ".png")), true);
             }
             tiles[10] = new Tile(ImageIO.read(getClass().getResourceAsStream("/ressources/dungeon/floor_ladder.png")),
-                    false);
+                    true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,19 +41,7 @@ public class TileManager {
         }
     }
 
-    public GamePanel getGp() {
-        return gp;
-    }
-
-    public void setGp(GamePanel gp) {
-        this.gp = gp;
-    }
-
     public Tile[] getTiles() {
         return tiles;
-    }
-
-    public void setTiles(Tile[] tiles) {
-        this.tiles = tiles;
     }
 }

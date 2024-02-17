@@ -3,7 +3,6 @@ package app;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -127,6 +126,10 @@ public class Main implements Runnable, ActionListener {
         return instance;
     }
 
+    public Game getGame() {
+        return game;
+    }
+
     @Override
     public void run() {
         JFrame window = new JFrame("Duke's Adventures");
@@ -154,7 +157,6 @@ public class Main implements Runnable, ActionListener {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
 
-        contentPane.setPreferredSize(new Dimension(896, 640));
         contentPane.setBackground(Color.BLACK);
         contentPane.setLayout(new CardLayout());
         contentPane.add(new MainMenu(), "MainMenu");
