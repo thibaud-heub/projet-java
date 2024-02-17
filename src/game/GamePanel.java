@@ -30,8 +30,6 @@ public class GamePanel extends JPanel implements KeyListener {
     private Monster[] monsters;
     private TileManager tileM;
 
-    private int xPos;
-    private int yPos;
 
     private int[] monsterXPositions;
     private int[] monsterYPositions;
@@ -170,8 +168,8 @@ public class GamePanel extends JPanel implements KeyListener {
 
         if (pressedKeys.contains(KeyEvent.VK_N)) {
             setMonsters(dungeon.nextRoom());
-            xPos = dungeon.getCurrentRoom().getPlayerSpawnX();
-            yPos = dungeon.getCurrentRoom().getPlayerSpawnY();
+            currentCharacter.setXY(dungeon.getCurrentRoom().getPlayerSpawnX(),dungeon.getCurrentRoom().getPlayerSpawnY());
+    
         }
 
         if (pressedKeys.contains(KeyEvent.VK_A) && !isAttacking && currentCharacter.attack(monsters)) {
