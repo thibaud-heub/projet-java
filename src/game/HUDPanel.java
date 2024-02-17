@@ -1,14 +1,16 @@
 package game;
 
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-import java.awt.Graphics;
-import java.awt.Dimension;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
-import java.awt.Font;
-import java.awt.GraphicsEnvironment;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
 
 public class HUDPanel extends JPanel {
     private double health;
@@ -136,12 +138,12 @@ public class HUDPanel extends JPanel {
         int currentwidth = (int) (widthHealthAndMana * healthPercentage);
         double manaPercentage = mana / 100;
         int currentManaWidth = (int) (widthHealthAndMana * manaPercentage);
-        double RfirePercentage = Rfire / 20;
-        double RphysicPercentage = Rphysic / 20;
-        double RmagicPercentage = Rmagic / 20;
-        double DfirePercentage = Dfire / 20;
-        double DphysicPercentage = Dphysic / 40;
-        double DmagicPercentage = Dmagic / 20;
+        double RfirePercentage = Math.min(1, Rfire / 20);
+        double RphysicPercentage = Math.min(1, Rphysic / 40);
+        double RmagicPercentage = Math.min(1, Rmagic / 40);
+        double DfirePercentage = Math.min(1, Dfire / 20);
+        double DphysicPercentage = Math.min(1, Dphysic / 40);
+        double DmagicPercentage = Math.min(1, Dmagic / 40);
         double XPPercentage = (littleXP) / 100;
         int currentRfire = (int) (width * RfirePercentage);
         int currentRphysic = (int) (width * RphysicPercentage);
