@@ -148,16 +148,16 @@ public class RoomBuilder {
 
     public void buildMonsters(Monster[] monsters, boolean boss) {
         if (boss) {
-            monsters[0].setXY(672, 480);
-            result.setMonsters(new Monster[] {monsters[0]});
+            monsters[0].setXY(672, 320);
+            result.setMonsters(new Monster[] { monsters[0] });
         } else {
             for (int i = 0; i < monsters.length; i++) {
                 int x, y;
                 do {
-                    x = new Random().nextInt(896);
-                    y = new Random().nextInt(640);
-                } while (result.getMapTileNum(x / 32, y / 32) != 0);
-                monsters[i].setXY(x, y);
+                    x = new Random().nextInt(28);
+                    y = new Random().nextInt(20);
+                } while (result.getMapTileNum(x, y) != 0);
+                monsters[i].setXY(x * 32, y * 32);
             }
             result.setMonsters(monsters);
         }
@@ -168,21 +168,21 @@ public class RoomBuilder {
         boolean onMonster;
         do {
             onMonster = false;
-            x = new Random().nextInt(448);
-            y = new Random().nextInt(640);
+            x = new Random().nextInt(14);
+            y = new Random().nextInt(20);
             for (Monster monster : result.getMonsters()) {
-                if (x / 32 == monster.getX() / 32 || y / 32 == monster.getY() / 32) {
+                if (x == monster.getX() / 32 || y == monster.getY() / 32) {
                     onMonster = true;
                 }
             }
-        } while (result.getMapTileNum(x / 32, y / 32) != 0 || onMonster);
-        result.setPlayerSpawnX(x);
-        result.setPlayerSpawnY(y);
+        } while (result.getMapTileNum(x, y) != 0 || onMonster);
+        result.setPlayerSpawnX(x * 32);
+        result.setPlayerSpawnY(y * 32);
     }
 
     public void buildPlayerSpawn(int x, int y) {
-        result.setPlayerSpawnX(x*32);
-        result.setPlayerSpawnY(y*32);
+        result.setPlayerSpawnX(x * 32);
+        result.setPlayerSpawnY(y * 32);
     }
 
     public Room getResult() {

@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -29,8 +30,8 @@ public class GamePanel extends JPanel implements KeyListener {
     private Monster[] monsters;
     private TileManager tileM;
 
-    private int xPos = 100;
-    private int yPos = 100;
+    private int xPos;
+    private int yPos;
 
     private int[] monsterXPositions;
     private int[] monsterYPositions;
@@ -63,6 +64,7 @@ public class GamePanel extends JPanel implements KeyListener {
         // this.hudPanel = hudPanel;
 
         setBackground(Color.BLACK);
+        setPreferredSize(new Dimension(896, 640));
         dungeon = new Dungeon(7);
         tileM = new TileManager(this);
         currentState = currentCharacter.getState();
@@ -71,6 +73,8 @@ public class GamePanel extends JPanel implements KeyListener {
         currentWeaponState = currentWeapon.getState();
         currentCharacter.setChosenWeapon(currentWeapon);
         setMonsters(dungeon.getCurrentRoom());
+        xPos = dungeon.getCurrentRoom().getPlayerSpawnX();
+        yPos = dungeon.getCurrentRoom().getPlayerSpawnY();
 
         setFocusable(true);
         addKeyListener(this);
@@ -169,6 +173,8 @@ public class GamePanel extends JPanel implements KeyListener {
 
         if (pressedKeys.contains(KeyEvent.VK_N)) {
             setMonsters(dungeon.nextRoom());
+            xPos = dungeon.getCurrentRoom().getPlayerSpawnX();
+            yPos = dungeon.getCurrentRoom().getPlayerSpawnY();
         }
 
         if (pressedKeys.contains(KeyEvent.VK_A) && !isAttacking && currentCharacter.attack(monsters)) {
