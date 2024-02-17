@@ -30,48 +30,10 @@ public abstract class weapon {
     public abstract int getOffsetWeaponY();
 
 
-    
-
-    public void attack() {
-        System.out.println("Attaque avec " + name + " pour " + damage + " points de dégâts" + " et -" + manaUsed + " points de mana !");
-    }
-
-
-     // Augmente les dégats de l'arme de value
-     public void increaseDamagePhysic(double value) {
-        double damagePhysic = damage.getPhysic();
-        damage.setPhysic(value + damagePhysic);
-    }
-
-    public void increaseDamageMagic(double value){
-        double damageMagic = damage.getMagic();
-        damage.setMagic(damageMagic + value);
-    }
-
-    public void increaseDamageFire(double value){
-        double damageFire = damage.getFire();
-        damage.setFire(damageFire + value);
-    }
-
 
     // Augmente la mana utilisée de l'arme de value
     public void increaseManaUsed(int value) {
         this.manaUsed += value;
-    }
-
-     // Augmente la durabilité de l'arme de value
-    public void increaseDurability(int value) {
-        this.durability += value;
-    }
-
-    
-    // Diminue la durabilité de l'arme de value
-    public void decreaseDurability(int value) {
-        this.durability -= value; 
-        if (this.durability <= 0) {
-            this.isWeaponBroken = true;
-            System.out.println("L'arme " + this.name + " est cassée !");
-        }
     }
 
     // Augmente la vitesse d'attaque de l'arme de value
