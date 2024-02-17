@@ -37,4 +37,9 @@ public class MudPile extends Monster{
         super.print();
     }
 
+    // Getters pour la vitesse
+
+    public int getSpeed(){
+        return speed;
+    }
 }

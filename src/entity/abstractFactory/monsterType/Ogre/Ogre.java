@@ -9,7 +9,7 @@ public class Ogre extends Monster{
 
     public Ogre () 
     {
-       super(monsterType.COMMON, monsterStats.getStats("Ogre"), 20, 0.7,16);
+       super(monsterType.COMMON, monsterStats.getStats("Ogre"), 20, 1,16);
 
     // Chemins des sprites    
     String[] idlePaths = {
@@ -49,16 +49,9 @@ public class Ogre extends Monster{
     };
     
 
-    public void attack (Monster other_monster) 
-    {
-        System.out.println("Ogre attack");
-        this.attack(other_monster);
-    }
+    // Getters pour la vitesse
 
-    @Override
-    public void print() 
-    {
-        System.out.println("\nJe suis un Ogre");
-        super.print();
+    public int getSpeed(){
+        return speed;
     }
 }

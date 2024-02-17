@@ -2,6 +2,7 @@ package game;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import entity.character;
 import entity.hunter;
@@ -30,12 +31,12 @@ public class Game extends JFrame {
         setVisible(true);
     }
 
-    // public static void main(String[] args) {
-    //     SwingUtilities.invokeLater(new Runnable() {
-    //         @Override
-    //         public void run() {
-    //             new Game();
-    //         }
-    //     });
-    // }
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Game();
+            }
+        });
+    }
 }

@@ -13,7 +13,7 @@ import javax.swing.SwingUtilities;
 
 import dungeon.Dungeon;
 import dungeon.Room;
-import entity.character;
+import entity.*;
 import entity.Drawing.DrawCharacters;
 import entity.Drawing.DrawMonsters;
 import entity.abstractFactory.monsterType.Monster;
@@ -55,8 +55,8 @@ public class GamePanel extends JPanel implements KeyListener {
     private final int ANIMATION_MONSTER_SPEED = 3;
     private int attackSpeed;
     private int attackDelay = 0;
-    private int speed;
     private Set<Integer> pressedKeys = new HashSet<>();
+
 
     public GamePanel(HUDPanel hudPanel, character currentCharacter, weapon currentWeapon) {
         this.currentCharacter = currentCharacter;
@@ -68,13 +68,11 @@ public class GamePanel extends JPanel implements KeyListener {
         dungeon = new Dungeon(7);
         tileM = new TileManager(this);
         currentState = currentCharacter.getState();
-        speed = currentCharacter.getSpeed();
         attackSpeed = currentWeapon.getSpeedAttack();
         currentWeaponState = currentWeapon.getState();
         currentCharacter.setChosenWeapon(currentWeapon);
         setMonsters(dungeon.getCurrentRoom());
-        xPos = dungeon.getCurrentRoom().getPlayerSpawnX();
-        yPos = dungeon.getCurrentRoom().getPlayerSpawnY();
+        currentCharacter.setXY(dungeon.getCurrentRoom().getPlayerSpawnX(), dungeon.getCurrentRoom().getPlayerSpawnY());
 
         setFocusable(true);
         addKeyListener(this);
@@ -90,8 +88,9 @@ public class GamePanel extends JPanel implements KeyListener {
         // draw the monsters
         for (int i = 0; i < monsters.length; i++) {
             if (monsters[i] != null) {
-                monsterXPositions[i] = (int) monsters[i].getX();
-                monsterYPositions[i] = (int) monsters[i].getY();
+                monsters[i].IA(monsters[i], currentCharacter);
+                monsterXPositions[i] = monsters[i].getX();
+                monsterYPositions[i] = monsters[i].getY();
 
                 // Dessiner la barre de vie
                 int healthWidth = 30; // Largeur de la barre de vie
@@ -110,7 +109,6 @@ public class GamePanel extends JPanel implements KeyListener {
                 g.setColor(Color.GREEN);
                 g.fillRect(healthX, healthY, currentHealthWidth, healthHeight);
 
-                monsters[i].IA(monsters[i], currentCharacter);
 
                 DrawMonsters monsterDrawer = new DrawMonsters(monsters[i], monsterXPositions[i], monsterYPositions[i],
                         monsterSpriteIndex[i], monsters[i].getRunningLeft(), this);
@@ -119,13 +117,12 @@ public class GamePanel extends JPanel implements KeyListener {
         }
 
         // draw the character
-        currentCharacter.setXY(xPos, yPos);
-        DrawCharacters drawer = new DrawCharacters(currentCharacter, xPos, yPos, spriteIndex, runningLeft, this);
+        DrawCharacters drawer = new DrawCharacters(currentCharacter, currentCharacter.getX(), currentCharacter.getY(), spriteIndex, runningLeft, this);
         drawer.draw(g);
 
         // draw the weapon
         if (!deathAnimationPlayed) {
-            DrawWeapons weaponDrawer = new DrawWeapons(currentWeapon, currentCharacter, xPos, yPos, weaponSpriteIndex,
+            DrawWeapons weaponDrawer = new DrawWeapons(currentWeapon, currentCharacter, currentCharacter.getX(), currentCharacter.getY(), weaponSpriteIndex,
                     runningLeft, weaponYAdjustment, this);
             weaponDrawer.draw(g);
         }
@@ -190,26 +187,26 @@ public class GamePanel extends JPanel implements KeyListener {
             currentState = character.State.RUNNING;
             currentCharacter.setState(character.State.RUNNING);
             runningLeft = false;
-            xPos += speed;
+            currentCharacter.moveAndCheck(Direction.EAST, currentCharacter);
         }
         if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
             // Déplacer vers la gauche
             currentState = character.State.RUNNING;
             currentCharacter.setState(character.State.RUNNING);
             runningLeft = true;
-            xPos -= speed;
+            currentCharacter.moveAndCheck(Direction.WEST, currentCharacter);
         }
         if (pressedKeys.contains(KeyEvent.VK_UP)) {
             // Déplacer vers le haut
             currentState = character.State.RUNNING;
             currentCharacter.setState(character.State.RUNNING);
-            yPos -= speed;
+            currentCharacter.moveAndCheck(Direction.NORTH, currentCharacter);
         }
         if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
             // Déplacer vers le bas
             currentState = character.State.RUNNING;
             currentCharacter.setState(character.State.RUNNING);
-            yPos += speed;
+            currentCharacter.moveAndCheck(Direction.SOUTH, currentCharacter);
         }
         if (pressedKeys.contains(KeyEvent.VK_U)) {
             // Mourir
@@ -222,6 +219,8 @@ public class GamePanel extends JPanel implements KeyListener {
             currentCharacter.setState(character.State.IDLE);
         }
     }
+
+    
 
     public void updateGame() {
         switch (currentState) {

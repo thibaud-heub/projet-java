@@ -9,6 +9,10 @@ public abstract class entity {
     private Boolean Alive; //indique si le monstre est en vie ou mort
     private typeDamage resistance;
     private typeDamage damage;
+    private int X;
+    private int Y;
+    private int speed;
+
 
     /**
      * Constructeur de la classe entity
@@ -26,6 +30,29 @@ public abstract class entity {
         this.Alive = true;
         this.damage = new typeDamage(Dfire, Dphysic, Dmagic);
         this.resistance = new typeDamage(Rfire, Rphysic, Rmagic);
+    }
+
+
+    public void moveAndCheck(Direction direction, entity entity){
+        int newXPos = entity.getX();
+        int newYPos = entity.getY();
+        switch (direction) {
+            case NORTH: newYPos -= entity.getSpeed();
+            break;
+            case SOUTH : newYPos += entity.getSpeed();
+            break;
+            case EAST : newXPos += entity.getSpeed();
+            break;
+            case WEST: newXPos -= entity.getSpeed();
+            break;
+        }
+        // Appeler la fonction de collision
+        // Si (collision(newXPos, newYPos)){
+            //return
+        //}
+        // Sinon
+        entity.setXY(newXPos, newYPos);
+        // if(entity instance of).. echelle
     }
 
     /**
@@ -135,6 +162,27 @@ public abstract class entity {
     public int getAttackSpeed()
     {
         return this.attackSpeed;
+    }
+
+    public int getSpeed()
+    {
+        return this.speed;
+    }
+
+    public int getX()
+    {
+        return this.X;
+    }
+
+    public int getY()
+    {
+        return this.Y;
+    }
+
+    public void setXY (int x, int y)
+    {
+        this.X = x;
+        this.Y = y;
     }
 
 }

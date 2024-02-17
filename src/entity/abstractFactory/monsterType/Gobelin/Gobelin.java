@@ -12,7 +12,7 @@ public class Gobelin extends Monster{
  */    
     public Gobelin () 
     {
-       super(monsterType.COMMON, monsterStats.getStats("Gobelin"), 10, 1.2,8);
+       super(monsterType.COMMON, monsterStats.getStats("Gobelin"), 10, 2,8);
 
        String[] idlePaths = {
         "/ressources/sprites/Monster/Goblin/Idle_1.png",
@@ -46,13 +46,9 @@ public class Gobelin extends Monster{
     setAttackSprites(attackPaths);
     
     }
-    /**
-     * redéfinition de la méthode afin de l'adapter au gobelin
-     */
-    @Override
-    public void print() 
-    {
-        System.out.println("\nJe suis un Gobelin");
-        super.print();
+    // Getters pour la vitesse
+
+    public int getSpeed(){
+        return speed;
     }
 }

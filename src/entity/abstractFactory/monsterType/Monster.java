@@ -1,16 +1,13 @@
 package entity.abstractFactory.monsterType;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
-import java.awt.image.BufferedImage;
-
 
 import javax.imageio.ImageIO;
 
-import entity.character;
-import entity.entity;
-import entity.typeDamage;
+import entity .*;
 
 public abstract class Monster extends entity {
 
@@ -24,20 +21,13 @@ public abstract class Monster extends entity {
 
     private State state = State.WALK;
     private int id = -1;
-    private double X;
-    private double Y;
     private monsterType monsterType; //indique si le monstre est common ou elite
     private int difficulty;
-    private double speed;
 
     // Pour l'IA
     private long lastAttackTime = 0;
     // Distance après laquelle le monstre s'arrête
     private static final int STOP_DISTANCE = 50; 
-    // Enumération des directions
-    private enum Direction {
-        NORTH, SOUTH, EAST, WEST
-    };
     // Distance parcourue depuis le dernier arrêt
     private int distanceSinceLastStop = 0;
     private Random random = new Random();
@@ -45,13 +35,14 @@ public abstract class Monster extends entity {
     private boolean runningLeft;
     private int adjustedWidth;
     private double maxPV;
+    protected int speed;
 
 /**
  * Constructeur de la classe monstre, permet de créer un monstre en définissant tous ses paramètres
  * @param monsterStats : Les stats du monstre que l'on souhaite créer, issu de la classe monsterStats
  * @param Type : Type du monstre : commun ou elite
  */
-    public Monster (monsterType Type, Map<String, Integer> monsterStats, int difficulty, double speed, int adjustedWidth)
+    public Monster (monsterType Type, Map<String, Integer> monsterStats, int difficulty, int speed, int adjustedWidth)
     {
         super(
             monsterStats.get("PV"), 
@@ -66,19 +57,8 @@ public abstract class Monster extends entity {
         this.attackSpeed = monsterStats.get("AttackSpeed");
         this.maxPV = monsterStats.get("PV");
         this.difficulty = difficulty;
-        this.speed = speed;
         this.adjustedWidth = adjustedWidth;
-    }
-
-    /**
-     * Affiche les données du monstre
-     */
-    public void print ()
-    {
-        System.out.println("Id : " + this.id);
-        super.print();
-        System.out.println("coordonée X = " + this.X + " Y = " + this.Y);
-        System.out.println("Type : " + monsterType + "\n");
+        this.speed = speed;
     }
 
     /**
@@ -106,12 +86,6 @@ public abstract class Monster extends entity {
     public void setId(int id)
     {
         this.id = id;
-    }
-
-    public void setXY (double x, double y)
-    {
-        this.X = x;
-        this.Y = y;
     }
 
 
@@ -184,16 +158,6 @@ public abstract class Monster extends entity {
         return id;
     }
 
-    public double getX()
-    {
-        return this.X;
-    }
-
-    public double getY()
-    {
-        return this.Y;
-    }
-
     public State getState()
     {
         return this.state;
@@ -204,10 +168,7 @@ public abstract class Monster extends entity {
         return this.attackSpeed;
     }
 
-    public double getSpeed()
-    {
-        return this.speed;
-    }
+    
 
     public int getAdjustedWidth() {
         return adjustedWidth;
@@ -246,6 +207,8 @@ public abstract class Monster extends entity {
         else {
             ride_monster(monster);
         }
+        // Appel à moveAndCheck
+        monster.moveAndCheck(direction, monster);
     }
 
 
@@ -255,29 +218,32 @@ public abstract class Monster extends entity {
      * @param player Le joueur actuel
      */
     private void moveToPlayer(Monster monster, character player) {
-        // Récupérer les positions actuelles
-        double monsterX = monster.getX();
-        double monsterY = monster.getY();
-        double playerX = player.getX();
-        double playerY = player.getY();
-        
-        // Calculer la différence de position pour déterminer la direction
-        double dx = playerX - monsterX;
-        double dy = playerY - monsterY;
+        int monsterX = monster.getX();
+        int monsterY = monster.getY();
+        int playerX = player.getX();
+        int playerY = player.getY();
 
-        double distance = Math.sqrt(dx * dx + dy * dy);
-        // Normaliser le vecteur de direction pour s'assurer que le monstre se déplace à une vitesse constante
-        double normalizedDx = dx / distance;
-        double normalizedDy = dy / distance;
+        int dx = playerX - monsterX;
+        int dy = playerY - monsterY;
+
+
+        // Déterminer la direction principale du mouvement
+        if (Math.abs(dx) > Math.abs(dy)) {
+            // Mouvement horizontal
+            if (dx > 0) {
+                direction = Direction.EAST;
+            } else {
+                direction = Direction.WEST;
+            }
+        } else {
+            // Mouvement vertical
+            if (dy > 0) {
+                direction = Direction.SOUTH;
+            } else {
+                direction = Direction.NORTH;
+            }
+        }
         
-        // Définir une vitesse de déplacement pour le monstre
-        double speed = monster.getSpeed(); 
-        
-        // Calculer les nouvelles positions basées sur la direction et la vitesse
-        double newX = monsterX + normalizedDx * speed ;
-        double newY = monsterY + normalizedDy * speed;
-        
-        monster.setXY(newX, newY);
     }
     
 
@@ -290,10 +256,10 @@ public abstract class Monster extends entity {
      * @return La distance entre les 2 entités
      */
     private double isPlayerNear(Monster monster, character player) {
-        double monsterX = monster.getX();
-        double monsterY = monster.getY();
-        double playerX = player.getX();
-        double playerY = player.getY();
+        int monsterX = monster.getX();
+        int monsterY = monster.getY();
+        int playerX = player.getX();
+        int playerY = player.getY();
 
         // Distance entre le monstre et le joueur
         double distance = Math.sqrt(Math.pow(monsterX - playerX, 2) + Math.pow(monsterY - playerY, 2));
@@ -333,10 +299,6 @@ public abstract class Monster extends entity {
         if(monster.getState() != Monster.State.DEATH){
             monster.setState(State.WALK);
         }
-        // Si un mur est proche, on inverse la direction
-        if (isWallAhead(monster, direction)) {
-            direction = reverseDirection(direction);
-        }
 
         // Si le monstre a parcouru une certaine distance, on l'arrête et on change de direction
         if (distanceSinceLastStop >= STOP_DISTANCE) {
@@ -370,32 +332,6 @@ public abstract class Monster extends entity {
 
 
     /**
-     * Méthode pour vérifier si un mur est proche
-     * @param monster Le monstre en question
-     * @param direction La direction actuelle du monstre
-     * @return Vrai si un mur est proche, faux sinon
-     */
-    private boolean isWallAhead(Monster monster, Direction direction) {
-        return false;
-    }
-    
-
-    /**
-     * Méthode pour inverser la direction
-     * @param direction La direction actuelle du monstre
-     * @return La direction opposée
-     */
-    private Direction reverseDirection(Direction direction) {
-        switch (direction) {
-            case NORTH: return Direction.SOUTH;
-            case SOUTH: return Direction.NORTH;
-            case EAST:  return Direction.WEST;
-            case WEST:  return Direction.EAST;
-        }
-        return direction; 
-    }
-
-    /**
      * Méthode pour déplacer le monstre dans une direction donnée
      * @param monster Le monstre en question
      * @param direction La direction actuelle du monstre
@@ -404,26 +340,21 @@ public abstract class Monster extends entity {
         if(monster.getState() != Monster.State.DEATH){
             monster.setState(State.WALK);
         }
-        double speed = monster.getSpeed();
-
-        // Récupérer les positions actuelles
-        double monsterX = monster.getX();
-        double monsterY = monster.getY();
     
         // Déplacer le monstre en fonction de la direction
         switch (direction) {
             case NORTH:
-                monster.setXY(monsterX, monsterY - speed);
+                direction = Direction.NORTH;
                 break;
             case SOUTH:
-                monster.setXY(monsterX, monsterY + speed);
+                direction = Direction.SOUTH;
                 break;
             case EAST:
-                monster.setXY(monsterX + speed, monsterY);
+                direction = Direction.EAST;  
                 setRunningLeft(false);
                 break;
             case WEST:
-                monster.setXY(monsterX - speed, monsterY);
+                direction = Direction.WEST;
                 setRunningLeft(true);
                 break;
         }
