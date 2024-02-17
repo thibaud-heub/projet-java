@@ -76,6 +76,7 @@ public class HUDPanel extends JPanel {
 
     public HUDPanel() {
         setPreferredSize(new Dimension(200, 600));
+        setBackground(Color.BLACK);
     }
 
     public void updateHUD(double health, double mana, double XP, double Rfire, double Rphysic, double Rmagic,
@@ -100,8 +101,6 @@ public class HUDPanel extends JPanel {
         loadImage();
         loadFont();
         super.paintComponent(g);
-
-        setBackground(Color.BLACK);
 
         // Mettre la police
         if (customFont != null) {

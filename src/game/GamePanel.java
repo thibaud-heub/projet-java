@@ -30,7 +30,6 @@ public class GamePanel extends JPanel implements KeyListener {
     private Monster[] monsters;
     private TileManager tileM;
 
-
     private int[] monsterXPositions;
     private int[] monsterYPositions;
 
@@ -55,22 +54,12 @@ public class GamePanel extends JPanel implements KeyListener {
     private int attackDelay = 0;
     private Set<Integer> pressedKeys = new HashSet<>();
 
-
-    public GamePanel(HUDPanel hudPanel, character currentCharacter, weapon currentWeapon) {
-        this.currentCharacter = currentCharacter;
-        this.currentWeapon = currentWeapon;
-        // this.hudPanel = hudPanel;
-
+    public GamePanel(HUDPanel hudPanel) {
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(896, 640));
         dungeon = new Dungeon(7);
         tileM = new TileManager(this);
-        currentState = currentCharacter.getState();
-        attackSpeed = currentWeapon.getSpeedAttack();
-        currentWeaponState = currentWeapon.getState();
-        currentCharacter.setChosenWeapon(currentWeapon);
         setMonsters(dungeon.getCurrentRoom());
-        currentCharacter.setXY(dungeon.getCurrentRoom().getPlayerSpawnX(), dungeon.getCurrentRoom().getPlayerSpawnY());
 
         setFocusable(true);
         addKeyListener(this);
@@ -107,7 +96,6 @@ public class GamePanel extends JPanel implements KeyListener {
                 g.setColor(Color.GREEN);
                 g.fillRect(healthX, healthY, currentHealthWidth, healthHeight);
 
-
                 DrawMonsters monsterDrawer = new DrawMonsters(monsters[i], monsterXPositions[i], monsterYPositions[i],
                         monsterSpriteIndex[i], monsters[i].getRunningLeft(), this);
                 monsterDrawer.draw(g);
@@ -115,16 +103,35 @@ public class GamePanel extends JPanel implements KeyListener {
         }
 
         // draw the character
-        DrawCharacters drawer = new DrawCharacters(currentCharacter, currentCharacter.getX(), currentCharacter.getY(), spriteIndex, runningLeft, this);
+        DrawCharacters drawer = new DrawCharacters(currentCharacter, currentCharacter.getX(), currentCharacter.getY(),
+                spriteIndex, runningLeft, this);
         drawer.draw(g);
 
         // draw the weapon
         if (!deathAnimationPlayed) {
-            DrawWeapons weaponDrawer = new DrawWeapons(currentWeapon, currentCharacter, currentCharacter.getX(), currentCharacter.getY(), weaponSpriteIndex,
+            DrawWeapons weaponDrawer = new DrawWeapons(currentWeapon, currentCharacter, currentCharacter.getX(),
+                    currentCharacter.getY(), weaponSpriteIndex,
                     runningLeft, weaponYAdjustment, this);
             weaponDrawer.draw(g);
         }
 
+    }
+
+    public GameLoop getGameLoop() {
+        return gameLoop;
+    }
+
+    public void setCurrentCharacter(character currentCharacter) {
+        this.currentCharacter = currentCharacter;
+        currentState = currentCharacter.getState();
+        currentCharacter.setXY(dungeon.getCurrentRoom().getPlayerSpawnX(), dungeon.getCurrentRoom().getPlayerSpawnY());
+    }
+
+    public void setCurrentWeapon(weapon currentWeapon) {
+        this.currentWeapon = currentWeapon;
+        attackSpeed = currentWeapon.getSpeedAttack();
+        currentWeaponState = currentWeapon.getState();
+        currentCharacter.setChosenWeapon(currentWeapon);
     }
 
     public Dungeon getDungeon() {
@@ -168,8 +175,8 @@ public class GamePanel extends JPanel implements KeyListener {
 
         if (pressedKeys.contains(KeyEvent.VK_N)) {
             setMonsters(dungeon.nextRoom());
-            currentCharacter.setXY(dungeon.getCurrentRoom().getPlayerSpawnX(),dungeon.getCurrentRoom().getPlayerSpawnY());
-    
+            currentCharacter.setXY(dungeon.getCurrentRoom().getPlayerSpawnX(),
+                    dungeon.getCurrentRoom().getPlayerSpawnY());
         }
 
         if (pressedKeys.contains(KeyEvent.VK_A) && !isAttacking && currentCharacter.attack(monsters)) {
@@ -217,8 +224,6 @@ public class GamePanel extends JPanel implements KeyListener {
             currentCharacter.setState(character.State.IDLE);
         }
     }
-
-    
 
     public void updateGame() {
         switch (currentState) {

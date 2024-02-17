@@ -44,7 +44,7 @@ public class WarriorMenu extends JPanel {
         sword.setBackground(Color.BLACK);
         sword.setForeground(Color.WHITE);
         sword.setFocusable(false);
-        sword.setActionCommand("room");
+        sword.setActionCommand("sword");
         sword.addActionListener(Main.getInstance());
         swordBox.add(sword);
         swordBox.add(Box.createRigidArea(new Dimension(32, 0)));
@@ -63,7 +63,7 @@ public class WarriorMenu extends JPanel {
         greatSword.setBackground(Color.BLACK);
         greatSword.setForeground(Color.WHITE);
         greatSword.setFocusable(false);
-        greatSword.setActionCommand("room");
+        greatSword.setActionCommand("greatSword");
         greatSword.addActionListener(Main.getInstance());
         greatSwordBox.add(greatSword);
         greatSwordBox.add(Box.createRigidArea(new Dimension(32, 0)));
