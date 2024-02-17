@@ -9,7 +9,7 @@ public class bigMagicWand extends weapon {
         this.attackSpeed = 15;
         this.range = 20.0;
         damage.setPhysic(5);
-        damage.setFire(0);
+        damage.setFire(1);
         damage.setMagic(25);
 
         // Chargement des sprites

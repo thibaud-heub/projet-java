@@ -9,8 +9,8 @@ public class katana extends weapon {
         this.attackSpeed = 10;
         this.range = 12.0;
         damage.setPhysic(15);
-        damage.setFire(0);
-        damage.setMagic(0);
+        damage.setFire(1);
+        damage.setMagic(1);
 
         // Chargement des sprites
         String[] weaponPaths = {

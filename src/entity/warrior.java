@@ -9,7 +9,7 @@ public class warrior extends character {
     public warrior() {
             
         // Appel du constructeur de la classe Entity avec les paramètres nécessaires
-        super(100, 0, 10, 0, 0, 10, 0, "Guerrier", 1);
+        super(100, 1, 10, 1, 1, 10, 1, "Guerrier", 1);
 
         // Initialisation des sprites
         String[] idlePaths = {
