@@ -165,13 +165,11 @@ public class GamePanel extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         pressedKeys.add(e.getKeyCode());
-        updateState();
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         pressedKeys.remove(e.getKeyCode());
-        updateState();
     }
 
     @Override
@@ -360,6 +358,7 @@ public class GamePanel extends JPanel implements KeyListener {
             gameLoop.stop();
             Main.getInstance().win();
         }
+        updateState();
         currentCharacter.setMana(0.2);
         currentCharacter.setPV(0.02);
         repaint();
