@@ -7,7 +7,7 @@ public class magicWand extends weapon {
         this.manaUsed = 5;
         this.durability = 100;
         this.attackSpeed = 10;
-        this.range = 12.0;
+        this.range = 50.0;
         damage.setPhysic(1);
         damage.setFire(1);
         damage.setMagic(15);
