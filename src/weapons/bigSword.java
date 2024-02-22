@@ -7,7 +7,7 @@ public class bigSword extends weapon {
         this.manaUsed = 20;
         this.durability = 100;
         this.attackSpeed = 20;
-        this.range = 14.0;
+        this.range = 35.0;
         damage.setPhysic(25);
         damage.setFire(1);
         damage.setMagic(1);
