@@ -27,6 +27,7 @@ np.random.seed(1)
 X = np.random.randn(20, 2)
 y = np.repeat([1, -1], 10)
 X[y == -1] = X[y == -1] + 3
+```
 
 La matrice X contient les données d entrée et le vecteur y contient les étiquettes associées. 
 
@@ -41,12 +42,14 @@ On désire maintenant comparer le résultat obtenu par le classifieur Perceptron
 #### 2.2 sur un deuxième jeu de données simulé
 
 Créez un jeu de données d apprentissage simulé utilisant les commandes suivantes : 
+```python
 from sklearn.datasets import make_circles
 X, y = make_circles(n_samples = 20, random_state = 123, noise = 0.1, factor = 0.2)
+```
 4. Affichez les données d entrée sur un graphique utilisant deux couleurs différentes pour distinguer les classes. Que remarquez vous ?
 
 5. Ecrire une fonction phi qui permet de transformer les données d apprentissage x<sub>i</sub> = (x<sub>i</sub><sup>(1)</sup> -> x<sub>i</sub><sup>(2)</sup>), i=1...=20, en z<sub>i</sub> = (z<sub>i</sub><sup>(1)</sup>, z<sub>i</sub><sup>(2)</sup>,z<sub>i</sub><sup>(3)</sup>) avec z<sub>i</sub><sup>(1)</sup> = (x<sub>i</sub><sup>(1)</sup>)<sup>2</sup>, z<sub>i</sub><sup>(2)</sup> = (x<sub>i</sub><sup>(2)</sup>)<sup>2</sup> et z<sub>i</sub><sup>(3)</sup> = 2*x<sub>i</sub><sup>(1)</sup>*x<sub>i</sub><sup>(2)</sup>
-Afficher les données (z<sub>i</sub>)<sup>n</sup><sub>i=1</sub> sur un graphe 3D (vous pouvez utiliser la commande plt3d = plt.figure().gca(projection="3d")pour configurer un affichage 3d). Qu est-ce que vous remarquez ?
+Afficher les données (z<sub>i</sub>)<sup>n</sup><sub>i=1</sub> sur un graphe 3D (vous pouvez utiliser la commande `plt3d = plt.figure().gca(projection="3d")`pour configurer un affichage 3d). Qu est-ce que vous remarquez ?
 
 6.Apprenez deux perceptrons utilisant respectivement  les données x<sub>i</sub> et z<sub>i</sub> i=1,...,20. Calculez l erreur de prédiction de ces deux perceptrons sur les données d apprentissage utilisées pour les apprendre. Comparez les résultats.
 
@@ -56,11 +59,14 @@ Afficher les données (z<sub>i</sub>)<sup>n</sup><sub>i=1</sub> sur un graphe 3D
 
 On va maintenant tester l algorithme du perceptron sur un jeu de données réel. On va considérer le jeu de données de classification binaire load_breast_cancer. Pour le charger en Python, vous pourrez utiliser le code suivant : 
 
+```python
 from sklearn.datasets import load_breast_cancer
 data = load_breast_cancer()
 X = data.data
 y = data.target
+```
 
 
-8. Réservez 50% des exemples pour le test et 50% pour l apprentissage. Apprenez un perceptron sur les données  d apprentissage et fixez le nombre d itération maximal à 50 (n_iter = 50). Calculez le taux de précision du classifieur sur les données test utilisant la méthode accuracy_score de la classe sklearn.metrics.
-9. L algorithme de régression linéaire peut être adapté pour traiter un problème de classification. une fois la fonction de régression apprise, l idée est d utilisr un seuil sur les sorties prédites afin de mettre à 1 toutes les valeurs positives et à 0 toutes les valeurs négatives. Apprenez un algorithme de régression linéaire (LinearRegression() de sklearn.linear_model) sur le même jeu de données de la question précédente. Calculez la précision sur la prédiction sur les données test et comparez le résultat avec celui obtenu par l algorithme du perceptron.
+8. Réservez 50% des exemples pour le test et 50% pour l apprentissage. Apprenez un perceptron sur les données  d apprentissage et fixez le nombre d itération maximal à 50 (`n_iter = 50`). Calculez le taux de précision du classifieur sur les données test utilisant la méthode accuracy_score de la classe sklearn.metrics.
+
+9. L algorithme de régression linéaire peut être adapté pour traiter un problème de classification. une fois la fonction de régression apprise, l idée est d utilisr un seuil sur les sorties prédites afin de mettre à 1 toutes les valeurs positives et à 0 toutes les valeurs négatives. Apprenez un algorithme de régression linéaire (`LinearRegression()` de `sklearn.linear_model`) sur le même jeu de données de la question précédente. Calculez la précision sur la prédiction sur les données test et comparez le résultat avec celui obtenu par l algorithme du perceptron.
