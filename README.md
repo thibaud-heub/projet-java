@@ -1,7 +1,5 @@
 # Projet Java : Duke's Adventures
 
-x<sub>i</sub> = (x<sub>i</sub><sup>(1)</sup> -> x<sub>i</sub><sup>(2)</sup>), i=1...=20, en z<sub>i</sub> = (z<sub>i</sub><sup>(1)</sup>, z<sub>i</sub><sup>(2)</sup>,z<sub>i</sub><sup>(3)</sup>) avec z<sub>i</sub><sup>(1)</sup> = (x<sub>i</sub><sup>(1)</sup>)<sup>2</sup>, z<sub>i</sub><sup>(2)</sup> = (x<sub>i</sub><sup>(2)</sup>)<sup>2</sup> et z<sub>i</sub><sup>(3)</sup> = 2*x<sub>i</sub><sup>(1)</sup>*x<sub>i</sub><sup>(2)</sup>
-
 
 ## Le but du jeu
 
